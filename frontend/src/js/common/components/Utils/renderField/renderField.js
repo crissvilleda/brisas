@@ -12,6 +12,7 @@ export const renderField = ({
     input,
     placeholder,
     type,
+    disabled,
     meta: { touched, error },
 }) => {
     const invalid = touched && error;
@@ -20,6 +21,7 @@ export const renderField = ({
             <input
                 {...input}
                 placeholder={placeholder}
+                disabled={disabled || false}
                 type={type}
                 className={classNames('form-control', {
                     'is-invalid': invalid,

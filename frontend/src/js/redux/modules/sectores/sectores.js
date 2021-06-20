@@ -9,7 +9,7 @@ export const { reducers, initialState, actions } = createReducer(
     'sectores',
     'sector',
     'sectorForm',
-    'sectores'
+    '/sectores'
 );
 
 export default handleActions(reducers, initialState);

@@ -7,6 +7,7 @@ import Demo from './common/components/Demo/Demo';
 import ProtectedRoute from './ProtectedRoute';
 import NotFound from './common/components/layout/NotFound/NotFound';
 import CrearEditarSector from './common/components/Sector/CrearEditar';
+import ListarSectores from './common/components/Sector/Listar';
 
 import '../assets/fonts/fonts.css';
 
@@ -27,6 +28,21 @@ module.exports = (
                     exact
                     path="/sector"
                     component={CrearEditarSector}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/sector/:id"
+                    component={CrearEditarSector}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/sector/:id/editar"
+                    component={CrearEditarSector}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/sectores"
+                    component={ListarSectores}
                 />
                 <Route component={NotFound} />
             </Switch>
