@@ -65,7 +65,7 @@ class SideBar extends Component {
                         </li>
                         <li className="nav-item">
                             <NavLink
-                                to="/grids"
+                                to="/usuarios"
                                 className="nav-link"
                                 activeClassName={'active'}
                             >
@@ -74,7 +74,7 @@ class SideBar extends Component {
                                         vertical_split
                                     </i>
                                 </div>
-                                <span>Grids</span>
+                                <span>USUARIOS</span>
                             </NavLink>
                         </li>
                         <li className="nav-item">

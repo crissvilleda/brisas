@@ -8,6 +8,8 @@ import ProtectedRoute from './ProtectedRoute';
 import NotFound from './common/components/layout/NotFound/NotFound';
 import CrearEditarSector from './common/components/Sector/CrearEditar';
 import ListarSectores from './common/components/Sector/Listar';
+import CrearEditarUsuario from './common/components/Usuario/CrearEditar';
+import ListarUsuarios from './common/components/Usuario/Listar';
 
 import '../assets/fonts/fonts.css';
 
@@ -24,6 +26,7 @@ module.exports = (
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/registro" component={Registro} />
                 <ProtectedRoute exact path="/" component={Demo} />
+                {/* Sectores */}
                 <ProtectedRoute
                     exact
                     path="/sector"
@@ -31,7 +34,7 @@ module.exports = (
                 />
                 <ProtectedRoute
                     exact
-                    path="/sector/:id"
+                    path="/sector/:id/ver"
                     component={CrearEditarSector}
                 />
                 <ProtectedRoute
@@ -44,6 +47,28 @@ module.exports = (
                     path="/sectores"
                     component={ListarSectores}
                 />
+                {/* Usuarios */}
+                <ProtectedRoute
+                    exact
+                    path="/usuario"
+                    component={CrearEditarUsuario}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/usuario/:id/ver"
+                    component={CrearEditarUsuario}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/usuario/:id/editar"
+                    component={CrearEditarUsuario}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/usuarios"
+                    component={ListarUsuarios}
+                />
+
                 <Route component={NotFound} />
             </Switch>
         </div>

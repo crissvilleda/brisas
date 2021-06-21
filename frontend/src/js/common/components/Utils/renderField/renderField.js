@@ -253,6 +253,8 @@ export const AsyncSelectField = ({
     isSearchable,
     loadOptions,
     placeholder,
+    valueKey,
+    labelKey,
     meta: { touched, error },
 }) => {
     const invalid = touched && error;
@@ -270,6 +272,8 @@ export const AsyncSelectField = ({
                 defaultOptions
                 loadOptions={loadOptions}
                 placeholder={placeholder}
+                getOptionValue={(option) => option[valueKey]}
+                getOptionLabel={(option) => option[labelKey]}
                 onChange={(e) => {
                     input.onChange(e ? e : null);
                 }}

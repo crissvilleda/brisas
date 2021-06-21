@@ -17,7 +17,7 @@ const CrearEditar = (props) => {
         <React.Fragment>
             <Form
                 onSubmit={onSubmit}
-                ver={!!props.location.pathname.includes('ver')}
+                ver={props.location.pathname.includes('ver')}
             />
         </React.Fragment>
     );
