@@ -10,12 +10,14 @@ import CrearEditarSector from './common/components/Sector/CrearEditar';
 import ListarSectores from './common/components/Sector/Listar';
 import CrearEditarUsuario from './common/components/Usuario/CrearEditar';
 import ListarUsuarios from './common/components/Usuario/Listar';
+import CrearEditarProyectoAgua from './common/components/ProyectoAgua/CrearEditar';
+import ListarProyectosAgua from './common/components/ProyectoAgua/Listar';
 
 import '../assets/fonts/fonts.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 require('../../node_modules/font-awesome/css/font-awesome.css');
 require('../../node_modules/bootstrap/dist/css/bootstrap.css');
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 require('../style/index.css');
 
@@ -67,6 +69,27 @@ module.exports = (
                     exact
                     path="/usuarios"
                     component={ListarUsuarios}
+                />
+                {/* Proyectos Agua */}
+                <ProtectedRoute
+                    exact
+                    path="/proyecto/agua"
+                    component={CrearEditarProyectoAgua}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/proyecto/agua/:id/ver"
+                    component={CrearEditarProyectoAgua}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/proyecto/agua/:id/editar"
+                    component={CrearEditarProyectoAgua}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/proyectos/agua"
+                    component={ListarProyectosAgua}
                 />
 
                 <Route component={NotFound} />

@@ -7,6 +7,7 @@ import profile from './modules/cuenta/profile';
 import usuarios from './modules/usuarios/usuarios';
 import notificaciones from './modules/notificaciones/notificaciones';
 import sectores from './modules/sectores/sectores';
+import proyectos from './modules/proyectos/proyectos';
 
 export default combineReducers({
     form: formReducer,
@@ -17,4 +18,5 @@ export default combineReducers({
     routing,
     notificaciones,
     sectores,
+    proyectos,
 });

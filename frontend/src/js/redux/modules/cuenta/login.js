@@ -30,26 +30,28 @@ export const setMe = (me) => ({
 // Actions
 // ------------------------------------
 
-export const onSubmit = (data = {}) => (dispatch, getStore) => {
-    dispatch(setLoader(true));
-    api.post('user/token', data)
-        .then((response) => {
-            localStorage.setItem('token', response.token);
-            dispatch(initializeForm('profile', response.user));
-            dispatch(setMe(response.user));
-            dispatch(push('/'));
-        })
-        .catch(() => {
-            NotificationManager.error(
-                'Credenciales incorrectas, vuelva a intentar',
-                'ERROR',
-                0
-            );
-        })
-        .finally(() => {
-            dispatch(setLoader(false));
-        });
-};
+export const onSubmit =
+    (data = {}) =>
+    (dispatch, getStore) => {
+        dispatch(setLoader(true));
+        api.post('user/token', data)
+            .then((response) => {
+                localStorage.setItem('token', response.token);
+                dispatch(initializeForm('profile', response.user));
+                dispatch(setMe(response.user));
+                dispatch(push('/'));
+            })
+            .catch(() => {
+                NotificationManager.error(
+                    'Credenciales incorrectas, vuelva a intentar',
+                    'ERROR',
+                    0
+                );
+            })
+            .finally(() => {
+                dispatch(setLoader(false));
+            });
+    };
 
 export const getMe = () => (dispatch) => {
     api.get('/user/me')

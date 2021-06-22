@@ -1,17 +1,17 @@
 from rest_framework import viewsets, status, filters
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
-from api.models import Sector
-from api.serializers import SectorSerializer
+from api.models import Proyecto
+from api.serializers import ProyectoSerializer
 
 
 class SectoresViewSet(viewsets.ModelViewSet):
-    queryset = Sector.objects.filter(activo=True)
-    serializer_class = SectorSerializer
+    queryset = Proyecto.objects.filter(activo=True)
+    serializer_class = ProyectoSerializer
 
     filter_backends = (DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter)
-    filter_fields = ("id", "nombre")
+    filter_fields = ("id", "nombre", "tipo")
     search_fields = ("id", "nombre")
     ordering_fields = ("id", "nombre")
 

@@ -60,22 +60,24 @@ export const createReducer = (
     // Actions
     // -----------------------------------
 
-    const listar = (page = 1) => (dispatch, getStore) => {
-        const resource = getStore()[storeId];
-        const params = { page };
-        params.ordering = resource.ordering;
-        params.search = resource.search;
-        dispatch(setLoader(true));
-        api.get(endpoint, params)
-            .then((response) => {
-                dispatch(setData(response));
-                dispatch(setPage(page));
-            })
-            .catch(() => {})
-            .finally(() => {
-                dispatch(setLoader(false));
-            });
-    };
+    const listar =
+        (page = 1) =>
+        (dispatch, getStore) => {
+            const resource = getStore()[storeId];
+            const params = { page };
+            params.ordering = resource.ordering;
+            params.search = resource.search;
+            dispatch(setLoader(true));
+            api.get(endpoint, params)
+                .then((response) => {
+                    dispatch(setData(response));
+                    dispatch(setPage(page));
+                })
+                .catch(() => {})
+                .finally(() => {
+                    dispatch(setLoader(false));
+                });
+        };
 
     const leer = (id) => (dispatch) => {
         dispatch(setLoader(true));
