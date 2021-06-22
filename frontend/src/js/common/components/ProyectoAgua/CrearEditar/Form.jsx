@@ -3,43 +3,36 @@ import { Field, reduxForm } from 'redux-form';
 import {
     renderField,
     AsyncSelectField,
+    renderTextArea,
+    renderCurrency,
+    renderDatePicker,
+    renderDayPicker,
 } from '../../Utils/renderField/renderField';
 import { Link } from 'react-router-dom';
 import { api } from 'api';
 
 const validate = (values) => {
     const errors = {};
-    if (!values.nombres) errors.nombres = 'Campo requerido';
-    if (!values.apellidos) errors.apellidos = 'Campo requerido';
-    if (!values.dpi) errors.dpi = 'Campo requerido';
-    if (values.dpi && values.dpi.length !== 13)
-        errors.dpi = 'EL numero de pdi es invalido';
-    if (!values.telefono) errors.telefono = 'Campo requerido';
-    if (!values.sector) errors.sector = 'Campo requerido';
+    if (!values.nombre) errors.nombre = 'Campo requerido';
+    if (!values.descripcion) errors.descripcion = 'Campo requerido';
+    if (!values.monto) errors.monto = 'Campo requerido';
+    if (!values.fecha_inicio) errors.fecha_inicio = 'Campo requerido';
+    if (!values.fecha_fin) errors.fecha_fin = 'Campo requerido';
     return errors;
-};
-
-const loadOptions = (search) => {
-    const params = {};
-    if (search) params.search = search;
-    return api
-        .get('sector', params)
-        .then((response) => response.results)
-        .catch(() => []);
 };
 
 const CrearEditar = (props) => {
     const { handleSubmit, ver } = props;
     return (
         <form action="" onSubmit={handleSubmit} className="py-4">
-            <h3>USUARIO</h3>
+            <h3>PROYECTOS AGUA</h3>
             <div className="mb-4 card card-small">
-                <div className="p-0 pt-3 d-flex flex-column flex-md-row col-6 m-auto">
+                <div className="p-0 pt-3 d-flex flex-column flex-md-row col-5 m-auto">
                     <div className="d-flex flex-column flex-1 mx-3">
-                        <label htmlFor="nombres">Nombres</label>
+                        <label htmlFor="nombres">Nombre</label>
                         <Field
-                            name="nombres"
-                            placeholder="Nombres del usuario"
+                            name="nombre"
+                            placeholder="Nombre del Proyecto"
                             component={renderField}
                             type="text"
                             className="form-control"
@@ -47,57 +40,55 @@ const CrearEditar = (props) => {
                         />
                     </div>
                 </div>
-                <div className="p-0 pt-3 d-flex flex-column flex-md-row col-6 m-auto">
+                <div className="p-0 pt-3 d-flex flex-column flex-md-row col-5 m-auto">
                     <div className="d-flex flex-column flex-1 mx-3">
-                        <label htmlFor="apellidos">Apellidos</label>
+                        <label htmlFor="descripcion">Descripción</label>
                         <Field
-                            name="apellidos"
-                            placeholder="Apellidos del usuario"
-                            component={renderField}
+                            name="descripcion"
+                            placeholder="Descripción  del proyecto"
+                            component={renderTextArea}
+                            rows={4}
                             type="text"
                             className="form-control"
                             disabled={ver}
                         />
                     </div>
                 </div>
-                <div className="p-0 pt-3 d-flex flex-column flex-md-row col-6 m-auto">
+                <div className="p-0 pt-3 d-flex flex-column flex-md-row col-5 m-auto">
                     <div className="d-flex flex-column flex-1 mx-3">
-                        <label htmlFor="dpi">Dpi</label>
+                        <label htmlFor="monto">Monto</label>
                         <Field
-                            name="dpi"
-                            placeholder="Dpi del usuario"
-                            component={renderField}
+                            name="monto"
+                            placeholder="Monto del proyecto"
+                            component={renderCurrency}
                             type="text"
                             className="form-control"
                             disabled={ver}
                         />
                     </div>
                 </div>
-                <div className="p-0 pt-3 d-flex flex-column flex-md-row col-6 m-auto">
+                <div className="p-0 pt-3 d-flex flex-column flex-md-row col-5 m-auto">
                     <div className="d-flex flex-column flex-1 mx-3">
-                        <label htmlFor="telefono">Teléfono</label>
+                        <label htmlFor="fecha_inicio">Fecha Inicio</label>
                         <Field
-                            name="telefono"
-                            placeholder="Teléfono del usuario"
-                            component={renderField}
+                            name="fecha_inicio"
+                            placeholder="Fecha inicio del proyecto"
+                            component={renderDatePicker}
                             type="text"
                             className="form-control"
                             disabled={ver}
                         />
                     </div>
                 </div>
-                <div className="p-0 pt-3 d-flex flex-column flex-md-row col-6 m-auto">
+                <div className="p-0 pt-3 d-flex flex-column flex-md-row col-5 m-auto">
                     <div className="d-flex flex-column flex-1 mx-3">
-                        <label htmlFor="sector">Sector</label>
+                        <label htmlFor="fecha_fin">Fecha Fin</label>
                         <Field
-                            name="sector"
-                            placeholder="Sector del usuario"
-                            component={AsyncSelectField}
-                            loadOptions={loadOptions}
-                            labelKey="nombre"
-                            valueKey="id"
+                            name="fecha_fin"
+                            placeholder="Fecha final el proyecto"
+                            component={renderDatePicker}
                             type="text"
-                            className="form-control"
+                            className="form-control flex-1"
                             disabled={ver}
                         />
                     </div>
@@ -111,7 +102,10 @@ const CrearEditar = (props) => {
                         >
                             Guardar
                         </button>
-                        <Link className="btn btn-secondary ml-2" to="/usuarios">
+                        <Link
+                            className="btn btn-secondary ml-2"
+                            to="/proyectos/agua"
+                        >
                             Cancelar
                         </Link>
                     </div>
@@ -122,6 +116,6 @@ const CrearEditar = (props) => {
 };
 
 export default reduxForm({
-    form: 'usuarioForm', // a unique identifier for this form
+    form: 'proyectoForm', // a unique identifier for this form
     validate,
 })(CrearEditar);

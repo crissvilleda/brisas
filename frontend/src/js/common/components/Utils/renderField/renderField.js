@@ -405,6 +405,7 @@ export const renderDatePicker = ({
         <div className={classNames(`${className}`, { 'is-invalid': invalid })}>
             <DatePicker
                 onChange={(e) => input.onChange(e)}
+                className="d-flex flex-1"
                 disabled={disabled}
                 maxDate={maxDate}
                 minDate={minDate}

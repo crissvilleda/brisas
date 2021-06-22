@@ -11,10 +11,10 @@ const ListarSectores = (props) => {
 
     return (
         <React.Fragment>
-            <h3 className="my-4"> LISTADO DE USUARIOS </h3>
+            <h3 className="my-4"> LISTADO DE PROYECTOS DE AGUA </h3>
             <div className="my-4 card card-small px-4">
                 <div className="py-4 d-flex justify-content-end ">
-                    <Link className="btn btn-primary" to="/usuario">
+                    <Link className="btn btn-primary" to="/proyecto/agua">
                         NUEVO
                     </Link>
                 </div>
@@ -28,21 +28,21 @@ const ListarSectores = (props) => {
                         isKey
                         dataField="id"
                         dataFormat={standardActions({
-                            ver: 'usuario',
-                            editar: 'usuario',
+                            ver: 'proyecto/agua',
+                            editar: 'proyecto/agua',
                         })}
                     >
                         ACCIONES
                     </TableHeaderColumn>
                     <TableHeaderColumn dataField="dpi">DPI</TableHeaderColumn>
-                    <TableHeaderColumn dataField="nombres">
-                        NOMBRES
+                    <TableHeaderColumn dataField="nombre">
+                        NOMBRE
                     </TableHeaderColumn>
-                    <TableHeaderColumn dataField="apellidos">
-                        APELLIDOS
+                    <TableHeaderColumn dataField="fecha_inicio">
+                        FECHA INICIO
                     </TableHeaderColumn>
-                    <TableHeaderColumn dataField="telefono">
-                        TELÉFONO
+                    <TableHeaderColumn dataField="fecha_fin">
+                        FECHA FINALIZADO
                     </TableHeaderColumn>
                 </Tabla>
             </div>
