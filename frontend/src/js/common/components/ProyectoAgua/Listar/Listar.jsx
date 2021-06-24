@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { RenderCurrency } from '../../Utils/renderField/renderReadField';
 import { AGUA } from '../../../../utility/constants';
 
-const ListarSectores = (props) => {
+const ListarProyectos = (props) => {
     React.useEffect(() => {
         props.listar(1, AGUA);
     }, []);
@@ -57,4 +57,4 @@ const ListarSectores = (props) => {
     );
 };
 
-export default ListarSectores;
+export default ListarProyectos;
