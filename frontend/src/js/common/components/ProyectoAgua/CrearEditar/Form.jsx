@@ -15,7 +15,7 @@ const validate = (values) => {
     const errors = {};
     if (!values.nombre) errors.nombre = 'Campo requerido';
     if (!values.descripcion) errors.descripcion = 'Campo requerido';
-    if (!values.monto) errors.monto = 'Campo requerido';
+    if (!values.costo) errors.costo = 'Campo requerido';
     if (!values.fecha_inicio) errors.fecha_inicio = 'Campo requerido';
     if (!values.fecha_fin) errors.fecha_fin = 'Campo requerido';
     return errors;
@@ -56,10 +56,10 @@ const CrearEditar = (props) => {
                 </div>
                 <div className="p-0 pt-3 d-flex flex-column flex-md-row col-5 m-auto">
                     <div className="d-flex flex-column flex-1 mx-3">
-                        <label htmlFor="monto">Monto</label>
+                        <label htmlFor="monto">Costo</label>
                         <Field
-                            name="monto"
-                            placeholder="Monto del proyecto"
+                            name="costo"
+                            placeholder="Costo del proyecto"
                             component={renderCurrency}
                             type="text"
                             className="form-control"
@@ -85,7 +85,7 @@ const CrearEditar = (props) => {
                         <label htmlFor="fecha_fin">Fecha Fin</label>
                         <Field
                             name="fecha_fin"
-                            placeholder="Fecha final el proyecto"
+                            placeholder="Fecha final del proyecto"
                             component={renderDatePicker}
                             type="text"
                             className="form-control flex-1"

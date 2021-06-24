@@ -37,6 +37,7 @@ export const renderTextArea = ({
     placeholder,
     rows,
     meta: { touched, error },
+    disabled,
 }) => {
     const invalid = touched && error;
     return (
@@ -46,6 +47,7 @@ export const renderTextArea = ({
                 placeholder={placeholder}
                 style={{ resize: 'none' }}
                 rows={rows || 3}
+                disabled={disabled}
                 className={classNames('form-control', {
                     'is-invalid': invalid,
                 })}
@@ -93,6 +95,7 @@ export const renderCurrency = ({
     meta: { touched, error },
     prefix = 'Q ',
     placeholder,
+    disabled,
 }) => {
     const invalid = touched && error;
     return (
@@ -105,6 +108,7 @@ export const renderCurrency = ({
                 fixedDecimalScale
                 placeholder={placeholder}
                 value={input.value}
+                disabled={disabled}
                 thousandSeparator
                 prefix={prefix}
                 onValueChange={(values) => {

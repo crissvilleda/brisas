@@ -3,6 +3,7 @@ import { push } from 'react-router-redux';
 import { initialize as initializeForm } from 'redux-form';
 import { api } from 'api';
 import { NotificationManager } from 'react-notifications';
+import { AGUA, CEMENTERIO, OTROS } from '../../../utility/constants';
 
 // ------------------------------------
 // Constants
@@ -97,7 +98,7 @@ const crear = (data) => (dispatch) => {
     api.post('proyecto', data)
         .then(() => {
             NotificationManager.success('Registro creado', 'Éxito', 3000);
-            // dispatch(push(resourceList));
+            if (data.tipo === AGUA) dispatch(push('/proyectos/agua'));
         })
         .catch((error) => {
             let msj = 'Error en la creación';
@@ -114,7 +115,7 @@ const editar = (id, data) => (dispatch) => {
     api.put(`proyecto/${id}`, data)
         .then(() => {
             NotificationManager.success('Registro actualizado', 'Éxito', 3000);
-            // dispatch(push(resourceList));
+            if (data.tipo === AGUA) dispatch(push('/proyectos/agua'));
         })
         .catch(() => {
             NotificationManager.error('Error en la edición', 'ERROR', 0);

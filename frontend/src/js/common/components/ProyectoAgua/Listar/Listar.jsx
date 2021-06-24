@@ -3,6 +3,7 @@ import { TableHeaderColumn } from 'react-bootstrap-table';
 import Tabla from '../../Utils/Grid';
 import { standardActions } from '../../Utils/Grid/StandardActions';
 import { Link } from 'react-router-dom';
+import { RenderCurrency } from '../../Utils/renderField/renderReadField';
 
 const ListarSectores = (props) => {
     React.useEffect(() => {
@@ -28,15 +29,20 @@ const ListarSectores = (props) => {
                         isKey
                         dataField="id"
                         dataFormat={standardActions({
-                            ver: 'proyecto/agua',
-                            editar: 'proyecto/agua',
+                            ver: '/proyecto/agua',
+                            editar: '/proyecto/agua',
                         })}
                     >
                         ACCIONES
                     </TableHeaderColumn>
-                    <TableHeaderColumn dataField="dpi">DPI</TableHeaderColumn>
                     <TableHeaderColumn dataField="nombre">
-                        NOMBRE
+                        PROYECTO
+                    </TableHeaderColumn>
+                    <TableHeaderColumn
+                        dataField="costo"
+                        dataFormat={(value) => <RenderCurrency value={value} />}
+                    >
+                        Monto
                     </TableHeaderColumn>
                     <TableHeaderColumn dataField="fecha_inicio">
                         FECHA INICIO

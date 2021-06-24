@@ -5,7 +5,7 @@ from api.models import Proyecto
 from api.serializers import ProyectoSerializer
 
 
-class SectoresViewSet(viewsets.ModelViewSet):
+class ProyectoViewSet(viewsets.ModelViewSet):
     queryset = Proyecto.objects.filter(activo=True)
     serializer_class = ProyectoSerializer
 
