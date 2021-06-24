@@ -4,16 +4,17 @@ import Tabla from '../../Utils/Grid';
 import { standardActions } from '../../Utils/Grid/StandardActions';
 import { Link } from 'react-router-dom';
 import { RenderCurrency } from '../../Utils/renderField/renderReadField';
+import { AGUA } from '../../../../utility/constants';
 
 const ListarSectores = (props) => {
     React.useEffect(() => {
-        props.listar();
+        props.listar(1, AGUA);
     }, []);
 
     return (
         <React.Fragment>
-            <h3 className="my-4"> LISTADO DE PROYECTOS DE AGUA </h3>
-            <div className="my-4 card card-small px-4">
+            <h3 className="py-4 text-dark"> LISTADO DE PROYECTOS DE AGUA </h3>
+            <div className="py-4 card card-small px-4">
                 <div className="py-4 d-flex justify-content-end ">
                     <Link className="btn btn-primary" to="/proyecto/agua">
                         NUEVO

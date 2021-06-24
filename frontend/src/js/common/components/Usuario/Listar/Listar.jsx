@@ -11,8 +11,8 @@ const ListarSectores = (props) => {
 
     return (
         <React.Fragment>
-            <h3 className="my-4"> LISTADO DE USUARIOS </h3>
-            <div className="my-4 card card-small px-4">
+            <h3 className="py-4 text-dark"> LISTADO DE USUARIOS </h3>
+            <div className="py-4 card card-small px-4">
                 <div className="py-4 d-flex justify-content-end ">
                     <Link className="btn btn-primary" to="/usuario">
                         NUEVO
@@ -28,8 +28,8 @@ const ListarSectores = (props) => {
                         isKey
                         dataField="id"
                         dataFormat={standardActions({
-                            ver: 'usuario',
-                            editar: 'usuario',
+                            ver: '/usuario',
+                            editar: '/usuario',
                         })}
                     >
                         ACCIONES

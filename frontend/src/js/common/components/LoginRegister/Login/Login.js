@@ -21,9 +21,14 @@ class Login extends Component {
         }
         return (
             <div className="blue-gradient-bg">
-                <div className="d-flex flex-column align-items-center pt-3 bienvenida">
-                    <h1 className="text-center">Bienvenido a CianStarter</h1>
-                    <p>Página de login</p>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <div className="d-flex flex-column justify-content-center align-items-center pt-3 bienvenida">
+                    <h3 className="text-center">Sistema las brisas</h3>
                 </div>
                 <br />
                 <div className="login-wrapper">
@@ -31,10 +36,6 @@ class Login extends Component {
                         <h5 className="text-center pv">INGRESAR</h5>
                         <LoadMask loading={loader} light>
                             <LoginForm onSubmit={onSubmit} />
-                            <span>
-                                ¿No tienes cuenta?&nbsp;
-                                <Link to="/registro">Registrate aquí</Link>
-                            </span>
                         </LoadMask>
                     </div>
                 </div>

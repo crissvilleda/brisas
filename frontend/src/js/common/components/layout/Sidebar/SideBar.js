@@ -18,12 +18,7 @@ class SideBar extends Component {
                     <nav className="align-items-stretch bg-white flex-md-nowrap border-bottom p-0 navbar navbar-light">
                         <a href="#" className="w-100 mr-0 navbar-brand">
                             <div className="d-table m-auto">
-                                <img
-                                    id="main-logo"
-                                    className="d-inline-block align-top mr-1"
-                                    src={require('assets/img/logo.png')}
-                                    alt="Logo"
-                                />
+                                <span>Sistema Las brisas</span>
                             </div>
                         </a>
                         <a
@@ -46,7 +41,7 @@ class SideBar extends Component {
                                 <div className="d-inline-block item-icon-wrapper">
                                     <i className="material-icons">edit</i>
                                 </div>
-                                <span>Home</span>
+                                <span>Inicio</span>
                             </NavLink>
                         </li>
                         <li className="nav-item">
@@ -114,7 +109,7 @@ class SideBar extends Component {
                                 <div className="d-inline-block item-icon-wrapper">
                                     <i className="material-icons">lock</i>
                                 </div>
-                                <span>Log Out</span>
+                                <span>Salir</span>
                             </Link>
                         </li>
                     </ul>

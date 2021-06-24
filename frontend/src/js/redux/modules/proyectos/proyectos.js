@@ -62,16 +62,17 @@ const setSearch = (search) => ({
 // -----------------------------------
 
 const listar =
-    (page = 1) =>
+    (page = 1, tipo = undefined) =>
     (dispatch, getStore) => {
         const resource = getStore().proyectos;
         const params = { page };
         params.ordering = resource.ordering;
         params.search = resource.search;
+        if (tipo) params.tipo = tipo;
         dispatch(setLoader(true));
         api.get('proyecto', params)
             .then((response) => {
-                dispatch(setData(response));
+                if (tipo === AGUA) dispatch(setData(response));
                 dispatch(setPage(page));
             })
             .catch(() => {})
