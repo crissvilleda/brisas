@@ -88,6 +88,20 @@ class SideBar extends Component {
                         </li>
                         <li className="nav-item">
                             <NavLink
+                                to="/proyectos/cementerio"
+                                className="nav-link"
+                                activeClassName={'active'}
+                            >
+                                <div className="d-inline-block item-icon-wrapper">
+                                    <i className="material-icons">
+                                        vertical_split
+                                    </i>
+                                </div>
+                                <span>PROYECTOS CEMENTERIO</span>
+                            </NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink
                                 to="/tabs"
                                 className="nav-link"
                                 activeClassName={'active'}

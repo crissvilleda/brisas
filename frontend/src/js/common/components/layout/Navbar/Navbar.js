@@ -49,7 +49,7 @@ class Navbar extends Component {
                                 {user.first_name}
                             </span>
                         </DropdownToggle>
-                        <DropdownMenu>
+                        {/* <DropdownMenu>
                             <DropdownItem header>Header</DropdownItem>
                             <DropdownItem>
                                 <Link tabIndex="0" to="/user-profile">
@@ -89,7 +89,7 @@ class Navbar extends Component {
                                     Logout
                                 </a>
                             </DropdownItem>
-                        </DropdownMenu>
+                        </DropdownMenu> */}
                     </Dropdown>
                 </ul>
                 <nav className="nav">

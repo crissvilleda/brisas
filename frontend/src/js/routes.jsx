@@ -12,6 +12,8 @@ import CrearEditarUsuario from './common/components/Usuario/CrearEditar';
 import ListarUsuarios from './common/components/Usuario/Listar';
 import CrearEditarProyectoAgua from './common/components/ProyectoAgua/CrearEditar';
 import ListarProyectosAgua from './common/components/ProyectoAgua/Listar';
+import CrearEditarProyectoCementerio from './common/components/ProyectoCementerio/CrearEditar';
+import ListarProyectosCementerio from './common/components/ProyectoCementerio/Listar';
 
 import '../assets/fonts/fonts.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -89,6 +91,28 @@ module.exports = (
                     exact
                     path="/proyectos/agua"
                     component={ListarProyectosAgua}
+                />
+
+                {/* Proyectos Agua */}
+                <ProtectedRoute
+                    exact
+                    path="/proyecto/cementerio"
+                    component={CrearEditarProyectoCementerio}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/proyecto/cementerio/:id/ver"
+                    component={CrearEditarProyectoCementerio}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/proyecto/cementerio/:id/editar"
+                    component={CrearEditarProyectoCementerio}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/proyectos/cementerio"
+                    component={ListarProyectosCementerio}
                 />
 
                 <Route component={NotFound} />
