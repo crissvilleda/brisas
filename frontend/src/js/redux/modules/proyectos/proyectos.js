@@ -73,6 +73,7 @@ const listar =
         api.get('proyecto', params)
             .then((response) => {
                 if (tipo === AGUA) dispatch(setData(response));
+                if (tipo === CEMENTERIO) dispatch(setData2(response));
                 dispatch(setPage(page));
             })
             .catch(() => {})
@@ -100,6 +101,8 @@ const crear = (data) => (dispatch) => {
         .then(() => {
             NotificationManager.success('Registro creado', 'Éxito', 3000);
             if (data.tipo === AGUA) dispatch(push('/proyectos/agua'));
+            if (data.tipo === CEMENTERIO)
+                dispatch(push('/proyectos/cementerio'));
         })
         .catch((error) => {
             let msj = 'Error en la creación';
@@ -117,6 +120,8 @@ const editar = (id, data) => (dispatch) => {
         .then(() => {
             NotificationManager.success('Registro actualizado', 'Éxito', 3000);
             if (data.tipo === AGUA) dispatch(push('/proyectos/agua'));
+            if (data.tipo === CEMENTERIO)
+                dispatch(push('/proyectos/cementerio'));
         })
         .catch(() => {
             NotificationManager.error('Error en la edición', 'ERROR', 0);

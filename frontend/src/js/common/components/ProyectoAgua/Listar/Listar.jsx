@@ -24,7 +24,7 @@ const ListarProyectos = (props) => {
                     data={props.data}
                     page={props.page}
                     loading={props.loader}
-                    onPageChange={props.listar}
+                    onPageChange={(page) => props.listar(page, AGUA)}
                 >
                     <TableHeaderColumn
                         isKey

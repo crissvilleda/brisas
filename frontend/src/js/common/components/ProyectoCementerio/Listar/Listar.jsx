@@ -23,10 +23,10 @@ const ListarProyectos = (props) => {
                     </Link>
                 </div>
                 <Tabla
-                    data={props.data}
+                    data={props.data2}
                     page={props.page}
                     loading={props.loader}
-                    onPageChange={props.listar}
+                    onPageChange={(page) => props.listar(page, CEMENTERIO)}
                 >
                     <TableHeaderColumn
                         isKey
