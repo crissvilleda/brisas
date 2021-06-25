@@ -36,7 +36,7 @@ const LoginForm = (props) => {
                     type="submit"
                     className="btn btn-primary m-1 align-self-center"
                 >
-                    Login
+                    INGRESAR
                 </button>
             </div>
         </form>
