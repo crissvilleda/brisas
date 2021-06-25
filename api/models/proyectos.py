@@ -14,7 +14,6 @@ class Proyecto(ModeloBase):
 
     nombre = models.CharField(max_length=250)
     descripcion = models.TextField()
-    costo = models.FloatField()
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
     tipo = models.IntegerField(choices=TIPOS_PROYECTO, default=OTROS)
