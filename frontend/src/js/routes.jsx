@@ -14,6 +14,10 @@ import CrearEditarProyectoAgua from './common/components/ProyectoAgua/CrearEdita
 import ListarProyectosAgua from './common/components/ProyectoAgua/Listar';
 import CrearEditarProyectoCementerio from './common/components/ProyectoCementerio/CrearEditar';
 import ListarProyectosCementerio from './common/components/ProyectoCementerio/Listar';
+import ListarUsuariosAgua from './common/components/UsuarioAgua/Listar';
+import ListarUsuariosCementerio from './common/components/UsuarioCementerio/Listar';
+import AgregarUsuarioAgua from './common/components/UsuarioAgua/CrearEditar/';
+import AgregarUsuarioCementerio from './common/components/UsuarioCementerio/CrearEditar/';
 
 import '../assets/fonts/fonts.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -71,6 +75,31 @@ module.exports = (
                     path="/usuarios"
                     component={ListarUsuarios}
                 />
+                {/* Usuarios servicio Agua */}
+
+                <ProtectedRoute
+                    exact
+                    path="/usuarios/agua"
+                    component={ListarUsuariosAgua}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/servicio/agua"
+                    component={AgregarUsuarioAgua}
+                />
+
+                {/* Usuarios servicio Cementerio */}
+                <ProtectedRoute
+                    exact
+                    path="/usuarios/cementerio"
+                    component={ListarUsuariosCementerio}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/servicio/cementerio"
+                    component={AgregarUsuarioCementerio}
+                />
+
                 {/* Proyectos Agua */}
                 <ProtectedRoute
                     exact
