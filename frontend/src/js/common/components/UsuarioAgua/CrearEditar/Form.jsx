@@ -6,13 +6,7 @@ import { api } from 'api';
 
 const validate = (values) => {
     const errors = {};
-    if (!values.nombres) errors.nombres = 'Campo requerido';
-    if (!values.apellidos) errors.apellidos = 'Campo requerido';
-    if (!values.dpi) errors.dpi = 'Campo requerido';
-    if (values.dpi && values.dpi.length !== 13)
-        errors.dpi = 'EL numero de pdi es invalido';
-    if (!values.telefono) errors.telefono = 'Campo requerido';
-    if (!values.sector) errors.sector = 'Campo requerido';
+    if (!values.usuario) errors.usuario = 'Campo requerido';
     return errors;
 };
 
@@ -40,6 +34,7 @@ const CrearEditar = (props) => {
                             component={AsyncSelectField}
                             loadOptions={loadOptions}
                             labelKey="nombres"
+                            labelKey2="apellidos"
                             valueKey="id"
                             type="text"
                             className="form-control"
@@ -67,6 +62,6 @@ const CrearEditar = (props) => {
 };
 
 export default reduxForm({
-    form: 'usuarioForm', // a unique identifier for this form
+    form: 'servicioForm', // a unique identifier for this form
     validate,
 })(CrearEditar);

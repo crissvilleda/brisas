@@ -14,7 +14,7 @@ class ServicioViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter)
     filter_fields = ("id", "usuario", "tipo")
-    search_fields = ("id", "usuario")
+    search_fields = ("id", "usuario__nombres", "usuario__apellidos")
     ordering_fields = ("id", "usuario")
 
     def get_serializer_class(self):

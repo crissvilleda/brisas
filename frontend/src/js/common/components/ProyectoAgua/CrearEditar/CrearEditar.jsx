@@ -2,6 +2,7 @@ import React from 'react';
 import Form from './Form';
 import moment from 'moment';
 import { AGUA } from '../../../../utility/constants';
+import swal from 'sweetalert2';
 
 const CrearEditar = (props) => {
     React.useEffect(() => {

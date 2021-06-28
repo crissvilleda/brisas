@@ -1,7 +1,8 @@
 
 
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, filters
 from rest_framework.response import Response
+from django_filters.rest_framework import DjangoFilterBackend
 from api.models import Usuario
 from api.serializers import UsuarioSerializer, UsuarioReadSerializer
 
@@ -9,6 +10,12 @@ from api.serializers import UsuarioSerializer, UsuarioReadSerializer
 class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = Usuario.objects.filter(activo=True)
     serializer_class = UsuarioSerializer
+
+    filter_backends = (DjangoFilterBackend,
+                       filters.SearchFilter, filters.OrderingFilter)
+    filter_fields = ("id", "nombres", "apellidos", "sector")
+    search_fields = ("id", "nombres", "apellidos")
+    ordering_fields = ("id", "nombres")
 
     def get_serializer_class(self):
         """Define serializer for API"""
