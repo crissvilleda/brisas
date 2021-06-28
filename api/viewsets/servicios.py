@@ -4,7 +4,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, status, filters
 from rest_framework.response import Response
 from api.models import Servicio
-from api.serializers import ServicioSerializer,
+from api.serializers import ServicioSerializer, ServicioReadSerializer
 
 
 class ServicioViewSet(viewsets.ModelViewSet):
