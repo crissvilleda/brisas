@@ -1,9 +1,6 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import {
-    renderField,
-    AsyncSelectField,
-} from '../../Utils/renderField/renderField';
+import { AsyncSelectField } from '../../Utils/renderField/renderField';
 import { Link } from 'react-router-dom';
 import { api } from 'api';
 
