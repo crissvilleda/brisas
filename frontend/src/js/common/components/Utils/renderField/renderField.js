@@ -279,7 +279,9 @@ export const AsyncSelectField = ({
                 placeholder={placeholder}
                 getOptionValue={(option) => option[valueKey]}
                 getOptionLabel={(option) =>
-                    option[labelKey] + ' ' + (labelKey2 || '')
+                    option[labelKey] +
+                    ' ' +
+                    (labelKey2 ? option[labelKey2] : '')
                 }
                 onChange={(e) => {
                     input.onChange(e ? e : null);
