@@ -10,13 +10,13 @@ import { AGUA, CEMENTERIO, OTROS } from '../../../utility/constants';
 // ------------------------------------
 
 const constants = {
-    LOADER: `PROYECTO_LOADER`,
-    DATA: `PROYECTO_AGUA_DATA`,
-    DATA2: `PROYECTO_CEMENTERIO_DATA`,
-    ITEM: `PROYECTO_ITEM`,
-    PAGE: `PROYECTO_PAGE`,
-    ORDERING: `PROYECTO_ORDERING`,
-    SEARCH: `PROYECTO_SEARCH`,
+    LOADER: `SERVICIO_LOADER`,
+    DATA: `SERVICIO_AGUA_DATA`,
+    DATA2: `SERVICIO_CEMENTERIO_DATA`,
+    ITEM: `SERVICIO_ITEM`,
+    PAGE: `SERVICIO_PAGE`,
+    ORDERING: `SERVICIO_ORDERING`,
+    SEARCH: `SERVICIO_SEARCH`,
 };
 
 // -----------------------------------
@@ -100,9 +100,9 @@ const crear = (data) => (dispatch) => {
     api.post('proyecto', data)
         .then(() => {
             NotificationManager.success('Registro creado', 'Éxito', 3000);
-            if (data.tipo === AGUA) dispatch(push('/proyectos/agua'));
+            if (data.tipo === AGUA) dispatch(push('/usuarios/agua'));
             if (data.tipo === CEMENTERIO)
-                dispatch(push('/proyectos/cementerio'));
+                dispatch(push('/usuarios/cementerio'));
         })
         .catch((error) => {
             let msj = 'Error en la creación';
@@ -119,9 +119,9 @@ const editar = (id, data) => (dispatch) => {
     api.put(`proyecto/${id}`, data)
         .then(() => {
             NotificationManager.success('Registro actualizado', 'Éxito', 3000);
-            if (data.tipo === AGUA) dispatch(push('/proyectos/agua'));
+            if (data.tipo === AGUA) dispatch(push('/usuarios/agua'));
             if (data.tipo === CEMENTERIO)
-                dispatch(push('/proyectos/cementerio'));
+                dispatch(push('/usuarios/cementerio'));
         })
         .catch(() => {
             NotificationManager.error('Error en la edición', 'ERROR', 0);
