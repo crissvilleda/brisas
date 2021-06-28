@@ -3,12 +3,13 @@ import { TableHeaderColumn } from 'react-bootstrap-table';
 import Tabla from '../../Utils/Grid';
 import { standardActions } from '../../Utils/Grid/StandardActions';
 import { Link } from 'react-router-dom';
+import { AGUA } from '../../../../utility/constants';
 
 const ListarSectores = (props) => {
     React.useEffect(() => {
-        props.listar();
+        props.listar(1, AGUA);
     }, []);
-
+    console.log(props.data);
     return (
         <React.Fragment>
             <h3 className="py-4 text-dark">USUARIOS DEL SERVICIO DE AGUA </h3>
@@ -22,7 +23,7 @@ const ListarSectores = (props) => {
                     data={props.data}
                     page={props.page}
                     loading={props.loader}
-                    onPageChange={props.listar}
+                    onPageChange={(page) => props.listar(page, AGUA)}
                 >
                     <TableHeaderColumn
                         isKey
@@ -33,14 +34,28 @@ const ListarSectores = (props) => {
                     >
                         ACCIONES
                     </TableHeaderColumn>
-                    <TableHeaderColumn dataField="dpi">DPI</TableHeaderColumn>
-                    <TableHeaderColumn dataField="nombres">
+                    <TableHeaderColumn
+                        dataField="usuario"
+                        dataFormat={(value) => value.dpi}
+                    >
+                        DPI
+                    </TableHeaderColumn>
+                    <TableHeaderColumn
+                        dataField="usuario"
+                        dataFormat={(value) => value.nombres}
+                    >
                         NOMBRES
                     </TableHeaderColumn>
-                    <TableHeaderColumn dataField="apellidos">
+                    <TableHeaderColumn
+                        dataField="usuario"
+                        dataFormat={(value) => value.apellidos}
+                    >
                         APELLIDOS
                     </TableHeaderColumn>
-                    <TableHeaderColumn dataField="telefono">
+                    <TableHeaderColumn
+                        dataField="usuario"
+                        dataFormat={(value) => value.telefono}
+                    >
                         TELÉFONO
                     </TableHeaderColumn>
                     <TableHeaderColumn dataField="estado">
