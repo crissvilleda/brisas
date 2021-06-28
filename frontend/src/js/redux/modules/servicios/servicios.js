@@ -64,13 +64,13 @@ const setSearch = (search) => ({
 const listar =
     (page = 1, tipo = undefined) =>
     (dispatch, getStore) => {
-        const resource = getStore().proyectos;
+        const resource = getStore().servicios;
         const params = { page };
         params.ordering = resource.ordering;
         params.search = resource.search;
         if (tipo) params.tipo = tipo;
         dispatch(setLoader(true));
-        api.get('proyecto', params)
+        api.get('servicio', params)
             .then((response) => {
                 if (tipo === AGUA) dispatch(setData(response));
                 if (tipo === CEMENTERIO) dispatch(setData2(response));
@@ -84,10 +84,10 @@ const listar =
 
 const leer = (id) => (dispatch) => {
     dispatch(setLoader(true));
-    api.get(`proyecto/${id}`)
+    api.get(`servicio/${id}`)
         .then((response) => {
             dispatch(setItem(response));
-            dispatch(initializeForm('proyectoForm', response));
+            dispatch(initializeForm('servicioForm', response));
         })
         .catch(() => {})
         .finally(() => {
@@ -97,7 +97,7 @@ const leer = (id) => (dispatch) => {
 
 const crear = (data) => (dispatch) => {
     dispatch(setLoader(true));
-    api.post('proyecto', data)
+    api.post('servicio', data)
         .then(() => {
             NotificationManager.success('Registro creado', 'Éxito', 3000);
             if (data.tipo === AGUA) dispatch(push('/usuarios/agua'));
@@ -116,7 +116,7 @@ const crear = (data) => (dispatch) => {
 
 const editar = (id, data) => (dispatch) => {
     dispatch(setLoader(true));
-    api.put(`proyecto/${id}`, data)
+    api.put(`servicio/${id}`, data)
         .then(() => {
             NotificationManager.success('Registro actualizado', 'Éxito', 3000);
             if (data.tipo === AGUA) dispatch(push('/usuarios/agua'));
@@ -133,7 +133,7 @@ const editar = (id, data) => (dispatch) => {
 
 const eliminar = (id) => (dispatch) => {
     dispatch(setLoader(true));
-    api.eliminar(`proyecto/${id}`)
+    api.eliminar(`servicio/${id}`)
         .then(() => {
             dispatch(listar());
             NotificationManager.success('Registro eliminado', 'Éxito', 3000);
@@ -156,7 +156,7 @@ const searchChange = (search) => (dispatch) => {
 };
 
 const onSortChange = (ordering) => (dispatch, getStore) => {
-    const sort = getStore().proyectos.ordering;
+    const sort = getStore().servicios.ordering;
     if (ordering === sort) {
         dispatch(setOrdering(`-${ordering}`));
     } else {

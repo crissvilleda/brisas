@@ -1,9 +1,10 @@
 
+from api.serializers.servicios import ServicioReadSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, status, filters
 from rest_framework.response import Response
 from api.models import Servicio
-from api.serializers import ServicioSerializer
+from api.serializers import ServicioSerializer,
 
 
 class ServicioViewSet(viewsets.ModelViewSet):
@@ -12,9 +13,16 @@ class ServicioViewSet(viewsets.ModelViewSet):
 
     filter_backends = (DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter)
-    filter_fields = ("id", "nombre", "tipo")
-    search_fields = ("id", "nombre")
-    ordering_fields = ("id", "nombre")
+    filter_fields = ("id", "usuario", "tipo")
+    search_fields = ("id", "usuario")
+    ordering_fields = ("id", "usuario")
+
+    def get_serializer_class(self):
+        """Define serializer for API"""
+        if self.action == 'list' or self.action == 'retrieve':
+            return ServicioReadSerializer
+        else:
+            return ServicioSerializer
 
     def create(self, request, *args, **kwargs):
         usuario = request.data.get('usuario')

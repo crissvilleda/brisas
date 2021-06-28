@@ -10,7 +10,7 @@ router.register(r'user', viewsets.UserViewset)
 router.register(r'sector', viewsets.SectoresViewSet)
 router.register(r'usuario', viewsets.UsuarioViewSet)
 router.register(r'proyecto', viewsets.ProyectoViewSet)
-
+router.register(r'servicio', viewsets.ServicioViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),

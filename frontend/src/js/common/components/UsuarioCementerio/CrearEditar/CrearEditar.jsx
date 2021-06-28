@@ -1,5 +1,6 @@
 import React from 'react';
 import Form from './Form';
+import { CEMENTERIO } from '../../../../utility/constants';
 
 const CrearEditar = (props) => {
     React.useEffect(() => {
@@ -9,6 +10,9 @@ const CrearEditar = (props) => {
 
     const onSubmit = (data) => {
         const { id } = props.match.params;
+        const body = { ...data };
+
+        body.tipo = CEMENTERIO;
         if (id) props.editar(id, data);
         else props.crear(data);
     };

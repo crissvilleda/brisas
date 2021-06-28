@@ -1,5 +1,6 @@
 import React from 'react';
 import Form from './Form';
+import { AGUA } from '../../../../utility/constants';
 
 const CrearEditar = (props) => {
     React.useEffect(() => {
@@ -9,8 +10,11 @@ const CrearEditar = (props) => {
 
     const onSubmit = (data) => {
         const { id } = props.match.params;
-        if (id) props.editar(id, data);
-        else props.crear(data);
+        const body = { ...data };
+
+        body.tipo = AGUA;
+        if (id) props.editar(id, body);
+        else props.crear(body);
     };
 
     return (
