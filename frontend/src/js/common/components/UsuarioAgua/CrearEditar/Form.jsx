@@ -51,7 +51,10 @@ const CrearEditar = (props) => {
                         >
                             Guardar
                         </button>
-                        <Link className="btn btn-secondary ml-2" to="/usuarios">
+                        <Link
+                            className="btn btn-secondary ml-2"
+                            to="/usuarios/agua"
+                        >
                             Cancelar
                         </Link>
                     </div>

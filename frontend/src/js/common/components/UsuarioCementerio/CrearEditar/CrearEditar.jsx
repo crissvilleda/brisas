@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from './Form';
 import { CEMENTERIO } from '../../../../utility/constants';
+import swal from 'sweetalert2';
 
 const CrearEditar = (props) => {
     React.useEffect(() => {
@@ -13,8 +14,18 @@ const CrearEditar = (props) => {
         const body = { ...data };
 
         body.tipo = CEMENTERIO;
-        if (id) props.editar(id, data);
-        else props.crear(data);
+        swal.fire({
+            title: 'Estas seguro de agregar a este usuario al servicio de cementerio?',
+            text: 'No se podrá revertir esta acción!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'No, Cancelar',
+            confirmButtonText: 'Si, Agregarlo',
+        }).then((res) => {
+            if (res.value) props.crear(body);
+        });
     };
 
     return (
