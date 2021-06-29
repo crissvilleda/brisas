@@ -9,6 +9,7 @@ import notificaciones from './modules/notificaciones/notificaciones';
 import sectores from './modules/sectores/sectores';
 import proyectos from './modules/proyectos/proyectos';
 import servicios from './modules/servicios/servicios';
+import detalles from './modules/detalles/detalles';
 
 export default combineReducers({
     form: formReducer,
@@ -21,4 +22,5 @@ export default combineReducers({
     sectores,
     proyectos,
     servicios,
+    detalles,
 });

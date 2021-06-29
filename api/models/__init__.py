@@ -4,3 +4,4 @@ from .sector import Sector
 from .usuarios import Usuario
 from .proyectos import Proyecto
 from .servicios import Servicio
+from .detalle import Detalle

@@ -10,14 +10,21 @@ import CrearEditarSector from './common/components/Sector/CrearEditar';
 import ListarSectores from './common/components/Sector/Listar';
 import CrearEditarUsuario from './common/components/Usuario/CrearEditar';
 import ListarUsuarios from './common/components/Usuario/Listar';
-import CrearEditarProyectoAgua from './common/components/ProyectoAgua/CrearEditar';
-import ListarProyectosAgua from './common/components/ProyectoAgua/Listar';
-import CrearEditarProyectoCementerio from './common/components/ProyectoCementerio/CrearEditar';
-import ListarProyectosCementerio from './common/components/ProyectoCementerio/Listar';
 import ListarUsuariosAgua from './common/components/UsuarioAgua/Listar';
 import ListarUsuariosCementerio from './common/components/UsuarioCementerio/Listar';
 import AgregarUsuarioAgua from './common/components/UsuarioAgua/CrearEditar/';
 import AgregarUsuarioCementerio from './common/components/UsuarioCementerio/CrearEditar/';
+
+
+// ----- proyecto agua
+import CrearEditarProyectoAgua from './common/components/ProyectoAgua/CrearEditar';
+import ListarProyectosAgua from './common/components/ProyectoAgua/Listar';
+import ListarPagosProyectosAgua from './common/components/ProyectoAgua/Pagos/Listar';
+import CrearEditarPagoProyectoAgua from './common/components/ProyectoAgua/Pagos/CrearEditar';
+
+// ----- proyecto cementerio
+import CrearEditarProyectoCementerio from './common/components/ProyectoCementerio/CrearEditar';
+import ListarProyectosCementerio from './common/components/ProyectoCementerio/Listar';
 
 import '../assets/fonts/fonts.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -101,48 +108,21 @@ module.exports = (
                 />
 
                 {/* Proyectos Agua */}
-                <ProtectedRoute
-                    exact
-                    path="/proyecto/agua"
-                    component={CrearEditarProyectoAgua}
-                />
-                <ProtectedRoute
-                    exact
-                    path="/proyecto/agua/:id/ver"
-                    component={CrearEditarProyectoAgua}
-                />
-                <ProtectedRoute
-                    exact
-                    path="/proyecto/agua/:id/editar"
-                    component={CrearEditarProyectoAgua}
-                />
-                <ProtectedRoute
-                    exact
-                    path="/proyectos/agua"
-                    component={ListarProyectosAgua}
-                />
+                <ProtectedRoute exact path="/proyecto/agua" component={CrearEditarProyectoAgua} />
+                <ProtectedRoute exact path="/proyecto/agua/:id/ver" component={CrearEditarProyectoAgua} />
+                <ProtectedRoute exact path="/proyecto/agua/:id/editar" component={CrearEditarProyectoAgua} />
+                <ProtectedRoute exact path="/proyectos/agua" component={ListarProyectosAgua} />
+                <ProtectedRoute exact path="/proyecto/agua/:idProyecto/pagos" component={ListarPagosProyectosAgua} />
+                <ProtectedRoute exact path="/proyecto/agua/:idProyecto/pago/:id/ver" component={CrearEditarPagoProyectoAgua} />
+                <ProtectedRoute exact path="/proyecto/agua/:idProyecto/pago/:id/editar" component={CrearEditarPagoProyectoAgua} />
+                <ProtectedRoute exact path="/proyecto/agua/:idProyecto/pago" component={CrearEditarPagoProyectoAgua} />
 
                 {/* Proyectos Agua */}
-                <ProtectedRoute
-                    exact
-                    path="/proyecto/cementerio"
-                    component={CrearEditarProyectoCementerio}
-                />
-                <ProtectedRoute
-                    exact
-                    path="/proyecto/cementerio/:id/ver"
-                    component={CrearEditarProyectoCementerio}
-                />
-                <ProtectedRoute
-                    exact
-                    path="/proyecto/cementerio/:id/editar"
-                    component={CrearEditarProyectoCementerio}
-                />
-                <ProtectedRoute
-                    exact
-                    path="/proyectos/cementerio"
-                    component={ListarProyectosCementerio}
-                />
+
+                <ProtectedRoute exact path="/proyecto/cementerio" component={CrearEditarProyectoCementerio} />
+                <ProtectedRoute exact path="/proyecto/cementerio/:id/ver" component={CrearEditarProyectoCementerio} />
+                <ProtectedRoute exact path="/proyecto/cementerio/:id/editar" component={CrearEditarProyectoCementerio} />
+                <ProtectedRoute exact path="/proyectos/cementerio" component={ListarProyectosCementerio} />
 
                 <Route component={NotFound} />
             </Switch>

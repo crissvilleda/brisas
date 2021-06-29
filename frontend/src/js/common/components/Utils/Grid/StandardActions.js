@@ -25,9 +25,26 @@ class Acciones extends Component {
             });
         };
     };
+    cerrar = (id) => {
+        return () => {
+            Swal.fire({
+                title: 'Cerrar el proyecto?',
+                text: '¡No podrá revertir esta acción!',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: '¡Sí, Cerrar!',
+                cancelButtonText: 'No, Cerrar',
+                reverseButtons: true,
+            }).then((result) => {
+                if (result.value) {
+                    this.props.cerrar(id);
+                }
+            });
+        };
+    };
 
     render() {
-        const { id, ver, editar, eliminar } = this.props;
+        const { id, ver, editar, eliminar, cerrar, proyecto } = this.props;
 
         return (
             <div className="d-flex justify-content-center">
@@ -52,6 +69,16 @@ class Acciones extends Component {
                     >
                         <i className="material-icons">delete</i>
                     </a>
+                )}
+                {proyecto !== undefined && (
+                    <Link to={`${ver}/${id}/pagos`} className="px-2">
+                        <i className="material-icons">remove_red_eye</i>
+                    </Link>
+                )}
+                {cerrar !== undefined && (
+                    <button className="px-2"
+                        style={{ cursor: 'pointer', color: '#c4183c' }}
+                        onClick={this.cerrar(id)} >CERRAR</button>
                 )}
             </div>
         );

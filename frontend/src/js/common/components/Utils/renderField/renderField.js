@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Select, { Creatable, Async } from 'react-select';
 import NumberFormat from 'react-number-format';
 import classNames from 'classnames';
@@ -138,7 +138,7 @@ export const renderSwitch = ({
                     input.onChange(value);
                 }}
                 checked={input.value ? input.value : false}
-                // id="normal-switch"
+            // id="normal-switch"
             />
             &nbsp;{label}
             {invalid && <div className="invalid-feedback">{error}</div>}
@@ -209,9 +209,10 @@ export const SelectField = ({
     isSearchable,
     options,
     placeholder,
-    labelKey = 'label',
-    valueKey = 'value',
+    labelKey = 'name',
+    valueKey = 'id',
     meta: { touched, error },
+    defaultValue,
 }) => {
     const invalid = touched && error;
     const _options = [];
@@ -226,6 +227,12 @@ export const SelectField = ({
     if (value !== null && value !== undefined) {
         value = _.find(_options, { value });
     }
+    useEffect(() => {
+        if (!value) {
+            if (defaultValue)
+                input.onChange(defaultValue);
+        }
+    }, [])
 
     return (
         <React.Fragment>
