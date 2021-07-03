@@ -17,7 +17,6 @@ const constants = {
     PAGE: `SERVICIO_PAGE`,
     ORDERING: `SERVICIO_ORDERING`,
     SEARCH: `SERVICIO_SEARCH`,
-    HISTORIAL: `SERVICIO_HISTORIAL`,
 };
 
 // -----------------------------------
@@ -58,11 +57,6 @@ const setSearch = (search) => ({
     search,
 });
 
-const setHistorial = (historial) => ({
-    type: constants.HISTORIAL,
-    historial,
-});
-
 // -----------------------------------
 // Actions
 // -----------------------------------
@@ -88,31 +82,12 @@ const listar =
             });
     };
 
-const getHistorial =
-    (page = 1, servicio = undefined) =>
-    (dispatch, getStore) => {
-        const resource = getStore().servicios;
-        const params = { page };
-        params.ordering = resource.ordering;
-        params.search = resource.search;
-        dispatch(setLoader(true));
-        api.get(`servicio/${servicio}/historial`, params)
-            .then((response) => {
-                dispatch(setPage(page));
-                dispatch(setHistorial(response));
-            })
-            .catch(() => {})
-            .finally(() => {
-                dispatch(setLoader(false));
-            });
-    };
-
 const leer = (id) => (dispatch) => {
     dispatch(setLoader(true));
-    return api
-        .get(`servicio/${id}`)
+    api.get(`servicio/${id}`)
         .then((response) => {
             dispatch(setItem(response));
+            dispatch(initializeForm('servicioForm', response));
         })
         .catch(() => {})
         .finally(() => {
@@ -198,7 +173,6 @@ export const actions = {
     eliminar,
     searchChange,
     onSortChange,
-    getHistorial,
 };
 
 // -----------------------------------
@@ -248,12 +222,6 @@ const reducers = {
             search,
         };
     },
-    [constants.HISTORIAL]: (state, { historial }) => {
-        return {
-            ...state,
-            historial,
-        };
-    },
 };
 
 const initialState = {
@@ -263,10 +231,6 @@ const initialState = {
         count: 0,
     },
     data2: {
-        results: [],
-        count: 0,
-    },
-    historial: {
         results: [],
         count: 0,
     },

@@ -18,6 +18,8 @@ import ListarUsuariosAgua from './common/components/UsuarioAgua/Listar';
 import ListarUsuariosCementerio from './common/components/UsuarioCementerio/Listar';
 import AgregarUsuarioAgua from './common/components/UsuarioAgua/CrearEditar/';
 import AgregarUsuarioCementerio from './common/components/UsuarioCementerio/CrearEditar/';
+import HistorialServicio from './common/components/Pagos/Listar';
+import AgregarPago from './common/components/Pagos/CrearEditar';
 
 import '../assets/fonts/fonts.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -142,6 +144,17 @@ module.exports = (
                     exact
                     path="/proyectos/cementerio"
                     component={ListarProyectosCementerio}
+                />
+                {/* Listar pagos */}
+                <ProtectedRoute
+                    exact
+                    path="/servicio/:id/ver"
+                    component={HistorialServicio}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/servicio/:id/pagar"
+                    component={AgregarPago}
                 />
 
                 <Route component={NotFound} />

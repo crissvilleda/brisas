@@ -29,7 +29,7 @@ const ListarSectores = (props) => {
                         isKey
                         dataField="id"
                         dataFormat={standardActions({
-                            ver: '/usuario',
+                            ver: '/servicio',
                         })}
                     >
                         ACCIONES
