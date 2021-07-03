@@ -7,44 +7,31 @@ import {
     renderCurrency,
     renderDatePicker,
     renderDayPicker,
-} from '../../Utils/renderField/renderField';
+    SelectField,
+} from '../../../Utils/renderField/renderField';
 import { Link } from 'react-router-dom';
 import { api } from 'api';
 
 const validate = (values) => {
     const errors = {};
-    if (!values.nombre) errors.nombre = 'Campo requerido';
     if (!values.descripcion) errors.descripcion = 'Campo requerido';
-    if (!values.fecha_inicio) errors.fecha_inicio = 'Campo requerido';
-    if (!values.fecha_fin) errors.fecha_fin = 'Campo requerido';
+    if (!values.monto) errors.monto = 'Campo requerido';
     return errors;
 };
 
 const CrearEditar = (props) => {
-    const { handleSubmit, ver } = props;
+    const { handleSubmit, ver, item_proyecto = {} } = props;
+    const { id = 0, nombre = "" } = item_proyecto || {}
     return (
         <form action="" onSubmit={handleSubmit} className="py-4">
-            <h3 className="text-dark">PROYECTO AGUA</h3>
+            <h3 className="py-4 text-dark"> ROYECTOS {nombre} </h3>
             <div className="mb-4 card card-small">
-                <div className="p-0 pt-3 d-flex flex-column flex-md-row col-5 m-auto">
-                    <div className="d-flex flex-column flex-1 mx-3">
-                        <label htmlFor="nombres">Nombre</label>
-                        <Field
-                            name="nombre"
-                            placeholder="Nombre del Proyecto"
-                            component={renderField}
-                            type="text"
-                            className="form-control"
-                            disabled={ver}
-                        />
-                    </div>
-                </div>
                 <div className="p-0 pt-3 d-flex flex-column flex-md-row col-5 m-auto">
                     <div className="d-flex flex-column flex-1 mx-3">
                         <label htmlFor="descripcion">Descripción</label>
                         <Field
                             name="descripcion"
-                            placeholder="Descripción  del proyecto"
+                            placeholder="Descripción"
                             component={renderTextArea}
                             rows={4}
                             type="text"
@@ -55,11 +42,12 @@ const CrearEditar = (props) => {
                 </div>
                 <div className="p-0 pt-3 d-flex flex-column flex-md-row col-5 m-auto">
                     <div className="d-flex flex-column flex-1 mx-3">
-                        <label htmlFor="fecha_inicio">Fecha Inicio</label>
+
+                        <label htmlFor="monto">Monto</label>
                         <Field
-                            name="fecha_inicio"
-                            placeholder="Fecha inicio del proyecto"
-                            component={renderDatePicker}
+                            name="monto"
+                            placeholder="Monto"
+                            component={renderCurrency}
                             type="text"
                             className="form-control"
                             disabled={ver}
@@ -68,14 +56,17 @@ const CrearEditar = (props) => {
                 </div>
                 <div className="p-0 pt-3 d-flex flex-column flex-md-row col-5 m-auto">
                     <div className="d-flex flex-column flex-1 mx-3">
-                        <label htmlFor="fecha_fin">Fecha Fin</label>
+
+                        <label htmlFor="tipo_detalle">Tipo del monto</label>
                         <Field
-                            name="fecha_fin"
-                            placeholder="Fecha final del proyecto"
-                            component={renderDatePicker}
-                            type="text"
-                            className="form-control flex-1"
+                            name="tipo_detalle"
+                            options={[{ "name": "Egreso", "id": 20 },
+                            { "name": "Neutro", "id": 30 }]}
+                            component={SelectField}
+                            placeholder="Tipo del monto"
                             disabled={ver}
+                            isSearchable={false}
+                            defaultValue={20}
                         />
                     </div>
                 </div>
@@ -90,7 +81,7 @@ const CrearEditar = (props) => {
                         </button>
                         <Link
                             className="btn btn-secondary ml-2"
-                            to="/proyectos/agua"
+                            to={`/proyecto/agua/${id}/pagos`}
                         >
                             Cancelar
                         </Link>
@@ -102,6 +93,6 @@ const CrearEditar = (props) => {
 };
 
 export default reduxForm({
-    form: 'proyectoForm', // a unique identifier for this form
+    form: 'DetalleProyectoForm', // a unique identifier for this form
     validate,
 })(CrearEditar);

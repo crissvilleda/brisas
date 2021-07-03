@@ -26,5 +26,8 @@ class Detalle(ModeloBase):
     tipo_detalle = models.IntegerField(choices=TIPOS_DETALLE)
 
     descripcion = models.TextField()
+    monto = models.FloatField()
+    cerrado = models.BooleanField(default=False)
+
     proyecto = models.ForeignKey(
-        'api.Proyecto', on_delete=models.CASCADE, related_name='detalles')
+        'api.Proyecto', on_delete=models.CASCADE, related_name='detalles', null=True)

@@ -10,6 +10,7 @@ import sectores from './modules/sectores/sectores';
 import proyectos from './modules/proyectos/proyectos';
 import servicios from './modules/servicios/servicios';
 import pagos from './modules/pagos/pagos';
+import detalles from './modules/detalles/detalles';
 
 export default combineReducers({
     form: formReducer,
@@ -23,4 +24,5 @@ export default combineReducers({
     proyectos,
     servicios,
     pagos,
+    detalles,
 });
