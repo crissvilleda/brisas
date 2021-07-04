@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-
 class SideBar extends Component {
     constructor(props) {
         super(props);
@@ -51,9 +50,9 @@ class SideBar extends Component {
                                 activeClassName={'active'}
                             >
                                 <div className="d-inline-block item-icon-wrapper">
-                                    <i className="material-icons">
-                                        vertical_split
-                                    </i>
+                                    <span style={{ fontSize: '1.25rem' }}>
+                                        <i className="fas fa-vector-square"></i>
+                                    </span>
                                 </div>
                                 <span>SECTORES</span>
                             </NavLink>
@@ -65,9 +64,9 @@ class SideBar extends Component {
                                 activeClassName={'active'}
                             >
                                 <div className="d-inline-block item-icon-wrapper">
-                                    <i className="material-icons">
-                                        vertical_split
-                                    </i>
+                                    <span style={{ fontSize: '1.25rem' }}>
+                                        <i className="fas fa-user"></i>
+                                    </span>
                                 </div>
                                 <span>USUARIOS</span>
                             </NavLink>
@@ -79,11 +78,14 @@ class SideBar extends Component {
                                 activeClassName={'active'}
                             >
                                 <div className="d-inline-block item-icon-wrapper">
-                                    <i className="material-icons">
-                                        vertical_split
-                                    </i>
+                                    <span style={{ fontSize: '1.25rem' }}>
+                                        <i className="fas fa-user"></i>
+                                    </span>
+                                    <span style={{ fontSize: '1.25rem' }}>
+                                        <i className="fas fa-tint"></i>
+                                    </span>
                                 </div>
-                                <span>USUARIOS SERVICIO AGUA</span>
+                                <span>USUARIOS AGUA</span>
                             </NavLink>
                         </li>
                         <li className="nav-item">
@@ -93,11 +95,14 @@ class SideBar extends Component {
                                 activeClassName={'active'}
                             >
                                 <div className="d-inline-block item-icon-wrapper">
-                                    <i className="material-icons">
-                                        vertical_split
-                                    </i>
+                                    <span style={{ fontSize: '1.25rem' }}>
+                                        <i className="fas fa-user"></i>
+                                    </span>
+                                    <span style={{ fontSize: '1.25rem' }}>
+                                        <i className="fas fa-skull"></i>
+                                    </span>
                                 </div>
-                                <span>USUARIOS SERVICIO CEMENTERIO </span>
+                                <span>USUARIOS CEMENTERIO </span>
                             </NavLink>
                         </li>
                         <li className="nav-item">
@@ -107,9 +112,12 @@ class SideBar extends Component {
                                 activeClassName={'active'}
                             >
                                 <div className="d-inline-block item-icon-wrapper">
-                                    <i className="material-icons">
-                                        vertical_split
-                                    </i>
+                                    <span style={{ fontSize: '1.25rem' }}>
+                                        <i className="fas fa-briefcase"></i>
+                                    </span>
+                                    <span style={{ fontSize: '1.25rem' }}>
+                                        <i className="fas fa-tint"></i>
+                                    </span>
                                 </div>
                                 <span>PROYECTOS AGUA</span>
                             </NavLink>
@@ -121,9 +129,12 @@ class SideBar extends Component {
                                 activeClassName={'active'}
                             >
                                 <div className="d-inline-block item-icon-wrapper">
-                                    <i className="material-icons">
-                                        vertical_split
-                                    </i>
+                                    <span style={{ fontSize: '1.25rem' }}>
+                                        <i className="fas fa-briefcase"></i>
+                                    </span>
+                                    <span style={{ fontSize: '1.25rem' }}>
+                                        <i className="fas fa-tint"></i>
+                                    </span>
                                 </div>
                                 <span>PROYECTOS CEMENTERIO</span>
                             </NavLink>
@@ -135,11 +146,11 @@ class SideBar extends Component {
                                 activeClassName={'active'}
                             >
                                 <div className="d-inline-block item-icon-wrapper">
-                                    <i className="material-icons">
-                                        vertical_split
-                                    </i>
+                                    <span style={{ fontSize: '1.25rem' }}>
+                                        <i className="fas fa-tools"></i>
+                                    </span>
                                 </div>
-                                <span>Tabs</span>
+                                <span>CONFIGURACIÓN</span>
                             </NavLink>
                         </li>
                         <li className="nav-item">
