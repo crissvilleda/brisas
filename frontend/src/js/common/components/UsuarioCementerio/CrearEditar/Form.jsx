@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { AsyncSelectField } from '../../Utils/renderField/renderField';
 import { Link } from 'react-router-dom';
 import { api } from 'api';
+import moment from 'moment';
 
 const validate = (values) => {
     const errors = {};
@@ -69,4 +70,8 @@ const CrearEditar = (props) => {
 export default reduxForm({
     form: 'servicioForm', // a unique identifier for this form
     validate,
+    initialValues: {
+        anio: moment().year(),
+        mes: moment().month() - 1,
+    },
 })(CrearEditar);
