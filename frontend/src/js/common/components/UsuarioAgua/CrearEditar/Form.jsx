@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import {
     AsyncSelectField,
     SelectField,
+    renderTextArea,
 } from '../../Utils/renderField/renderField';
 import { Link } from 'react-router-dom';
 import { api } from 'api';
@@ -105,7 +106,20 @@ const CrearEditar = (props) => {
                         />
                     </div>
                 </div>
-
+                <div className="p-0 pt-3 d-flex flex-column flex-md-row col-6 m-auto">
+                    <div className="d-flex flex-column flex-1 mx-3">
+                        <label htmlFor="mes">Descripción</label>
+                        <Field
+                            name="descripcion"
+                            placeholder="Agrega descripción"
+                            component={renderTextArea}
+                            rows={4}
+                            type="text"
+                            className="form-control"
+                            disabled={ver}
+                        />
+                    </div>
+                </div>
                 <div className="d-flex py-4">
                     <div className="col-5 m-auto d-flex justify-content-center">
                         <button
