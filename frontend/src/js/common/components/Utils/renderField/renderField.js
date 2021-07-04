@@ -138,7 +138,7 @@ export const renderSwitch = ({
                     input.onChange(value);
                 }}
                 checked={input.value ? input.value : false}
-            // id="normal-switch"
+                // id="normal-switch"
             />
             &nbsp;{label}
             {invalid && <div className="invalid-feedback">{error}</div>}
@@ -229,10 +229,9 @@ export const SelectField = ({
     }
     useEffect(() => {
         if (!value) {
-            if (defaultValue)
-                input.onChange(defaultValue);
+            if (defaultValue) input.onChange(defaultValue);
         }
-    }, [])
+    }, []);
 
     return (
         <React.Fragment>
