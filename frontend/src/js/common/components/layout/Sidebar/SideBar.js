@@ -133,7 +133,7 @@ class SideBar extends Component {
                                         <i className="fas fa-briefcase"></i>
                                     </span>
                                     <span style={{ fontSize: '1.25rem' }}>
-                                        <i className="fas fa-tint"></i>
+                                        <i className="fas fa-skull"></i>
                                     </span>
                                 </div>
                                 <span>PROYECTOS CEMENTERIO</span>
