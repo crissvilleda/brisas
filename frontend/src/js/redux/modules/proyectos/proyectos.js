@@ -61,8 +61,7 @@ const setSearch = (search) => ({
 // Actions
 // -----------------------------------
 
-const listar =
-    (page = 1, tipo = undefined) =>
+const listar = (page = 1, tipo = undefined) =>
     (dispatch, getStore) => {
         const resource = getStore().proyectos;
         const params = { page };
@@ -76,7 +75,7 @@ const listar =
                 if (tipo === CEMENTERIO) dispatch(setData2(response));
                 dispatch(setPage(page));
             })
-            .catch(() => {})
+            .catch(() => { })
             .finally(() => {
                 dispatch(setLoader(false));
             });
@@ -89,7 +88,7 @@ const leer = (id) => (dispatch) => {
             dispatch(setItem(response));
             dispatch(initializeForm('proyectoForm', response));
         })
-        .catch(() => {})
+        .catch(() => { })
         .finally(() => {
             dispatch(setLoader(false));
         });
@@ -125,6 +124,21 @@ const editar = (id, data) => (dispatch) => {
         })
         .catch(() => {
             NotificationManager.error('Error en la edición', 'ERROR', 0);
+        })
+        .finally(() => {
+            dispatch(setLoader(false));
+        });
+};
+
+const cerrarProyecto = (id, tipo = undefined) => (dispatch) => {
+    dispatch(setLoader(true));
+    api.put(`proyecto/${id}/cerrar`)
+        .then(() => {
+            NotificationManager.success('Proyecto cerrado', 'Éxito', 3000);
+            dispatch(listar(1, tipo));
+        })
+        .catch(() => {
+            NotificationManager.error('Error al cerrar proyecto', 'ERROR', 3000);
         })
         .finally(() => {
             dispatch(setLoader(false));
@@ -173,6 +187,7 @@ export const actions = {
     eliminar,
     searchChange,
     onSortChange,
+    cerrarProyecto,
 };
 
 // -----------------------------------

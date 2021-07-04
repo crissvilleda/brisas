@@ -5,13 +5,14 @@ import { standardActions } from '../../Utils/Grid/StandardActions';
 import { Link } from 'react-router-dom';
 import { RenderCurrency } from '../../Utils/renderField/renderReadField';
 import { AGUA } from '../../../../utility/constants';
+import moment from "moment";
 
 const ListarProyectos = (props) => {
     React.useEffect(() => {
         props.listar(1, AGUA);
     }, []);
     const cerrar = (id) => {
-        console.log("cerrando", id)
+        props.cerrarProyecto(id, AGUA)
     }
 
     return (
@@ -37,6 +38,7 @@ const ListarProyectos = (props) => {
                             editar: '/proyecto/agua',
                             proyecto: '/proyecto/agua',
                         })}
+                        width="110px"
                     >
                         ACCIONES
                     </TableHeaderColumn>
@@ -61,17 +63,22 @@ const ListarProyectos = (props) => {
                     >
                         TOTAL COSTO
                     </TableHeaderColumn>
-                    <TableHeaderColumn dataField="fecha_inicio">
+                    <TableHeaderColumn
+                        dataField="fecha_inicio"
+                        dataFormat={cell => moment(cell).format("DD-MMM-YYYY")}
+                    >
                         FECHA INICIO
                     </TableHeaderColumn>
-                    <TableHeaderColumn dataField="fecha_fin">
+                    <TableHeaderColumn
+                        dataField="fecha_fin"
+                        dataFormat={cell => cell ? moment(cell).format("DD-MMM-YYYY") : "--"}
+                    >
                         FECHA FINALIZADO
                     </TableHeaderColumn>
                     <TableHeaderColumn
                         dataField="id"
-                        dataFormat={standardActions({
-                            cerrar,
-                        })}
+                        dataFormat={(cell, arrow) => standardActions({ 'cerrar': !arrow.cerrado ? cerrar : undefined })(cell)}
+                        width="110px"
                     >
                         ACCIONES
                     </TableHeaderColumn>
