@@ -55,10 +55,7 @@ const loadOptions = (search) => {
 const CrearEditar = (props) => {
     const { handleSubmit, ver } = props;
     return (
-        <form action="" onSubmit={handleSubmit} className="py-4">
-            <h3 className="text-dark">
-                REGISTRAR USUARIO AL SERVICIO CEMENTERIO
-            </h3>
+        <form action="" onSubmit={handleSubmit}>
             <div className="mb-4 card card-small">
                 <div className="p-0 pt-3 d-flex flex-column flex-md-row col-6 m-auto">
                     <div className="d-flex flex-column flex-1 mx-3">

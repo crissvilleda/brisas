@@ -33,12 +33,14 @@ const CrearEditar = (props) => {
         <React.Fragment>
             <div className="py-4">
                 <h3 className="text-dark">
-                    REGISTRAR USUARIO AL SERVICIO AGUA
+                    REGISTRAR USUARIO AL SERVICIO CEMENTERIO
                 </h3>
-                <Form
-                    onSubmit={onSubmit}
-                    ver={props.location.pathname.includes('ver')}
-                />
+                <LoadMask loading={props.loader} blur>
+                    <Form
+                        onSubmit={onSubmit}
+                        ver={props.location.pathname.includes('ver')}
+                    />
+                </LoadMask>
             </div>
         </React.Fragment>
     );
