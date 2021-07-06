@@ -20,4 +20,4 @@ class Servicio(ModeloBase):
 
     anio = models.SmallIntegerField()
     mes = models.SmallIntegerField()
-    descripcion = models.TextField()
+    descripcion = models.TextField(blank=True, null=True)

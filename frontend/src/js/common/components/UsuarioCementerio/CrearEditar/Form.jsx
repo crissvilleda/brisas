@@ -38,6 +38,8 @@ const optionsAnio = [
 const validate = (values) => {
     const errors = {};
     if (!values.usuario) errors.usuario = 'Campo requerido';
+    if (!values.anio) errors.anio = 'Campo requerido';
+    if (!values.mes) errors.mes = 'Campo requerido';
     return errors;
 };
 
@@ -74,6 +76,12 @@ const CrearEditar = (props) => {
                             disabled={ver}
                         />
                     </div>
+                </div>
+                <div className="p-0 pt-3 d-flex flex-column flex-md-row col-6 m-auto">
+                    <span className="mx-3">
+                        Seleccione el ultimo año y mes hasta donde el usuario a
+                        registrar tiene pagado o esta al dia.
+                    </span>
                 </div>
                 <div className="p-0 pt-3 d-flex flex-column flex-md-row col-6 m-auto">
                     <div className="d-flex flex-column flex-1 mx-3">
