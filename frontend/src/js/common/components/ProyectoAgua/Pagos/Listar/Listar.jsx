@@ -5,10 +5,11 @@ import { standardActions } from '../../../Utils/Grid/StandardActions';
 import { Link } from 'react-router-dom';
 import { RenderCurrency } from '../../../Utils/renderField/renderReadField';
 import { AGUA } from '../../../../../utility/constants';
+import moment from "moment";
 
 const ListarProyectos = (props) => {
     const { item_proyecto = {} } = props
-    const { nombre = "", id = 0 } = item_proyecto || {}
+    const { nombre = "", id = 0, cerrado } = item_proyecto || {}
 
     React.useEffect(() => {
         const { idProyecto } = props.match.params;
@@ -31,38 +32,51 @@ const ListarProyectos = (props) => {
                     loading={props.loader}
                     onPageChange={(page) => props.listar(page, AGUA)}
                 >
+                    {!cerrado &&
+                        <TableHeaderColumn
+                            dataField="id"
+                            dataFormat={standardActions({
+                                ver: `/proyecto/agua/${id}/pago`,
+                                editar: `/proyecto/agua/${id}/pago`,
+                            })}
+                            width="110px"
+                        >
+                            ACCIONES
+                        </TableHeaderColumn>
+                    }
                     <TableHeaderColumn
                         isKey
-                        dataField="id"
-                        dataFormat={standardActions({
-                            ver: `/proyecto/agua/${id}/pago`,
-                            editar: `/proyecto/agua/${id}/pago`,
-                        })}
-                    >
-                        ACCIONES
-                    </TableHeaderColumn>
-                    <TableHeaderColumn dataField="tipo">
+                        dataField="tipo"
+                        dataFormat={(value) => {
+                            let text = "--"
+                            if (value == 10) {
+                                text = "Servicio Agua"
+                            } else if (value == 20) {
+                                text = "Servicio Cementerio"
+                            }
+                            return text
+                        }}>
+
                         TIPO
                     </TableHeaderColumn>
                     <TableHeaderColumn
                         dataField="monto"
-                        dataFormat={(value) => <RenderCurrency value={value} />}
+                        width="150px"
+                        dataFormat={(value, row) => row.tipo_detalle == 30 ? <RenderCurrency value={value} /> : "--"}
                     >
                         MONTO NEUTRO
                     </TableHeaderColumn>
                     <TableHeaderColumn
-                        dataField="monto_egreso"
-                        dataFormat={(value) => <RenderCurrency value={value} />}
+                        dataField="monto"
+                        width="150px"
+                        dataFormat={(value, row) => row.tipo_detalle == 20 ? <RenderCurrency value={value} /> : "--"}
                     >
                         MONTO EGRESO
                     </TableHeaderColumn>
-                    <TableHeaderColumn
-                        dataField="total_costo"
-                        dataFormat={(value) => <RenderCurrency value={value} />}
+                    <TableHeaderColumn dataField="createdAt"
+                        dataFormat={cell => moment(cell).format("DD-MMM-YYYY, h:mm a")}
+                        width="180px"
                     >
-                        TOTAL COSTO
-                    </TableHeaderColumn>
-                    <TableHeaderColumn dataField="createdAt">
                         FECHA
                     </TableHeaderColumn>
                 </Tabla>

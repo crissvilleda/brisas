@@ -3,14 +3,20 @@ from rest_framework import serializers
 from api.models import Proyecto
 from django.db.models import Sum
 
-class ProyectoReadSerializer(serializers.ModelSerializer):
+class ProyectoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Proyecto
-        fields = '__all__'
+        fields = (
+            'nombre',
+            'descripcion',
+            'fecha_inicio',
+            'fecha_fin',
+            'tipo'
+        )
 
 
-class ProyectoSerializer(serializers.ModelSerializer):
+class ProyectoReadSerializer (serializers.ModelSerializer):
     monto_neutro=serializers.SerializerMethodField()
     monto_egreso=serializers.SerializerMethodField()
     total_costo=serializers.SerializerMethodField()

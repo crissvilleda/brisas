@@ -17,3 +17,4 @@ class Proyecto(ModeloBase):
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
     tipo = models.IntegerField(choices=TIPOS_PROYECTO, default=OTROS)
+    cerrado = models.BooleanField(default=False)
