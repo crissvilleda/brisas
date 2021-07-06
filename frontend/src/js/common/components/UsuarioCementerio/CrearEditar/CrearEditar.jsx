@@ -2,6 +2,7 @@ import React from 'react';
 import Form from './Form';
 import { CEMENTERIO } from '../../../../utility/constants';
 import swal from 'sweetalert2';
+import LoadMask from '../../Utils/LoadMask/LoadMask';
 
 const CrearEditar = (props) => {
     React.useEffect(() => {
@@ -30,10 +31,15 @@ const CrearEditar = (props) => {
 
     return (
         <React.Fragment>
-            <Form
-                onSubmit={onSubmit}
-                ver={props.location.pathname.includes('ver')}
-            />
+            <div className="py-4">
+                <h3 className="text-dark">
+                    REGISTRAR USUARIO AL SERVICIO AGUA
+                </h3>
+                <Form
+                    onSubmit={onSubmit}
+                    ver={props.location.pathname.includes('ver')}
+                />
+            </div>
         </React.Fragment>
     );
 };
