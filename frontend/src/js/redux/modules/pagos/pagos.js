@@ -17,6 +17,7 @@ const constants = {
     PAGE: `SERVICIO_PAGE`,
     ORDERING: `SERVICIO_ORDERING`,
     SEARCH: `SERVICIO_SEARCH`,
+    MESES_BLOQUEAR: `MESES_BLOQUEAR_PAGO`,
 };
 
 // -----------------------------------
@@ -55,6 +56,11 @@ const setOrdering = (ordering) => ({
 const setSearch = (search) => ({
     type: constants.SEARCH,
     search,
+});
+
+const setMeses = (meses) => ({
+    type: constants.MESES_BLOQUEAR,
+    meses,
 });
 
 // -----------------------------------
@@ -131,6 +137,30 @@ const editar = (id, data) => (dispatch) => {
         });
 };
 
+const obtenerMeses = (id, anio) => (dispatch, getStore) => {
+    let { values } = getStore().form.pagoForm;
+    if (!values) values = {};
+    dispatch(setLoader(true));
+    const params = {};
+    if (anio) params.anio = anio;
+    api.get(`servicio/${id}/meses`, params)
+        .then((response) => {
+            const meses = [];
+            if (response.meses) {
+                response.meses.forEach((mes) => {
+                    values[mes['nombre']] = mes['value'];
+                    if (mes['value']) meses.push(mes['nombre']);
+                });
+                dispatch(setMeses(meses));
+                dispatch(initializeForm('pagoForm', { ...values }));
+            }
+        })
+        .catch((error) => console.log(error))
+        .finally(() => {
+            dispatch(setLoader(false));
+        });
+};
+
 const eliminar = (id) => (dispatch) => {
     dispatch(setLoader(true));
     api.eliminar(`servicio/${id}`)
@@ -173,6 +203,7 @@ export const actions = {
     eliminar,
     searchChange,
     onSortChange,
+    obtenerMeses,
 };
 
 // -----------------------------------
@@ -222,6 +253,12 @@ const reducers = {
             search,
         };
     },
+    [constants.MESES_BLOQUEAR]: (state, { meses }) => {
+        return {
+            ...state,
+            meses,
+        };
+    },
 };
 
 const initialState = {
@@ -235,6 +272,7 @@ const initialState = {
         count: 0,
     },
     item: {},
+    meses: [],
     page: 1,
     ordering: '',
     search: '',

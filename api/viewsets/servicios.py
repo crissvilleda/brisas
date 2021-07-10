@@ -10,6 +10,28 @@ from api.models import Servicio, Pago
 
 from api.serializers import ServicioSerializer, ServicioReadSerializer, PagoReadSerializer
 
+LISTA_MESES = [{'no': 1, 'nombre': 'enero', 'value': False},
+               {'no': 2, 'nombre': 'febrero', 'value': False},
+               {'no': 3, 'nombre': 'marzo', 'value': False},
+               {'no': 4, 'nombre': 'abril', 'value': False},
+               {'no': 5, 'nombre': 'mayo', 'value':  False},
+               {'no': 6, 'nombre': 'junio', 'value': False},
+               {'no': 7, 'nombre': 'julio', 'value': False},
+               {'no': 8, 'nombre': 'agosto', 'value': False},
+               {'no': 9, 'nombre': 'septiembre', 'value': False},
+               {'no': 10, 'nombre': 'octubre', 'value': False},
+               {'no': 11, 'nombre': 'noviembre', 'value':  False},
+               {'no': 12, 'nombre': 'diciembre', 'value': False},
+               ]
+
+
+def change(item, mes):
+    if item['no'] <= mes:
+        item['value'] = True
+    else:
+        item['value'] = False
+    return item
+
 
 class ServicioViewSet(viewsets.ModelViewSet):
     queryset = Servicio.objects.filter(activo=True)
@@ -52,6 +74,35 @@ class ServicioViewSet(viewsets.ModelViewSet):
 
         serializer = PagoReadSerializer(queryset, many=True)
         return Response(serializer.data)
+
+    @action(methods=['get'], detail=True)
+    def meses(self, request, *args, **kwargs):
+        servicio = self.get_object()
+        anio_consulta = request.query_params.get('anio', None)
+
+        if anio_consulta is None:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        pagos = Pago.objects.filter(servicio=servicio, anio=anio_consulta)
+
+        data = {}
+        if not pagos.exists():
+            anio = servicio.anio
+            mes = servicio.mes
+
+            if int(anio_consulta) < anio:
+                data['meses'] = list(map(lambda x: change(x, 12), LISTA_MESES))
+                return Response(data=data, status=status.HTTP_200_OK)
+            elif int(anio_consulta) == anio:
+                data['meses'] = list(
+                    map(lambda x: change(x, mes), LISTA_MESES))
+                return Response(data=data, status=status.HTTP_200_OK)
+            else:
+                data['meses'] = list(
+                    map(lambda x: change(x, 0), LISTA_MESES))
+                return Response(data=data, status=status.HTTP_200_OK)
+
+        pass
 
     def destroy(self, request, *args, **kwargs):
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)

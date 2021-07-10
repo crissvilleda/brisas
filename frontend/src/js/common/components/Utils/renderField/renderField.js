@@ -161,8 +161,12 @@ export const renderFieldCheck = ({
                 <label className="needsclick">
                     <input
                         type="checkbox"
-                        disabled={disabled}
                         {...input}
+                        disabled={disabled}
+                        onChange={(value) => {
+                            input.onChange(value);
+                        }}
+                        checked={input.value}
                         className={classNames('', { 'is-invalid': invalid })}
                     />
                     <span className="fa fa-check" />
@@ -202,6 +206,7 @@ export const renderFieldRadio = ({
 };
 
 export const SelectField = ({
+    onCambio,
     input,
     disabled,
     isClearable,
@@ -247,6 +252,7 @@ export const SelectField = ({
                 placeholder={placeholder}
                 onChange={(e) => {
                     input.onChange(e ? e[valueKey] : null);
+                    if (onCambio) onCambio(e);
                 }}
                 value={value}
                 isDisabled={disabled}

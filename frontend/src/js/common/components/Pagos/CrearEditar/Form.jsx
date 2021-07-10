@@ -6,6 +6,7 @@ import {
     SelectField,
 } from '../../Utils/renderField/renderField';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 const options = [
     { value: 2020, label: '2020' },
@@ -32,16 +33,16 @@ const CrearEditar = (props) => {
             <div className="mb-4 card card-small">
                 <div className="p-0 pt-3 d-flex flex-column flex-md-row col-6 m-auto">
                     <div className="d-flex flex-column flex-1 mx-3">
-                        <label htmlFor="nombre">Enero</label>
+                        <label htmlFor="nombre">Año</label>
                         <Field
-                            name="enero"
+                            name="anio"
                             component={SelectField}
                             labelKey="label"
                             valueKey="value"
                             options={options}
+                            onCambio={props.onAnioChange}
                             type="text"
                             className="form-control"
-                            disabled={ver}
                         />
                     </div>
                 </div>
@@ -52,8 +53,8 @@ const CrearEditar = (props) => {
                             name="enero"
                             component={renderFieldCheck}
                             type="text"
+                            disabled={props.meses.includes('enero')}
                             className="form-control"
-                            disabled={ver}
                         />
                     </div>
                     <div className="d-flex flex-column flex-1 mx-3">
@@ -62,8 +63,8 @@ const CrearEditar = (props) => {
                             name="febrero"
                             component={renderFieldCheck}
                             type="text"
+                            disabled={props.meses.includes('febrero')}
                             className="form-control"
-                            disabled={ver}
                         />
                     </div>
                 </div>
@@ -74,8 +75,8 @@ const CrearEditar = (props) => {
                             name="marzo"
                             component={renderFieldCheck}
                             type="text"
+                            disabled={props.meses.includes('marzo')}
                             className="form-control"
-                            disabled={ver}
                         />
                     </div>
                     <div className="d-flex flex-column flex-1 mx-3">
@@ -84,8 +85,8 @@ const CrearEditar = (props) => {
                             name="abril"
                             component={renderFieldCheck}
                             type="text"
+                            disabled={props.meses.includes('abril')}
                             className="form-control"
-                            disabled={ver}
                         />
                     </div>
                 </div>
@@ -96,8 +97,8 @@ const CrearEditar = (props) => {
                             name="mayo"
                             component={renderFieldCheck}
                             type="text"
+                            disabled={props.meses.includes('mayo')}
                             className="form-control"
-                            disabled={ver}
                         />
                     </div>
                     <div className="d-flex flex-column flex-1 mx-3">
@@ -106,8 +107,8 @@ const CrearEditar = (props) => {
                             name="junio"
                             component={renderFieldCheck}
                             type="text"
+                            disabled={props.meses.includes('junio')}
                             className="form-control"
-                            disabled={ver}
                         />
                     </div>
                 </div>
@@ -118,8 +119,8 @@ const CrearEditar = (props) => {
                             name="julio"
                             component={renderFieldCheck}
                             type="text"
+                            disabled={props.meses.includes('julio')}
                             className="form-control"
-                            disabled={ver}
                         />
                     </div>
                     <div className="d-flex flex-column flex-1 mx-3">
@@ -128,8 +129,8 @@ const CrearEditar = (props) => {
                             name="agosto"
                             component={renderFieldCheck}
                             type="text"
+                            disabled={props.meses.includes('agosto')}
                             className="form-control"
-                            disabled={ver}
                         />
                     </div>
                 </div>
@@ -140,8 +141,8 @@ const CrearEditar = (props) => {
                             name="septiembre"
                             component={renderFieldCheck}
                             type="text"
+                            disabled={props.meses.includes('septiembre')}
                             className="form-control"
-                            disabled={ver}
                         />
                     </div>
                     <div className="d-flex flex-column flex-1 mx-3">
@@ -150,8 +151,8 @@ const CrearEditar = (props) => {
                             name="octubre"
                             component={renderFieldCheck}
                             type="text"
+                            disabled={props.meses.includes('octubre')}
                             className="form-control"
-                            disabled={ver}
                         />
                     </div>
                 </div>
@@ -162,8 +163,8 @@ const CrearEditar = (props) => {
                             name="noviembre"
                             component={renderFieldCheck}
                             type="text"
+                            disabled={props.meses.includes('noviembre')}
                             className="form-control"
-                            disabled={ver}
                         />
                     </div>
                     <div className="d-flex flex-column flex-1 mx-3">
@@ -172,22 +173,21 @@ const CrearEditar = (props) => {
                             name="diciembre"
                             component={renderFieldCheck}
                             type="text"
+                            disabled={props.meses.includes('diciembre')}
                             className="form-control"
-                            disabled={ver}
                         />
                     </div>
                 </div>
 
                 <div className="d-flex py-4">
                     <div className="col-5 m-auto d-flex justify-content-center">
-                        <button
-                            type="submit"
-                            disabled={ver}
-                            className="btn btn-primary mr-2"
-                        >
+                        <button type="submit" className="btn btn-primary mr-2">
                             Guardar
                         </button>
-                        <Link className="btn btn-secondary ml-2" to="/sectores">
+                        <Link
+                            className="btn btn-secondary ml-2"
+                            to={`/servicio/${props.item.id}/ver`}
+                        >
                             Cancelar
                         </Link>
                     </div>
@@ -200,4 +200,7 @@ const CrearEditar = (props) => {
 export default reduxForm({
     form: 'pagoForm', // a unique identifier for this form
     validate,
+    initialValues: {
+        anio: moment().year(),
+    },
 })(CrearEditar);

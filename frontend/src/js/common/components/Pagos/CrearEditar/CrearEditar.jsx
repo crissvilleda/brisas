@@ -1,12 +1,15 @@
 import React from 'react';
 import Form from './Form';
 import LoadMask from '../../Utils/LoadMask/LoadMask';
+import moment from 'moment';
 
 const CrearEditar = (props) => {
     React.useEffect(() => {
         const { id } = props.match.params;
-        if (id) props.leer(id);
-        else props.history.push('/404');
+        if (id) {
+            props.leer(id);
+            props.obtenerMeses(id, moment().year());
+        } else props.history.push('/404');
     }, []);
 
     const onSubmit = (data) => {
@@ -22,6 +25,10 @@ const CrearEditar = (props) => {
         }
         return '';
     };
+    const onAnioChange = (e) => {
+        const { id } = props.match.params;
+        props.obtenerMeses(id, e.value);
+    };
 
     return (
         <React.Fragment>
@@ -32,6 +39,8 @@ const CrearEditar = (props) => {
                         onSubmit={onSubmit}
                         ver={!!props.location.pathname.includes('ver')}
                         item={props.item}
+                        meses={props.meses}
+                        onAnioChange={onAnioChange}
                     />
                 </LoadMask>
             </div>
