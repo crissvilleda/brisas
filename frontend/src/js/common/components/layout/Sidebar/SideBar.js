@@ -141,7 +141,7 @@ class SideBar extends Component {
                         </li>
                         <li className="nav-item">
                             <NavLink
-                                to="/tabs"
+                                to="/config"
                                 className="nav-link"
                                 activeClassName={'active'}
                             >

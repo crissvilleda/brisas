@@ -11,6 +11,7 @@ import proyectos from './modules/proyectos/proyectos';
 import servicios from './modules/servicios/servicios';
 import pagos from './modules/pagos/pagos';
 import detalles from './modules/detalles/detalles';
+import config from './modules/configuracion/configuracion';
 
 export default combineReducers({
     form: formReducer,
@@ -25,4 +26,5 @@ export default combineReducers({
     servicios,
     pagos,
     detalles,
+    config,
 });

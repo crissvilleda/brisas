@@ -6,3 +6,4 @@ from .proyectos import Proyecto
 from .servicios import Servicio
 from .pagos import Pago
 from .detalle import Detalle
+from .configuracion import Configuracion

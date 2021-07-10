@@ -16,6 +16,8 @@ import AgregarUsuarioAgua from './common/components/UsuarioAgua/CrearEditar/';
 import AgregarUsuarioCementerio from './common/components/UsuarioCementerio/CrearEditar/';
 import HistorialServicio from './common/components/Pagos/Listar';
 import AgregarPago from './common/components/Pagos/CrearEditar';
+//- configuración
+import Config from './common/components/configuracion/CrearEditar';
 
 // ----- proyecto agua
 import CrearEditarProyectoAgua from './common/components/ProyectoAgua/CrearEditar';
@@ -203,6 +205,8 @@ module.exports = (
                     path="/proyectos/cementerio"
                     component={ListarProyectosCementerio}
                 />
+
+                <ProtectedRoute exact path="/config" component={Config} />
 
                 <Route component={NotFound} />
             </Switch>
