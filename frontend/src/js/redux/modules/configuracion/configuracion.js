@@ -1,5 +1,6 @@
 import { handleActions } from 'redux-actions';
 import { initialize as initializeForm } from 'redux-form';
+import { NotificationManager } from 'react-notifications';
 import { api } from 'api';
 
 const constants = {
