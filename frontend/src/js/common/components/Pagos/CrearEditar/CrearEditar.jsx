@@ -35,13 +35,15 @@ const CrearEditar = (props) => {
             <div className="py-4">
                 <h3 className="text-dark">{renderUsuario()}</h3>
                 <LoadMask loading={props.loader} blur>
-                    <Form
-                        onSubmit={onSubmit}
-                        ver={!!props.location.pathname.includes('ver')}
-                        item={props.item}
-                        meses={props.meses}
-                        onAnioChange={onAnioChange}
-                    />
+                    <div className="d-flex mb-4 card card-small">
+                        <Form
+                            onSubmit={onSubmit}
+                            ver={!!props.location.pathname.includes('ver')}
+                            item={props.item}
+                            meses={props.meses}
+                            onAnioChange={onAnioChange}
+                        />
+                    </div>
                 </LoadMask>
             </div>
         </React.Fragment>

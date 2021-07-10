@@ -2,6 +2,7 @@
 @import '../../node_modules/react-bootstrap-table/dist/react-bootstrap-table.min.css';
 @import '../../node_modules/react-day-picker/lib/style.css';
 @import 'bootstrap_reset.css';
+@import './texts.css';
 
 .container {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
