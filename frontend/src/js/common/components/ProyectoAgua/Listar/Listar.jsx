@@ -2,25 +2,35 @@ import React from 'react';
 import { TableHeaderColumn } from 'react-bootstrap-table';
 import Tabla from '../../Utils/Grid';
 import { standardActions } from '../../Utils/Grid/StandardActions';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { RenderCurrency } from '../../Utils/renderField/renderReadField';
-import { AGUA } from '../../../../utility/constants';
+import { AGUA, CEMENTERIO, OTROS } from '../../../../utility/constants';
 import moment from "moment";
 
 const ListarProyectos = (props) => {
+    const { textTipo } = props.match.params;
+    if (!['agua', 'cementerio'].includes(textTipo)) {
+        return <Redirect to="/" />;
+    }
+
+    const TIPO_PROYECTO = textTipo == 'agua' ? AGUA : textTipo == 'cementerio' ? CEMENTERIO : OTROS
+    const URL = `/proyecto/${TIPO_PROYECTO == 10 ? "agua" : TIPO_PROYECTO == 20 ? "cementerio" : "otros"}`
+
+
     React.useEffect(() => {
-        props.listar(1, AGUA);
-    }, []);
+        props.listar(1, TIPO_PROYECTO);
+    }, [textTipo]);
     const cerrar = (id) => {
-        props.cerrarProyecto(id, AGUA)
+        // props.cerrarProyecto(id, TIPO_PROYECTO)
+        console.log("TIPO_PROYECTO", TIPO_PROYECTO)
     }
 
     return (
         <React.Fragment>
-            <h3 className="py-4 text-dark"> LISTADO DE PROYECTOS DE AGUA </h3>
+            <h3 className="py-4 text-dark">PROYECTOS DE {TIPO_PROYECTO == 10 ? 'AGUA' : TIPO_PROYECTO == 20 ? 'CEMENTERIO' : 'OTROS'} </h3>
             <div className="py-4 card card-small px-4">
                 <div className="py-4 d-flex justify-content-end ">
-                    <Link className="btn btn-primary" to="/proyecto/agua">
+                    <Link className="btn btn-primary" to={URL}>
                         NUEVO
                     </Link>
                 </div>
@@ -28,15 +38,15 @@ const ListarProyectos = (props) => {
                     data={props.data}
                     page={props.page}
                     loading={props.loader}
-                    onPageChange={(page) => props.listar(page, AGUA)}
+                    onPageChange={(page) => props.listar(page, TIPO_PROYECTO)}
                 >
                     <TableHeaderColumn
                         isKey
                         dataField="id"
                         dataFormat={standardActions({
-                            ver: '/proyecto/agua',
-                            editar: '/proyecto/agua',
-                            proyecto: '/proyecto/agua',
+                            ver: URL,
+                            editar: URL,
+                            proyecto: URL,
                         })}
                         width="110px"
                     >

@@ -5,8 +5,9 @@ import { AGUA } from '../../../../../utility/constants';
 
 const CrearEditar = (props) => {
     React.useEffect(() => {
-        const { idProyecto } = props.match.params;
+        const { idProyecto, id } = props.match.params;
         if (idProyecto) props.leer_proyecto(idProyecto);
+        if (id) props.leer(id);
     }, []);
 
     const onSubmit = (data) => {

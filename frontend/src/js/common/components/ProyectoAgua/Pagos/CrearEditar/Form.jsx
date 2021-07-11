@@ -15,13 +15,14 @@ import { api } from 'api';
 const validate = (values) => {
     const errors = {};
     if (!values.descripcion) errors.descripcion = 'Campo requerido';
+    if (!values.tipo_detalle) errors.tipo_detalle = 'Campo requerido';
     if (!values.monto) errors.monto = 'Campo requerido';
     return errors;
 };
 
 const CrearEditar = (props) => {
     const { handleSubmit, ver, item_proyecto = {} } = props;
-    const { id = 0, nombre = "" } = item_proyecto || {}
+    const { id = 0, nombre = "", tipo = 30 } = item_proyecto || {}
     return (
         <form action="" onSubmit={handleSubmit} className="py-4">
             <h3 className="py-4 text-dark"> ROYECTOS {nombre} </h3>
@@ -66,7 +67,7 @@ const CrearEditar = (props) => {
                             placeholder="Tipo del monto"
                             disabled={ver}
                             isSearchable={false}
-                            defaultValue={20}
+                        // defaultValue={20}
                         />
                     </div>
                 </div>
@@ -81,7 +82,7 @@ const CrearEditar = (props) => {
                         </button>
                         <Link
                             className="btn btn-secondary ml-2"
-                            to={`/proyecto/agua/${id}/pagos`}
+                            to={`/proyecto/${tipo == 10 ? "agua" : tipo == 20 ? "cementerio" : "otros"}/${id}/pagos`}
                         >
                             Cancelar
                         </Link>

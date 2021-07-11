@@ -1,8 +1,15 @@
-from api.models import Detalle
+from api.models import Detalle,Proyecto
 
 from rest_framework import serializers
-from api.serializers import UsuarioReadSerializer
 
+class ProyectoReadSerializer (serializers.ModelSerializer):
+    class Meta:
+        model = Proyecto
+        fields = (
+            'nombre',
+            'tipo',
+            'id',
+        )
 
 class DetalleSerializer(serializers.ModelSerializer):
 
@@ -12,6 +19,7 @@ class DetalleSerializer(serializers.ModelSerializer):
 
 
 class DetalleReadSerializer(serializers.ModelSerializer):
+    proyecto = ProyectoReadSerializer()
 
     class Meta:
         model = Detalle

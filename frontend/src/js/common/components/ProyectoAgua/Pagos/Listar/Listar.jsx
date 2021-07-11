@@ -9,7 +9,7 @@ import moment from "moment";
 
 const ListarProyectos = (props) => {
     const { item_proyecto = {} } = props
-    const { nombre = "", id = 0, cerrado } = item_proyecto || {}
+    const { nombre = "", id = 0, cerrado, tipo = 30 } = item_proyecto || {}
 
     React.useEffect(() => {
         const { idProyecto } = props.match.params;
@@ -17,14 +17,18 @@ const ListarProyectos = (props) => {
         props.listar(1, idProyecto);
     }, []);
 
+    const URL = `/proyecto/${tipo == 10 ? "agua" : tipo == 20 ? "cementerio" : "otros"}/${id}/pago`
     return (
         <React.Fragment>
-            <h3 className="py-4 text-dark"> ROYECTOS {nombre} </h3>
+            <h3 className="pt-4 pb-0 text-dark">PROYECTO DE {tipo == 10 ? "AGUA" : tipo == 20 ? "CEMENTERIO" : "OTROS"}:</h3>
+            <h3 className="pt-0 pb-4 text-dark">{nombre} </h3>
             <div className="py-4 card card-small px-4">
                 <div className="py-4 d-flex justify-content-end ">
-                    <Link className="btn btn-primary" to="/proyecto/agua/1/pago">
-                        Nuevo
-                    </Link>
+                    {!cerrado &&
+                        <Link className="btn btn-primary" to={URL}>
+                            Nuevo
+                        </Link>
+                    }
                 </div>
                 <Tabla
                     data={props.data}
@@ -36,8 +40,8 @@ const ListarProyectos = (props) => {
                         <TableHeaderColumn
                             dataField="id"
                             dataFormat={standardActions({
-                                ver: `/proyecto/agua/${id}/pago`,
-                                editar: `/proyecto/agua/${id}/pago`,
+                                ver: URL,
+                                editar: URL,
                             })}
                             width="110px"
                         >
@@ -47,12 +51,15 @@ const ListarProyectos = (props) => {
                     <TableHeaderColumn
                         isKey
                         dataField="tipo"
+                        width="120px"
                         dataFormat={(value) => {
                             let text = "--"
                             if (value == 10) {
                                 text = "Servicio Agua"
                             } else if (value == 20) {
                                 text = "Servicio Cementerio"
+                            } else if (value == 30) {
+                                text = "Servicio OTROS"
                             }
                             return text
                         }}>

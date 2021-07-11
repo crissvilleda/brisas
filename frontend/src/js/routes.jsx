@@ -113,65 +113,43 @@ module.exports = (
                 {/* Proyectos Agua */}
                 <ProtectedRoute
                     exact
-                    path="/proyecto/agua"
+                    path="/proyecto/:textTipo"
                     component={CrearEditarProyectoAgua}
                 />
                 <ProtectedRoute
                     exact
-                    path="/proyecto/agua/:id/ver"
+                    path="/proyecto/:textTipo/:id/ver"
                     component={CrearEditarProyectoAgua}
                 />
                 <ProtectedRoute
                     exact
-                    path="/proyecto/agua/:id/editar"
+                    path="/proyecto/:textTipo/:id/editar"
                     component={CrearEditarProyectoAgua}
                 />
                 <ProtectedRoute
                     exact
-                    path="/proyectos/agua"
+                    path="/proyectos/:textTipo"
                     component={ListarProyectosAgua}
                 />
                 <ProtectedRoute
                     exact
-                    path="/proyecto/agua/:idProyecto/pagos"
+                    path="/proyecto/:textTipo/:idProyecto/pagos"
                     component={ListarPagosProyectosAgua}
                 />
                 <ProtectedRoute
                     exact
-                    path="/proyecto/agua/:idProyecto/pago/:id/ver"
+                    path="/proyecto/:textTipo/:idProyecto/pago/:id/ver"
                     component={CrearEditarPagoProyectoAgua}
                 />
                 <ProtectedRoute
                     exact
-                    path="/proyecto/agua/:idProyecto/pago/:id/editar"
+                    path="/proyecto/:textTipo/:idProyecto/pago/:id/editar"
                     component={CrearEditarPagoProyectoAgua}
                 />
                 <ProtectedRoute
                     exact
-                    path="/proyecto/agua/:idProyecto/pago"
+                    path="/proyecto/:textTipo/:idProyecto/pago"
                     component={CrearEditarPagoProyectoAgua}
-                />
-
-                {/* Proyectos Agua */}
-                <ProtectedRoute
-                    exact
-                    path="/proyecto/cementerio"
-                    component={CrearEditarProyectoCementerio}
-                />
-                <ProtectedRoute
-                    exact
-                    path="/proyecto/cementerio/:id/ver"
-                    component={CrearEditarProyectoCementerio}
-                />
-                <ProtectedRoute
-                    exact
-                    path="/proyecto/cementerio/:id/editar"
-                    component={CrearEditarProyectoCementerio}
-                />
-                <ProtectedRoute
-                    exact
-                    path="/proyectos/cementerio"
-                    component={ListarProyectosCementerio}
                 />
                 {/* Listar pagos */}
                 <ProtectedRoute
@@ -183,27 +161,6 @@ module.exports = (
                     exact
                     path="/servicio/:id/pagar"
                     component={AgregarPago}
-                />
-
-                <ProtectedRoute
-                    exact
-                    path="/proyecto/cementerio"
-                    component={CrearEditarProyectoCementerio}
-                />
-                <ProtectedRoute
-                    exact
-                    path="/proyecto/cementerio/:id/ver"
-                    component={CrearEditarProyectoCementerio}
-                />
-                <ProtectedRoute
-                    exact
-                    path="/proyecto/cementerio/:id/editar"
-                    component={CrearEditarProyectoCementerio}
-                />
-                <ProtectedRoute
-                    exact
-                    path="/proyectos/cementerio"
-                    component={ListarProyectosCementerio}
                 />
 
                 <ProtectedRoute exact path="/config" component={Config} />

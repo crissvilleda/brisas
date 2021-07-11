@@ -11,9 +11,11 @@ import { AGUA, CEMENTERIO, OTROS } from '../../../utility/constants';
 
 const constants = {
     LOADER: `PROYECTO_LOADER`,
-    DATA: `PROYECTO_DATA`,
+    DATA: `PROYECTO_AGUA_DATA`,
+    DATA2: `PROYECTO_CEMENTERIO_DATA`,
     ITEM: `PROYECTO_ITEM`,
     PAGE: `PROYECTO_PAGE`,
+    ORDERING: `PROYECTO_ORDERING`,
     SEARCH: `PROYECTO_SEARCH`,
 };
 
@@ -30,6 +32,10 @@ const setData = (data) => ({
     type: constants.DATA,
     data,
 });
+const setData2 = (data2) => ({
+    type: constants.DATA2,
+    data2,
+});
 
 const setItem = (item) => ({
     type: constants.ITEM,
@@ -40,6 +46,12 @@ const setPage = (page) => ({
     type: constants.PAGE,
     page,
 });
+
+const setOrdering = (ordering) => ({
+    type: constants.ORDERING,
+    ordering,
+});
+
 const setSearch = (search) => ({
     type: constants.SEARCH,
     search,
@@ -53,16 +65,14 @@ const listar = (page = 1, tipo = undefined) =>
     (dispatch, getStore) => {
         const resource = getStore().proyectos;
         const params = { page };
+        params.ordering = resource.ordering;
         params.search = resource.search;
         if (tipo) params.tipo = tipo;
         dispatch(setLoader(true));
-        dispatch(setData({
-            results: [],
-            count: 0,
-        }));
         api.get('proyecto', params)
             .then((response) => {
-                dispatch(setData(response));
+                if (tipo === AGUA) dispatch(setData(response));
+                if (tipo === CEMENTERIO) dispatch(setData2(response));
                 dispatch(setPage(page));
             })
             .catch(() => { })
@@ -89,12 +99,9 @@ const crear = (data) => (dispatch) => {
     api.post('proyecto', data)
         .then(() => {
             NotificationManager.success('Registro creado', 'Éxito', 3000);
-            if (data.tipo === AGUA)
-                dispatch(push('/proyectos/agua'));
+            if (data.tipo === AGUA) dispatch(push('/proyectos/agua'));
             if (data.tipo === CEMENTERIO)
                 dispatch(push('/proyectos/cementerio'));
-            if (data.tipo === OTROS)
-                dispatch(push('/proyectos/otros'));
         })
         .catch((error) => {
             let msj = 'Error en la creación';
@@ -111,12 +118,9 @@ const editar = (id, data) => (dispatch) => {
     api.put(`proyecto/${id}`, data)
         .then(() => {
             NotificationManager.success('Registro actualizado', 'Éxito', 3000);
-            if (data.tipo === AGUA)
-                dispatch(push('/proyectos/agua'));
+            if (data.tipo === AGUA) dispatch(push('/proyectos/agua'));
             if (data.tipo === CEMENTERIO)
                 dispatch(push('/proyectos/cementerio'));
-            if (data.tipo === OTROS)
-                dispatch(push('/proyectos/otros'));
         })
         .catch(() => {
             NotificationManager.error('Error en la edición', 'ERROR', 0);
@@ -141,18 +145,48 @@ const cerrarProyecto = (id, tipo = undefined) => (dispatch) => {
         });
 };
 
+const eliminar = (id) => (dispatch) => {
+    dispatch(setLoader(true));
+    api.eliminar(`proyecto/${id}`)
+        .then(() => {
+            dispatch(listar());
+            NotificationManager.success('Registro eliminado', 'Éxito', 3000);
+        })
+        .catch(() => {
+            NotificationManager.success(
+                'Error en la transacción',
+                'Éxito',
+                3000
+            );
+        })
+        .finally(() => {
+            dispatch(setLoader(false));
+        });
+};
+
 const searchChange = (search) => (dispatch) => {
     dispatch(setSearch(search));
     dispatch(listar());
 };
 
+const onSortChange = (ordering) => (dispatch, getStore) => {
+    const sort = getStore().proyectos.ordering;
+    if (ordering === sort) {
+        dispatch(setOrdering(`-${ordering}`));
+    } else {
+        dispatch(setOrdering(ordering));
+    }
+    dispatch(listar());
+};
 
 export const actions = {
     listar,
     leer,
     crear,
     editar,
+    eliminar,
     searchChange,
+    onSortChange,
     cerrarProyecto,
 };
 
@@ -173,6 +207,12 @@ const reducers = {
             data,
         };
     },
+    [constants.DATA2]: (state, { data2 }) => {
+        return {
+            ...state,
+            data2,
+        };
+    },
     [constants.ITEM]: (state, { item }) => {
         return {
             ...state,
@@ -183,6 +223,12 @@ const reducers = {
         return {
             ...state,
             page,
+        };
+    },
+    [constants.ORDERING]: (state, { ordering }) => {
+        return {
+            ...state,
+            ordering,
         };
     },
     [constants.SEARCH]: (state, { search }) => {
@@ -199,8 +245,13 @@ const initialState = {
         results: [],
         count: 0,
     },
+    data2: {
+        results: [],
+        count: 0,
+    },
     item: {},
     page: 1,
+    ordering: '',
     search: '',
 };
 

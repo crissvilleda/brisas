@@ -21,10 +21,10 @@ const validate = (values) => {
 };
 
 const CrearEditar = (props) => {
-    const { handleSubmit, ver } = props;
+    const { handleSubmit, ver, tipo_proyecto } = props;
     return (
         <form action="" onSubmit={handleSubmit} className="py-4">
-            <h3 className="text-dark">PROYECTO AGUA</h3>
+            <h3 className="text-dark">PROYECTO {tipo_proyecto == 10 ? "AGUA" : tipo_proyecto == 20 ? "CEMENTERIO" : "OTROS"}</h3>
             <div className="mb-4 card card-small">
                 <div className="p-0 pt-3 d-flex flex-column flex-md-row col-5 m-auto">
                     <div className="d-flex flex-column flex-1 mx-3">
@@ -90,7 +90,7 @@ const CrearEditar = (props) => {
                         </button>
                         <Link
                             className="btn btn-secondary ml-2"
-                            to="/proyectos/agua"
+                            to={`/proyectos/${tipo_proyecto == 10 ? "agua" : tipo_proyecto == 20 ? "cementerio" : "otros"}`}
                         >
                             Cancelar
                         </Link>
