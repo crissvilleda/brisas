@@ -1,26 +1,36 @@
 import React from 'react';
 import Form from './Form';
 import moment from 'moment';
-import { AGUA } from '../../../../../utility/constants';
+import { AGUA, CEMENTERIO, OTROS } from '../../../../utility/constants';
+import { Redirect } from 'react-router-dom';
 
 const CrearEditar = (props) => {
+    const { textTipo } = props.match.params;
+    if (!['agua', 'cementerio'].includes(textTipo)) {
+        return <Redirect to="/" />;
+    }
+
+    const TIPO_PROYECTO = textTipo == 'agua' ? AGUA : textTipo == 'cementerio' ? CEMENTERIO : OTROS
+
+
     React.useEffect(() => {
-        const { idProyecto, id } = props.match.params;
-        if (idProyecto) props.leer_proyecto(idProyecto);
+        props.destroyForm()
+        const { id } = props.match.params;
         if (id) props.leer(id);
     }, []);
 
     const onSubmit = (data) => {
-        const { id, idProyecto } = props.match.params;
+        const { id } = props.match.params;
         const body = { ...data };
 
-        body.tipo = AGUA;
+        body.tipo = TIPO_PROYECTO;
         body.fecha_fin = moment(data.fecha_fin).format('YYYY-MM-DD');
         body.fecha_inicio = moment(data.fecha_inicio).format('YYYY-MM-DD');
 
-        if (id) props.editar(id, body);
+        if (id) {
+            props.editar(id, body);
+        }
         else {
-            body.proyecto = idProyecto
             props.crear(body);
         }
     };
@@ -29,8 +39,8 @@ const CrearEditar = (props) => {
         <React.Fragment>
             <Form
                 onSubmit={onSubmit}
+                tipo_proyecto={TIPO_PROYECTO}
                 ver={props.location.pathname.includes('ver')}
-                item_proyecto={props.item_proyecto}
             />
         </React.Fragment>
     );

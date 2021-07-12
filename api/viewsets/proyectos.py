@@ -8,7 +8,7 @@ from rest_framework.response import Response
 
 
 class ProyectoViewSet(viewsets.ModelViewSet):
-    queryset = Proyecto.objects.filter(activo=True)
+    queryset = Proyecto.objects.filter(activo=True).order_by('-id')
 
     filter_backends = (DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter)

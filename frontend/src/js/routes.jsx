@@ -20,14 +20,10 @@ import AgregarPago from './common/components/Pagos/CrearEditar';
 import Config from './common/components/configuracion/CrearEditar';
 
 // ----- proyecto agua
-import CrearEditarProyectoAgua from './common/components/ProyectoAgua/CrearEditar';
-import ListarProyectosAgua from './common/components/ProyectoAgua/Listar';
-import ListarPagosProyectosAgua from './common/components/ProyectoAgua/Pagos/Listar';
-import CrearEditarPagoProyectoAgua from './common/components/ProyectoAgua/Pagos/CrearEditar';
-
-// ----- proyecto cementerio
-import CrearEditarProyectoCementerio from './common/components/ProyectoCementerio/CrearEditar';
-import ListarProyectosCementerio from './common/components/ProyectoCementerio/Listar';
+import CrearEditarProyecto from './common/components/Proyecto/CrearEditar';
+import ListarProyectos from './common/components/Proyecto/Listar';
+import ListarPagosProyectos from './common/components/Proyecto/Pagos/Listar';
+import CrearEditarPagoProyecto from './common/components/Proyecto/Pagos/CrearEditar';
 
 import '../assets/fonts/fonts.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -114,42 +110,42 @@ module.exports = (
                 <ProtectedRoute
                     exact
                     path="/proyecto/:textTipo"
-                    component={CrearEditarProyectoAgua}
+                    component={CrearEditarProyecto}
                 />
                 <ProtectedRoute
                     exact
                     path="/proyecto/:textTipo/:id/ver"
-                    component={CrearEditarProyectoAgua}
+                    component={CrearEditarProyecto}
                 />
                 <ProtectedRoute
                     exact
                     path="/proyecto/:textTipo/:id/editar"
-                    component={CrearEditarProyectoAgua}
+                    component={CrearEditarProyecto}
                 />
                 <ProtectedRoute
                     exact
                     path="/proyectos/:textTipo"
-                    component={ListarProyectosAgua}
+                    component={ListarProyectos}
                 />
                 <ProtectedRoute
                     exact
                     path="/proyecto/:textTipo/:idProyecto/pagos"
-                    component={ListarPagosProyectosAgua}
+                    component={ListarPagosProyectos}
                 />
                 <ProtectedRoute
                     exact
                     path="/proyecto/:textTipo/:idProyecto/pago/:id/ver"
-                    component={CrearEditarPagoProyectoAgua}
+                    component={CrearEditarPagoProyecto}
                 />
                 <ProtectedRoute
                     exact
                     path="/proyecto/:textTipo/:idProyecto/pago/:id/editar"
-                    component={CrearEditarPagoProyectoAgua}
+                    component={CrearEditarPagoProyecto}
                 />
                 <ProtectedRoute
                     exact
                     path="/proyecto/:textTipo/:idProyecto/pago"
-                    component={CrearEditarPagoProyectoAgua}
+                    component={CrearEditarPagoProyecto}
                 />
                 {/* Listar pagos */}
                 <ProtectedRoute

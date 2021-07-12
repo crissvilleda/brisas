@@ -1,42 +1,38 @@
 import React from 'react';
 import Form from './Form';
 import moment from 'moment';
-import { AGUA, CEMENTERIO, OTROS } from '../../../../utility/constants';
-import swal from 'sweetalert2';
-import { Link, Redirect } from 'react-router-dom';
+import { AGUA } from '../../../../../utility/constants';
 
 const CrearEditar = (props) => {
-    const { textTipo } = props.match.params;
-    if (!['agua', 'cementerio'].includes(textTipo)) {
-        return <Redirect to="/" />;
-    }
-
-    const TIPO_PROYECTO = textTipo == 'agua' ? AGUA : textTipo == 'cementerio' ? CEMENTERIO : OTROS
-
-
     React.useEffect(() => {
-        const { id } = props.match.params;
+        const { idProyecto, id } = props.match.params;
+        if (idProyecto) props.leer_proyecto(idProyecto);
         if (id) props.leer(id);
     }, []);
 
     const onSubmit = (data) => {
-        const { id } = props.match.params;
+        const { id, idProyecto } = props.match.params;
         const body = { ...data };
 
-        body.tipo = TIPO_PROYECTO;
+        body.tipo = AGUA;
         body.fecha_fin = moment(data.fecha_fin).format('YYYY-MM-DD');
         body.fecha_inicio = moment(data.fecha_inicio).format('YYYY-MM-DD');
 
-        if (id) props.editar(id, body);
-        else props.crear(body);
+        if (id) {
+            props.editar(id, body)
+        }
+        else {
+            body.proyecto = idProyecto
+            props.crear(body);
+        }
     };
 
     return (
         <React.Fragment>
             <Form
                 onSubmit={onSubmit}
-                tipo_proyecto={TIPO_PROYECTO}
                 ver={props.location.pathname.includes('ver')}
+                item_proyecto={props.item_proyecto}
             />
         </React.Fragment>
     );

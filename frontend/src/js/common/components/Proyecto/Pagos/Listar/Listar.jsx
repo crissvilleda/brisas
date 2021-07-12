@@ -34,7 +34,7 @@ const ListarProyectos = (props) => {
                     data={props.data}
                     page={props.page}
                     loading={props.loader}
-                    onPageChange={(page) => props.listar(page, AGUA)}
+                    onPageChange={(page) => props.listar(page, id)}
                 >
                     {!cerrado &&
                         <TableHeaderColumn

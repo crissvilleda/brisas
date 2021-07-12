@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions';
 import { push } from 'react-router-redux';
-import { initialize as initializeForm } from 'redux-form';
+import { initialize as initializeForm, destroy } from 'redux-form';
 import { api } from 'api';
 import { NotificationManager } from 'react-notifications';
 import { AGUA, CEMENTERIO, OTROS } from '../../../utility/constants';
@@ -73,6 +73,7 @@ const listar = (page = 1, tipo = undefined) =>
 
 const leer = (id) => (dispatch) => {
     dispatch(setLoader(true));
+    dispatch(setItem({}));
     api.get(`proyecto/${id}`)
         .then((response) => {
             dispatch(setItem(response));
@@ -146,6 +147,11 @@ const searchChange = (search) => (dispatch) => {
     dispatch(listar());
 };
 
+const destroyForm = () => (dispatch) => {
+    dispatch(setItem({}));
+    dispatch(destroy('proyectoForm'));
+};
+
 
 export const actions = {
     listar,
@@ -154,6 +160,7 @@ export const actions = {
     editar,
     searchChange,
     cerrarProyecto,
+    destroyForm,
 };
 
 // -----------------------------------

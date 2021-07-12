@@ -14,7 +14,6 @@ const constants = {
     DATA: `PROYECTO_DETALLE_DATA`,
     ITEM: `PROYECTO_DETALLE_ITEM`,
     PAGE: `PROYECTO_DETALLE_PAGE`,
-    ORDERING: `PROYECTO_DETALLE_ORDERING`,
     SEARCH: `PROYECTO_DETALLE_SEARCH`,
 };
 
@@ -39,11 +38,6 @@ const setItem = (item) => ({
 const setPage = (page) => ({
     type: constants.PAGE,
     page,
-});
-
-const setOrdering = (ordering) => ({
-    type: constants.ORDERING,
-    ordering,
 });
 
 const setSearch = (search) => ({
@@ -115,13 +109,15 @@ const crear = (data) => (dispatch) => {
 
 const editar = (id, data) => (dispatch) => {
     dispatch(setLoader(true));
+    const id_proyecto = data.proyecto.id
+    delete data.proyecto
     api.put(`detalle/${id}`, data)
         .then(() => {
             NotificationManager.success('Registro actualizado', 'Éxito', 3000);
             if (data.tipo === AGUA)
-                dispatch(push(`proyecto/agua/${data.proyecto}/pagos`));
+                dispatch(push(`/proyecto/agua/${id_proyecto}/pagos`));
             if (data.tipo === CEMENTERIO)
-                dispatch(push(`proyecto/cementerio/${data.proyecto}/pagos`));
+                dispatch(push(`/proyecto/cementerio/${id_proyecto}/pagos`));
         })
         .catch(() => {
             NotificationManager.error('Error en la edición', 'ERROR', 0);
@@ -137,15 +133,6 @@ const searchChange = (search) => (dispatch) => {
     dispatch(listar());
 };
 
-const onSortChange = (ordering) => (dispatch, getStore) => {
-    const sort = getStore().detalles.ordering;
-    if (ordering === sort) {
-        dispatch(setOrdering(`-${ordering}`));
-    } else {
-        dispatch(setOrdering(ordering));
-    }
-    dispatch(listar());
-};
 
 export const actions = {
     listar,
@@ -153,7 +140,6 @@ export const actions = {
     crear,
     editar,
     searchChange,
-    onSortChange,
 };
 
 // -----------------------------------
@@ -185,12 +171,6 @@ const reducers = {
             page,
         };
     },
-    [constants.ORDERING]: (state, { ordering }) => {
-        return {
-            ...state,
-            ordering,
-        };
-    },
     [constants.SEARCH]: (state, { search }) => {
         return {
             ...state,
@@ -207,7 +187,6 @@ const initialState = {
     },
     item: {},
     page: 1,
-    ordering: '',
     search: '',
 };
 
