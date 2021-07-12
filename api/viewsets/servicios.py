@@ -6,7 +6,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 
-from api.models import Servicio, Pago
+from api.models import Servicio, Pago, Configuracion
 
 from api.serializers import ServicioSerializer, ServicioReadSerializer, PagoReadSerializer
 
@@ -85,7 +85,16 @@ class ServicioViewSet(viewsets.ModelViewSet):
 
         pagos = Pago.objects.filter(servicio=servicio, anio=anio_consulta)
 
+        # Se obtendrá también la cantidad de lo que se va a pagar para que el frontend sepa hacer los calculos y cobrar
         data = {}
+
+        config = Configuracion.objects.all().last()
+
+        if servicio.tipo == Servicio.AGUA:
+            data['cuota'] = config.cuota_agua or 0
+        else:
+            data['cuota'] = config.cuota_cementerio or 0
+
         if not pagos.exists():
             anio = servicio.anio
             mes = servicio.mes
