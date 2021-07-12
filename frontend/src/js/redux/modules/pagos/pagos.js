@@ -11,12 +11,7 @@ import { AGUA, CEMENTERIO, OTROS } from '../../../utility/constants';
 
 const constants = {
     LOADER: `SERVICIO_LOADER`,
-    DATA: `SERVICIO_AGUA_DATA`,
-    DATA2: `SERVICIO_CEMENTERIO_DATA`,
     ITEM: `SERVICIO_ITEM`,
-    PAGE: `SERVICIO_PAGE`,
-    ORDERING: `SERVICIO_ORDERING`,
-    SEARCH: `SERVICIO_SEARCH`,
     MESES_BLOQUEAR: `MESES_BLOQUEAR_PAGO`,
 };
 
@@ -96,40 +91,10 @@ const reducers = {
             loader,
         };
     },
-    [constants.DATA]: (state, { data }) => {
-        return {
-            ...state,
-            data,
-        };
-    },
-    [constants.DATA2]: (state, { data2 }) => {
-        return {
-            ...state,
-            data2,
-        };
-    },
     [constants.ITEM]: (state, { item }) => {
         return {
             ...state,
             item,
-        };
-    },
-    [constants.PAGE]: (state, { page }) => {
-        return {
-            ...state,
-            page,
-        };
-    },
-    [constants.ORDERING]: (state, { ordering }) => {
-        return {
-            ...state,
-            ordering,
-        };
-    },
-    [constants.SEARCH]: (state, { search }) => {
-        return {
-            ...state,
-            search,
         };
     },
     [constants.MESES_BLOQUEAR]: (state, { meses }) => {
@@ -142,19 +107,8 @@ const reducers = {
 
 const initialState = {
     loader: false,
-    data: {
-        results: [],
-        count: 0,
-    },
-    data2: {
-        results: [],
-        count: 0,
-    },
     item: {},
     meses: [],
-    page: 1,
-    ordering: '',
-    search: '',
 };
 
 export default handleActions(reducers, initialState);
