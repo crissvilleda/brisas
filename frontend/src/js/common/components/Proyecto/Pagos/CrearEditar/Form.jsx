@@ -25,7 +25,11 @@ const CrearEditar = (props) => {
     const { id = 0, nombre = "", tipo = 30 } = item_proyecto || {}
     return (
         <form action="" onSubmit={handleSubmit} className="py-4">
-            <h3 className="py-4 text-dark"> ROYECTOS {nombre} </h3>
+            {/* <h3 className="py-4 text-dark">PROYECTOS {nombre} </h3> */}
+
+            <h3 className="pt-4 pb-0 text-dark">PROYECTO DE {tipo == 10 ? "AGUA" : tipo == 20 ? "CEMENTERIO" : "OTROS"}:</h3>
+            <h3 className="pt-0 pb-4 text-dark">{nombre} </h3>
+
             <div className="mb-4 card card-small">
                 <div className="p-0 pt-3 d-flex flex-column flex-md-row col-5 m-auto">
                     <div className="d-flex flex-column flex-1 mx-3">

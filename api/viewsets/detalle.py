@@ -7,7 +7,7 @@ from api.serializers import DetalleSerializer, DetalleReadSerializer
 
 
 class DetalleViewSet(viewsets.ModelViewSet):
-    queryset = Detalle.objects.filter(activo=True)
+    queryset = Detalle.objects.filter(activo=True).order_by('-id')
     serializer_class = DetalleSerializer
 
     filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)

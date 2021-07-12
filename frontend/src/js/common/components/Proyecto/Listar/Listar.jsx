@@ -21,8 +21,7 @@ const ListarProyectos = (props) => {
         props.listar(1, TIPO_PROYECTO);
     }, [textTipo]);
     const cerrar = (id) => {
-        // props.cerrarProyecto(id, TIPO_PROYECTO)
-        console.log("TIPO_PROYECTO", TIPO_PROYECTO)
+        props.cerrarProyecto(id, TIPO_PROYECTO)
     }
 
     return (
