@@ -27,6 +27,21 @@ const validate = (values) => {
 
 const CrearEditar = (props) => {
     const { handleSubmit, ver } = props;
+    const [selectMeses, setSelectMeses] = React.useState(0);
+    const [totalPagar, setTotalPagar] = React.useState(0);
+
+    React.useEffect(() => {
+        const total = props.cuota * selectMeses;
+        setTotalPagar(total);
+    }, [selectMeses]);
+
+    const onCambio = (value) => {
+        if (value === 'true') {
+            setSelectMeses(selectMeses - 1);
+        } else if (value === 'false') {
+            setSelectMeses(selectMeses + 1);
+        }
+    };
 
     return (
         <form action="" onSubmit={handleSubmit}>
@@ -54,6 +69,7 @@ const CrearEditar = (props) => {
                                 name="enero"
                                 component={renderFieldCheck}
                                 type="text"
+                                onCambio={onCambio}
                                 disabled={props.meses.includes('enero')}
                                 className="form-control"
                             />
@@ -64,6 +80,7 @@ const CrearEditar = (props) => {
                                 name="febrero"
                                 component={renderFieldCheck}
                                 type="text"
+                                onCambio={onCambio}
                                 disabled={props.meses.includes('febrero')}
                                 className="form-control"
                             />
@@ -76,6 +93,7 @@ const CrearEditar = (props) => {
                                 name="marzo"
                                 component={renderFieldCheck}
                                 type="text"
+                                onCambio={onCambio}
                                 disabled={props.meses.includes('marzo')}
                                 className="form-control"
                             />
@@ -86,6 +104,7 @@ const CrearEditar = (props) => {
                                 name="abril"
                                 component={renderFieldCheck}
                                 type="text"
+                                onCambio={onCambio}
                                 disabled={props.meses.includes('abril')}
                                 className="form-control"
                             />
@@ -98,6 +117,7 @@ const CrearEditar = (props) => {
                                 name="mayo"
                                 component={renderFieldCheck}
                                 type="text"
+                                onCambio={onCambio}
                                 disabled={props.meses.includes('mayo')}
                                 className="form-control"
                             />
@@ -108,6 +128,7 @@ const CrearEditar = (props) => {
                                 name="junio"
                                 component={renderFieldCheck}
                                 type="text"
+                                onCambio={onCambio}
                                 disabled={props.meses.includes('junio')}
                                 className="form-control"
                             />
@@ -120,6 +141,7 @@ const CrearEditar = (props) => {
                                 name="julio"
                                 component={renderFieldCheck}
                                 type="text"
+                                onCambio={onCambio}
                                 disabled={props.meses.includes('julio')}
                                 className="form-control"
                             />
@@ -130,6 +152,7 @@ const CrearEditar = (props) => {
                                 name="agosto"
                                 component={renderFieldCheck}
                                 type="text"
+                                onCambio={onCambio}
                                 disabled={props.meses.includes('agosto')}
                                 className="form-control"
                             />
@@ -142,6 +165,7 @@ const CrearEditar = (props) => {
                                 name="septiembre"
                                 component={renderFieldCheck}
                                 type="text"
+                                onCambio={onCambio}
                                 disabled={props.meses.includes('septiembre')}
                                 className="form-control"
                             />
@@ -152,6 +176,7 @@ const CrearEditar = (props) => {
                                 name="octubre"
                                 component={renderFieldCheck}
                                 type="text"
+                                onCambio={onCambio}
                                 disabled={props.meses.includes('octubre')}
                                 className="form-control"
                             />
@@ -164,6 +189,7 @@ const CrearEditar = (props) => {
                                 name="noviembre"
                                 component={renderFieldCheck}
                                 type="text"
+                                onCambio={onCambio}
                                 disabled={props.meses.includes('noviembre')}
                                 className="form-control"
                             />
@@ -174,6 +200,7 @@ const CrearEditar = (props) => {
                                 name="diciembre"
                                 component={renderFieldCheck}
                                 type="text"
+                                onCambio={onCambio}
                                 disabled={props.meses.includes('diciembre')}
                                 className="form-control"
                             />
@@ -193,19 +220,23 @@ const CrearEditar = (props) => {
                         <span className="font-weight-bolder text-md">
                             Pago por mes:{' '}
                         </span>{' '}
-                        <span className="text-md">Q 30.00</span>
+                        <span className="text-md">{`Q ${props.cuota.toFixed(
+                            2
+                        )}`}</span>
                     </div>
                     <div className="pt-4 pl-4">
                         <span className="font-weight-bolder text-md">
                             Meses a pagar:{' '}
                         </span>
-                        <span className="text-md">2</span>
+                        <span className="text-md">{selectMeses}</span>
                     </div>
                     <div className="pt-4 pl-4">
                         <span className="font-weight-bolder text-md">
                             Total a pagar:{' '}
                         </span>
-                        <span className="text-md">Q 60.00</span>
+                        <span className="text-md">{`Q ${totalPagar.toFixed(
+                            2
+                        )}`}</span>
                     </div>
                 </div>
             </div>

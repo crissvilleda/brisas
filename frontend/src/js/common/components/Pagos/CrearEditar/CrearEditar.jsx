@@ -41,6 +41,7 @@ const CrearEditar = (props) => {
                             ver={!!props.location.pathname.includes('ver')}
                             item={props.item}
                             meses={props.meses}
+                            cuota={props.cuota}
                             onAnioChange={onAnioChange}
                         />
                     </div>

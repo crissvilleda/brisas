@@ -150,6 +150,7 @@ export const renderFieldCheck = ({
     input,
     label,
     value,
+    onCambio,
     disabled,
     type,
     meta: { touched, error },
@@ -165,6 +166,7 @@ export const renderFieldCheck = ({
                         disabled={disabled}
                         onChange={(value) => {
                             input.onChange(value);
+                            if (onCambio) onCambio(value.target.value);
                         }}
                         checked={input.value}
                         className={classNames('', { 'is-invalid': invalid })}
