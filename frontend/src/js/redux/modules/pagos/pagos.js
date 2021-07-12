@@ -10,9 +10,10 @@ import { AGUA, CEMENTERIO, OTROS } from '../../../utility/constants';
 // ------------------------------------
 
 const constants = {
-    LOADER: `SERVICIO_LOADER`,
-    ITEM: `SERVICIO_ITEM`,
+    LOADER: `PAGO_LOADER`,
+    ITEM: `PAGO_ITEM`,
     MESES_BLOQUEAR: `MESES_BLOQUEAR_PAGO`,
+    CUOTA: 'PAGO_CUOTA',
 };
 
 // -----------------------------------
@@ -27,6 +28,11 @@ const setLoader = (loader) => ({
 const setItem = (item) => ({
     type: constants.ITEM,
     item,
+});
+
+const setCuota = (cuota) => ({
+    type: constants.CUOTA,
+    cuota,
 });
 
 const setMeses = (meses) => ({
@@ -68,6 +74,7 @@ const obtenerMeses = (id, anio) => (dispatch, getStore) => {
                 dispatch(setMeses(meses));
                 dispatch(initializeForm('pagoForm', { ...values }));
             }
+            dispatch(setCuota(response.cuota));
         })
         .catch((error) => console.log(error))
         .finally(() => {
@@ -103,9 +110,16 @@ const reducers = {
             meses,
         };
     },
+    [constants.CUOTA]: (state, { cuota }) => {
+        return {
+            ...state,
+            cuota,
+        };
+    },
 };
 
 const initialState = {
+    cuota: 0,
     loader: false,
     item: {},
     meses: [],
