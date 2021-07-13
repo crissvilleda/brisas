@@ -4,6 +4,7 @@ import { initialize as initializeForm } from 'redux-form';
 import { api } from 'api';
 import { NotificationManager } from 'react-notifications';
 import { AGUA, CEMENTERIO, OTROS } from '../../../utility/constants';
+import moment from 'moment';
 
 // ------------------------------------
 // Constants
@@ -82,9 +83,30 @@ const obtenerMeses = (id, anio) => (dispatch, getStore) => {
         });
 };
 
+const realizarPago = (id, data) => (dispatch) => {
+    let { values } = getStore().form.pagoForm;
+    if (!values) values = { anio: moment().year() };
+    dispatch(setLoader(true));
+    api.post(`servicio/${id}/pago`, data)
+        .then((response) => {
+            NotificationManager.success(
+                'Pago registrado con exito',
+                'Éxito',
+                3000
+            );
+        })
+        .catch((error) => {
+            NotificationManager.error('Error al realizar el pago', 'ERROR');
+        })
+        .finally(() => {
+            dispatch(setLoader(false));
+        });
+};
+
 export const actions = {
     leer,
     obtenerMeses,
+    realizarPago,
 };
 
 // -----------------------------------

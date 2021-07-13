@@ -8,7 +8,7 @@ from rest_framework.response import Response
 
 from api.models import Servicio, Pago, Configuracion
 
-from api.serializers import ServicioSerializer, ServicioReadSerializer, PagoReadSerializer
+from api.serializers import ServicioSerializer, ServicioReadSerializer, PagoReadSerializer, PagoSerializer
 
 LISTA_MESES = [{'no': 1, 'nombre': 'enero', 'value': False},
                {'no': 2, 'nombre': 'febrero', 'value': False},
@@ -112,6 +112,47 @@ class ServicioViewSet(viewsets.ModelViewSet):
                 return Response(data=data, status=status.HTTP_200_OK)
 
         pass
+
+    @action(methods=['get'], detail=True)
+    def pago(self, request, *args, **kwargs):
+        servicio = self.get_object()
+        meses = request.data.get('meses', 0)
+        ultimo_pago = Pago.objects.filter(servicio=servicio).last()
+
+        config = Configuracion.objects.all().last()
+
+        cuota = config.cuota_agua
+        if servicio.tipo == Servicio.CEMENTERIO:
+            cuota = config.cuota_cementerio
+
+        if ultimo_pago is None:
+            anio = servicio.anio
+            mes = servicio.mes + 1
+            while(meses > 0):
+                data = {}
+                if mes < 12 and mes > 0:
+                    data['usuario'] = servicio.usuario
+                    data['servicio'] = servicio
+                    data['mes'] = mes
+                    data['anio'] = anio
+                    data['pago'] = cuota
+                    serializer = PagoSerializer(data=data)
+                    serializer.is_valid(raise_exception=True)
+                    serializer.save()
+                elif mes == 12:
+                    data['usuario'] = servicio.usuario
+                    data['servicio'] = servicio
+                    data['mes'] = mes
+                    data['anio'] = anio
+                    data['pago'] = cuota
+                    serializer = PagoSerializer(data=data)
+                    serializer.is_valid(raise_exception=True)
+                    serializer.save()
+                    mes = 0
+
+                mes += 1
+                meses -= 1
+            return Response(status=status.HTTP_200_OK)
 
     def destroy(self, request, *args, **kwargs):
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)

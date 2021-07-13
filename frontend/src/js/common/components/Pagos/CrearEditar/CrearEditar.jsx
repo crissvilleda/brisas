@@ -2,6 +2,8 @@ import React from 'react';
 import Form from './Form';
 import LoadMask from '../../Utils/LoadMask/LoadMask';
 import moment from 'moment';
+import swal from 'sweetalert2';
+import { NotificationManager } from 'react-notifications';
 
 const CrearEditar = (props) => {
     React.useEffect(() => {
@@ -14,8 +16,29 @@ const CrearEditar = (props) => {
 
     const onSubmit = (data) => {
         const { id } = props.match.params;
-        if (id) props.editar(id, data);
-        else props.crear(data);
+
+        if (data === 0) {
+            NotificationManager.error(
+                'Seleccione al menos un mes para poder realizar en pago',
+                'Error',
+                5000
+            );
+        } else {
+            swal.fire({
+                title: 'Estas seguro de realizar el pago?',
+                text: 'No se podrá revertir esta acción!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'No, Cancelar',
+                confirmButtonText: 'Si, Realizar',
+            }).then((res) => {
+                if (res.value) {
+                    props.realizarPago(id, { meses: data });
+                }
+            });
+        }
     };
 
     const renderUsuario = () => {

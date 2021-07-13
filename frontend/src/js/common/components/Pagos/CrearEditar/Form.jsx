@@ -243,7 +243,11 @@ const CrearEditar = (props) => {
 
             <div className="d-flex py-4">
                 <div className="col-5 m-auto d-flex justify-content-center">
-                    <button type="submit" className="btn btn-primary mr-2">
+                    <button
+                        type="button"
+                        className="btn btn-primary mr-2"
+                        onClick={(e) => props.onSubmit(selectMeses)}
+                    >
                         Pagar
                     </button>
                     <Link
