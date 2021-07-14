@@ -3,7 +3,8 @@ import { TableHeaderColumn } from 'react-bootstrap-table';
 import Tabla from '../../Utils/Grid';
 import { standardActions } from '../../Utils/Grid/StandardActions';
 import { Link } from 'react-router-dom';
-
+import { RenderCurrency } from '../../Utils/renderField/renderReadField.js';
+import { getMes } from '../../../../utility/utilidades';
 const ListarServicios = (props) => {
     React.useEffect(() => {
         const { id } = props.match.params;
@@ -42,7 +43,7 @@ const ListarServicios = (props) => {
                     loading={props.loader}
                     onPageChange={(page) => props.historial(page, id)}
                 >
-                    <TableHeaderColumn
+                    {/* <TableHeaderColumn
                         isKey
                         dataField="id"
                         dataFormat={standardActions({
@@ -51,10 +52,22 @@ const ListarServicios = (props) => {
                         })}
                     >
                         ACCIONES
+                    </TableHeaderColumn> */}
+                    <TableHeaderColumn isKey dataField="id">
+                        ID
                     </TableHeaderColumn>
-                    <TableHeaderColumn dataField="id">ID</TableHeaderColumn>
-                    <TableHeaderColumn dataField="nombre">
-                        NOMBRE
+                    <TableHeaderColumn dataField="anio">AÑO</TableHeaderColumn>
+                    <TableHeaderColumn
+                        dataField="mes"
+                        dataFormat={(value) => getMes(value)}
+                    >
+                        MES
+                    </TableHeaderColumn>
+                    <TableHeaderColumn
+                        dataField="pago"
+                        dataFormat={(value) => <RenderCurrency value={value} />}
+                    >
+                        MONTO
                     </TableHeaderColumn>
                 </Tabla>
             </div>
