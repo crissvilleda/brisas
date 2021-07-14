@@ -25,11 +25,24 @@ LISTA_MESES = [{'no': 1, 'nombre': 'enero', 'value': False},
                ]
 
 
-def change(item, mes):
+def cambiar_por_servicio(item, mes):
     if item['no'] <= mes:
         item['value'] = True
     else:
         item['value'] = False
+    return item
+
+
+def cambiar_por_pagos(item, pagos):
+    for pago in pagos:
+        print(pago.mes)
+        if item['no'] == pago.mes:
+            item['value'] = True
+        elif item['value'] is True:
+            pass
+        else:
+            item['value'] = False
+
     return item
 
 
@@ -95,25 +108,36 @@ class ServicioViewSet(viewsets.ModelViewSet):
         else:
             data['cuota'] = config.cuota_cementerio or 0
 
+        anio = servicio.anio
+        mes = servicio.mes
+
         if not pagos.exists():
-            anio = servicio.anio
-            mes = servicio.mes
 
             if int(anio_consulta) < anio:
-                data['meses'] = list(map(lambda x: change(x, 12), LISTA_MESES))
+                data['meses'] = list(
+                    map(lambda x: cambiar_por_servicio(x, 12), LISTA_MESES))
                 return Response(data=data, status=status.HTTP_200_OK)
             elif int(anio_consulta) == anio:
                 data['meses'] = list(
-                    map(lambda x: change(x, mes), LISTA_MESES))
+                    map(lambda x: cambiar_por_servicio(x, mes), LISTA_MESES))
                 return Response(data=data, status=status.HTTP_200_OK)
             else:
                 data['meses'] = list(
-                    map(lambda x: change(x, 0), LISTA_MESES))
+                    map(lambda x: cambiar_por_servicio(x, 0), LISTA_MESES))
                 return Response(data=data, status=status.HTTP_200_OK)
 
-        pass
+        elif anio == int(anio_consulta):
+            data['meses'] = list(
+                map(lambda x: cambiar_por_servicio(x, mes), LISTA_MESES))
+            data['meses'] = list(
+                map(lambda x: cambiar_por_pagos(x, pagos), data['meses']))
+            return Response(data=data, status=status.HTTP_200_OK)
+        else:
+            data['meses'] = list(
+                map(lambda x: cambiar_por_pagos(x, pagos), LISTA_MESES))
+            return Response(data=data, status=status.HTTP_200_OK)
 
-    @action(methods=['get'], detail=True)
+    @action(methods=['post'], detail=True)
     def pago(self, request, *args, **kwargs):
         servicio = self.get_object()
         meses = request.data.get('meses', 0)
@@ -131,8 +155,37 @@ class ServicioViewSet(viewsets.ModelViewSet):
             while(meses > 0):
                 data = {}
                 if mes < 12 and mes > 0:
+                    data['usuario'] = servicio.usuario.id
+                    data['servicio'] = servicio.id
+                    data['mes'] = mes
+                    data['anio'] = anio
+                    data['pago'] = cuota
+                    serializer = PagoSerializer(data=data)
+                    serializer.is_valid(raise_exception=True)
+                    serializer.save()
+                elif mes == 12:
                     data['usuario'] = servicio.usuario
                     data['servicio'] = servicio
+                    data['mes'] = mes
+                    data['anio'] = anio
+                    data['pago'] = cuota
+                    serializer = PagoSerializer(data=data)
+                    serializer.is_valid(raise_exception=True)
+                    serializer.save()
+                    mes = 0
+
+                mes += 1
+                meses -= 1
+            return Response(status=status.HTTP_200_OK)
+
+        else:
+            anio = ultimo_pago.anio
+            mes = ultimo_pago.mes + 1
+            while(meses > 0):
+                data = {}
+                if mes < 12 and mes > 0:
+                    data['usuario'] = servicio.usuario.id
+                    data['servicio'] = servicio.id
                     data['mes'] = mes
                     data['anio'] = anio
                     data['pago'] = cuota

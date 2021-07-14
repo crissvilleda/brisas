@@ -83,7 +83,7 @@ const obtenerMeses = (id, anio) => (dispatch, getStore) => {
         });
 };
 
-const realizarPago = (id, data) => (dispatch) => {
+const realizarPago = (id, data) => (dispatch, getStore) => {
     let { values } = getStore().form.pagoForm;
     if (!values) values = { anio: moment().year() };
     dispatch(setLoader(true));
@@ -94,6 +94,7 @@ const realizarPago = (id, data) => (dispatch) => {
                 'Éxito',
                 3000
             );
+            dispatch(obtenerMeses(id, values.anio));
         })
         .catch((error) => {
             NotificationManager.error('Error al realizar el pago', 'ERROR');
