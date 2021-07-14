@@ -4,6 +4,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, status, filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
+import copy
 
 
 from api.models import Servicio, Pago, Configuracion
@@ -77,7 +78,7 @@ class ServicioViewSet(viewsets.ModelViewSet):
     @action(methods=['get'], detail=True)
     def historial(self, request, *args, **kwargs):
         servicio = self.get_object()
-        queryset = Pago.objects.filter(servicio=servicio)
+        queryset = Pago.objects.filter(servicio=servicio).order_by('-id')
 
         page = self.paginate_queryset(queryset)
         if page is not None:
@@ -110,30 +111,31 @@ class ServicioViewSet(viewsets.ModelViewSet):
         anio = servicio.anio
         mes = servicio.mes
 
+        COPY_MESES = copy.deepcopy(LISTA_MESES)
         if not pagos.exists():
 
             if int(anio_consulta) < anio:
                 data['meses'] = list(
-                    map(lambda x: cambiar_por_servicio(x, 12), LISTA_MESES))
+                    map(lambda x: cambiar_por_servicio(x, 12), COPY_MESES))
                 return Response(data=data, status=status.HTTP_200_OK)
             elif int(anio_consulta) == anio:
                 data['meses'] = list(
-                    map(lambda x: cambiar_por_servicio(x, mes), LISTA_MESES))
+                    map(lambda x: cambiar_por_servicio(x, mes), COPY_MESES))
                 return Response(data=data, status=status.HTTP_200_OK)
             else:
                 data['meses'] = list(
-                    map(lambda x: cambiar_por_servicio(x, 0), LISTA_MESES))
+                    map(lambda x: cambiar_por_servicio(x, 0), COPY_MESES))
                 return Response(data=data, status=status.HTTP_200_OK)
 
         elif anio == int(anio_consulta):
             data['meses'] = list(
-                map(lambda x: cambiar_por_servicio(x, mes), LISTA_MESES))
+                map(lambda x: cambiar_por_servicio(x, mes), COPY_MESES))
             data['meses'] = list(
                 map(lambda x: cambiar_por_pagos(x, pagos), data['meses']))
             return Response(data=data, status=status.HTTP_200_OK)
         else:
             data['meses'] = list(
-                map(lambda x: cambiar_por_pagos(x, pagos), LISTA_MESES))
+                map(lambda x: cambiar_por_pagos(x, pagos), COPY_MESES))
             return Response(data=data, status=status.HTTP_200_OK)
 
     @action(methods=['post'], detail=True)
@@ -163,14 +165,15 @@ class ServicioViewSet(viewsets.ModelViewSet):
                     serializer.is_valid(raise_exception=True)
                     serializer.save()
                 elif mes == 12:
-                    data['usuario'] = servicio.usuario
-                    data['servicio'] = servicio
+                    data['usuario'] = servicio.usuario.id
+                    data['servicio'] = servicio.id
                     data['mes'] = mes
                     data['anio'] = anio
                     data['pago'] = cuota
                     serializer = PagoSerializer(data=data)
                     serializer.is_valid(raise_exception=True)
                     serializer.save()
+                    anio += 1
                     mes = 0
 
                 mes += 1
@@ -192,14 +195,15 @@ class ServicioViewSet(viewsets.ModelViewSet):
                     serializer.is_valid(raise_exception=True)
                     serializer.save()
                 elif mes == 12:
-                    data['usuario'] = servicio.usuario
-                    data['servicio'] = servicio
+                    data['usuario'] = servicio.usuario.id
+                    data['servicio'] = servicio.id
                     data['mes'] = mes
                     data['anio'] = anio
                     data['pago'] = cuota
                     serializer = PagoSerializer(data=data)
                     serializer.is_valid(raise_exception=True)
                     serializer.save()
+                    anio += 1
                     mes = 0
 
                 mes += 1

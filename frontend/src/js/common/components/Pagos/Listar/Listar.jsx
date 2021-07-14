@@ -41,7 +41,7 @@ const ListarServicios = (props) => {
                     data={props.historial || { results: [], count: 0 }}
                     page={props.page}
                     loading={props.loader}
-                    onPageChange={(page) => props.historial(page, id)}
+                    onPageChange={(page) => props.getHistorial(page, id)}
                 >
                     {/* <TableHeaderColumn
                         isKey
