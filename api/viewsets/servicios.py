@@ -35,7 +35,6 @@ def cambiar_por_servicio(item, mes):
 
 def cambiar_por_pagos(item, pagos):
     for pago in pagos:
-        print(pago.mes)
         if item['no'] == pago.mes:
             item['value'] = True
         elif item['value'] is True:
