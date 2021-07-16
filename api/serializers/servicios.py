@@ -13,6 +13,7 @@ class ServicioSerializer(serializers.ModelSerializer):
 
 class ServicioReadSerializer(serializers.ModelSerializer):
     usuario = UsuarioReadSerializer()
+    tipo_servicio = serializers.ReadOnlyField(source='get_tipo_display')
 
     class Meta:
         model = Servicio
