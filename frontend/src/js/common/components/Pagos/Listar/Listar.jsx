@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { RenderCurrency } from '../../Utils/renderField/renderReadField.js';
 import { getMes } from '../../../../utility/utilidades';
 const ListarServicios = (props) => {
+    const { item } = props;
     React.useEffect(() => {
         const { id } = props.match.params;
         async function cargar() {
@@ -17,7 +18,7 @@ const ListarServicios = (props) => {
     const { id } = props.match.params;
 
     const renderUsuario = () => {
-        if (props.item && props.item.usuario) {
+        if (item && item.usuario) {
             const { nombres, apellidos } = props.item.usuario;
             return `${nombres} ${apellidos}`;
         }
@@ -26,7 +27,8 @@ const ListarServicios = (props) => {
     return (
         <React.Fragment>
             <h3 className="py-4 text-dark">
-                HISTORIAL DE PAGOS DE {renderUsuario()}
+                HISTORIAL DE PAGOS DE {renderUsuario()} -{' '}
+                {item.tipo_servicio || ''}
             </h3>
             <div className="py-4 card card-small px-4">
                 <div className="py-4 d-flex justify-content-end ">
@@ -43,16 +45,6 @@ const ListarServicios = (props) => {
                     loading={props.loader}
                     onPageChange={(page) => props.getHistorial(page, id)}
                 >
-                    {/* <TableHeaderColumn
-                        isKey
-                        dataField="id"
-                        dataFormat={standardActions({
-                            ver: 'sector',
-                            editar: 'sector',
-                        })}
-                    >
-                        ACCIONES
-                    </TableHeaderColumn> */}
                     <TableHeaderColumn isKey dataField="id">
                         ID
                     </TableHeaderColumn>
