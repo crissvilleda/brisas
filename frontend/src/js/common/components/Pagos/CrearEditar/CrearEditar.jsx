@@ -6,6 +6,8 @@ import swal from 'sweetalert2';
 import { NotificationManager } from 'react-notifications';
 
 const CrearEditar = (props) => {
+    const [selectMeses, setSelectMeses] = React.useState(0);
+    const [totalPagar, setTotalPagar] = React.useState(0);
     React.useEffect(() => {
         const { id } = props.match.params;
         if (id) {
@@ -35,7 +37,10 @@ const CrearEditar = (props) => {
                 confirmButtonText: 'Si, Realizar',
             }).then((res) => {
                 if (res.value) {
-                    props.realizarPago(id, { meses: data });
+                    props.realizarPago(id, { meses: data }).then(() => {
+                        setSelectMeses(0);
+                        setTotalPagar(0);
+                    });
                 }
             });
         }
@@ -66,6 +71,10 @@ const CrearEditar = (props) => {
                             meses={props.meses}
                             cuota={props.cuota}
                             onAnioChange={onAnioChange}
+                            setSelectMeses={setSelectMeses}
+                            selectMeses={selectMeses}
+                            setTotalPagar={setTotalPagar}
+                            totalPagar={totalPagar}
                         />
                     </div>
                 </LoadMask>

@@ -87,7 +87,8 @@ const realizarPago = (id, data) => (dispatch, getStore) => {
     let { values } = getStore().form.pagoForm;
     if (!values) values = { anio: moment().year() };
     dispatch(setLoader(true));
-    api.post(`servicio/${id}/pago`, data)
+    return api
+        .post(`servicio/${id}/pago`, data)
         .then((response) => {
             NotificationManager.success(
                 'Pago registrado con exito',

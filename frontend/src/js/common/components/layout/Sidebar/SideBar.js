@@ -38,7 +38,9 @@ class SideBar extends Component {
                                 activeClassName={'active'}
                             >
                                 <div className="d-inline-block item-icon-wrapper">
-                                    <i className="material-icons">edit</i>
+                                    <span style={{ fontSize: '1.25rem' }}>
+                                        <i className="fas fa-home"></i>
+                                    </span>
                                 </div>
                                 <span>Inicio</span>
                             </NavLink>

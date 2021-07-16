@@ -26,9 +26,13 @@ const validate = (values) => {
 };
 
 const CrearEditar = (props) => {
-    const { handleSubmit, ver } = props;
-    const [selectMeses, setSelectMeses] = React.useState(0);
-    const [totalPagar, setTotalPagar] = React.useState(0);
+    const {
+        handleSubmit,
+        selectMeses,
+        totalPagar,
+        setSelectMeses,
+        setTotalPagar,
+    } = props;
 
     React.useEffect(() => {
         const total = props.cuota * selectMeses;
