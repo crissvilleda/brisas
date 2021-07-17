@@ -58,8 +58,11 @@ const ListarSectores = (props) => {
                     >
                         TELÉFONO
                     </TableHeaderColumn>
-                    <TableHeaderColumn dataField="estado">
-                        ESTADO
+                    <TableHeaderColumn
+                        dataField="solvente"
+                        dataFormat={(value) => (value ? 'SI' : 'NO')}
+                    >
+                        SOLVENTE
                     </TableHeaderColumn>
                 </Tabla>
             </div>
