@@ -6,14 +6,24 @@ import { Link } from 'react-router-dom';
 
 const ListarSectores = (props) => {
     React.useEffect(() => {
-        props.listar();
+        props.searchChange('');
     }, []);
+
+    const buscar = (e) => {
+        props.searchChange(e.target.value);
+    };
 
     return (
         <React.Fragment>
             <h3 className="py-4 text-dark"> LISTADO DE USUARIOS </h3>
             <div className="py-4 card card-small px-4">
-                <div className="py-4 d-flex justify-content-end ">
+                <div className="py-4 d-flex justify-content-between">
+                    <input
+                        type="text"
+                        className="form-control col-4"
+                        onChange={buscar}
+                        placeholder="Buscar..."
+                    />
                     <Link className="btn btn-primary" to="/usuario">
                         NUEVO
                     </Link>
