@@ -5,16 +5,25 @@ import { standardActions } from '../../Utils/Grid/StandardActions';
 import { Link } from 'react-router-dom';
 import { AGUA } from '../../../../utility/constants';
 
-const ListarSectores = (props) => {
+const ListarUsuariosAgua = (props) => {
     React.useEffect(() => {
-        props.listar(1, AGUA);
+        props.searchChange('', AGUA);
     }, []);
-    console.log(props.data);
+
+    const buscar = (e) => {
+        props.searchChange(e.target.value, AGUA);
+    };
     return (
         <React.Fragment>
             <h3 className="py-4 text-dark">USUARIOS DEL SERVICIO DE AGUA </h3>
             <div className="py-4 card card-small px-4">
-                <div className="py-4 d-flex justify-content-end ">
+                <div className="py-4 d-flex justify-content-between">
+                    <input
+                        type="text"
+                        className="form-control col-4"
+                        onChange={buscar}
+                        placeholder="Buscar..."
+                    />
                     <Link className="btn btn-primary" to="/servicio/agua">
                         REGISTRAR NUEVO USUARIO
                     </Link>
@@ -70,4 +79,4 @@ const ListarSectores = (props) => {
     );
 };
 
-export default ListarSectores;
+export default ListarUsuariosAgua;

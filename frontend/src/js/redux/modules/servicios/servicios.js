@@ -175,10 +175,12 @@ const eliminar = (id) => (dispatch) => {
         });
 };
 
-const searchChange = (search) => (dispatch) => {
-    dispatch(setSearch(search));
-    dispatch(listar());
-};
+const searchChange =
+    (search, tipo = undefined) =>
+    (dispatch) => {
+        dispatch(setSearch(search));
+        dispatch(listar(1, tipo));
+    };
 
 const onSortChange = (ordering) => (dispatch, getStore) => {
     const sort = getStore().servicios.ordering;

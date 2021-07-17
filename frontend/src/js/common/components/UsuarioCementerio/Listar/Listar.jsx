@@ -5,10 +5,14 @@ import { standardActions } from '../../Utils/Grid/StandardActions';
 import { Link } from 'react-router-dom';
 import { CEMENTERIO } from '../../../../utility/constants';
 
-const ListarSectores = (props) => {
+const ListarUsuariosCementerio = (props) => {
     React.useEffect(() => {
-        props.listar(1, CEMENTERIO);
+        props.searchChange('', CEMENTERIO);
     }, []);
+
+    const buscar = (e) => {
+        props.searchChange(e.target.value, CEMENTERIO);
+    };
 
     return (
         <React.Fragment>
@@ -16,8 +20,14 @@ const ListarSectores = (props) => {
                 USUARIOS DEL SERVICIO DE CEMENTERIO
             </h3>
             <div className="py-4 card card-small px-4">
-                <div className="py-4 d-flex justify-content-end ">
-                    <Link className="btn btn-primary" to="/servicio/cementerio">
+                <div className="py-4 d-flex justify-content-between">
+                    <input
+                        type="text"
+                        className="form-control col-4"
+                        onChange={buscar}
+                        placeholder="Buscar..."
+                    />
+                    <Link className="btn btn-primary" to="/servicio/agua">
                         REGISTRAR NUEVO USUARIO
                     </Link>
                 </div>
@@ -72,4 +82,4 @@ const ListarSectores = (props) => {
     );
 };
 
-export default ListarSectores;
+export default ListarUsuariosCementerio;
