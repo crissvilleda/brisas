@@ -1,17 +1,27 @@
 import React from 'react';
 import { TableHeaderColumn } from 'react-bootstrap-table';
 import Tabla from '../../Utils/Grid';
+import Select from 'react-select';
 import { standardActions } from '../../Utils/Grid/StandardActions';
 import { Link } from 'react-router-dom';
 import { CEMENTERIO } from '../../../../utility/constants';
 
+const options = [
+    { value: 1, label: 'Solvente' },
+    { value: 2, label: 'Insolvente' },
+];
+
 const ListarUsuariosCementerio = (props) => {
     React.useEffect(() => {
-        props.searchChange('', CEMENTERIO);
+        props.listarCementerio(1);
     }, []);
 
     const buscar = (e) => {
         props.searchChange(e.target.value, CEMENTERIO);
+    };
+
+    const filtrar = (e) => {
+        props.filterChange(e.value, CEMENTERIO);
     };
 
     return (
@@ -27,15 +37,22 @@ const ListarUsuariosCementerio = (props) => {
                         onChange={buscar}
                         placeholder="Buscar..."
                     />
+                    <Select
+                        options={options}
+                        isClearable={true}
+                        placeholder="Filtrar por ....."
+                        onChange={filtrar}
+                        className="col-4"
+                    />
                     <Link className="btn btn-primary" to="/servicio/agua">
                         REGISTRAR NUEVO USUARIO
                     </Link>
                 </div>
                 <Tabla
                     data={props.data2}
-                    page={props.page}
+                    page={props.page2}
                     loading={props.loader}
-                    onPageChange={(page) => props.listar(page, CEMENTERIO)}
+                    onPageChange={(page) => props.listarCementerio(page)}
                 >
                     <TableHeaderColumn
                         isKey

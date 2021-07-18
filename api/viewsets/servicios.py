@@ -88,10 +88,13 @@ class ServicioViewSet(viewsets.ModelViewSet):
 
         if solvente is not None and solvente == '1':
             queryset = queryset.filter(Q(pagos__mes__gte=mes, pagos__anio__gte=anio) | Q(
-                mes__gte=mes, anio__gte=anio)).distinct()
+                mes__gte=mes, anio__gte=anio))
         elif solvente is not None and solvente == '2':
             queryset = queryset.exclude(Q(pagos__mes__gte=mes, pagos__anio__gte=anio) | Q(
-                mes__gte=mes, anio__gte=anio)).distinct()
+                mes__gte=mes, anio__gte=anio))
+
+        # ELIMINACIÓN DE DATA REPETIDA
+        queryset = queryset.distinct()
 
         page = self.paginate_queryset(queryset)
         if page is not None:
