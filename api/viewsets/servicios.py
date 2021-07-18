@@ -87,13 +87,11 @@ class ServicioViewSet(viewsets.ModelViewSet):
         mes = timezone.now().month
 
         if solvente is not None and solvente == '1':
-            print('Solventes')
             queryset = queryset.filter(Q(pagos__mes__gte=mes, pagos__anio__gte=anio) | Q(
-                mes__gte=mes, anio__gte=anio))
+                mes__gte=mes, anio__gte=anio)).distinct()
         elif solvente is not None and solvente == '2':
-            print('Insolventes')
             queryset = queryset.exclude(Q(pagos__mes__gte=mes, pagos__anio__gte=anio) | Q(
-                mes__gte=mes, anio__gte=anio))
+                mes__gte=mes, anio__gte=anio)).distinct()
 
         page = self.paginate_queryset(queryset)
         if page is not None:

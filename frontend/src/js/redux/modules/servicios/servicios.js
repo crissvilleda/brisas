@@ -14,9 +14,13 @@ const constants = {
     DATA: `SERVICIO_AGUA_DATA`,
     DATA2: `SERVICIO_CEMENTERIO_DATA`,
     ITEM: `SERVICIO_ITEM`,
-    PAGE: `SERVICIO_PAGE`,
+    PAGE: `SERVICIO_AGUA_PAGE`,
+    PAGE2: `SERVICIO_CEMENTERIO_PAGE`,
     ORDERING: `SERVICIO_ORDERING`,
-    SEARCH: `SERVICIO_SEARCH`,
+    SEARCH: `SERVICIO_AGUA_SEARCH`,
+    SEARCH2: `SERVICIO_CEMENTERIO_SEARCH`,
+    FILTER: `SERVICIO_AGUA_FILTER`,
+    FILTER2: `SERVICIO_CEMENTERIO_FILTER`,
     HISTORIAL: `SERVICIO_HISTORIAL`,
 };
 
@@ -48,6 +52,11 @@ const setPage = (page) => ({
     page,
 });
 
+const setPage2 = (page2) => ({
+    type: constants.PAGE2,
+    page2,
+});
+
 const setOrdering = (ordering) => ({
     type: constants.ORDERING,
     ordering,
@@ -56,6 +65,21 @@ const setOrdering = (ordering) => ({
 const setSearch = (search) => ({
     type: constants.SEARCH,
     search,
+});
+
+const setSearch2 = (search2) => ({
+    type: constants.SEARCH2,
+    search2,
+});
+
+const setFilter = (filter) => ({
+    type: constants.FILTER,
+    filter,
+});
+
+const setFilter2 = (filter2) => ({
+    type: constants.FILTER2,
+    filter2,
 });
 
 const setHistorial = (historial) => ({
@@ -67,20 +91,38 @@ const setHistorial = (historial) => ({
 // Actions
 // -----------------------------------
 
-const listar =
-    (page = 1, tipo = undefined) =>
+const listarAgua =
+    (page = 1) =>
     (dispatch, getStore) => {
         const resource = getStore().servicios;
         const params = { page };
-        params.ordering = resource.ordering;
         params.search = resource.search;
-        if (tipo) params.tipo = tipo;
+        params.solvente = resource.filter;
+        params.tipo = AGUA;
         dispatch(setLoader(true));
         api.get('servicio', params)
             .then((response) => {
-                if (tipo === AGUA) dispatch(setData(response));
-                if (tipo === CEMENTERIO) dispatch(setData2(response));
+                dispatch(setData(response));
                 dispatch(setPage(page));
+            })
+            .catch(() => {})
+            .finally(() => {
+                dispatch(setLoader(false));
+            });
+    };
+const listarCementerio =
+    (page = 1) =>
+    (dispatch, getStore) => {
+        const resource = getStore().servicios;
+        const params = { page };
+        params.search = resource.search2;
+        params.solvente = resource.filter2;
+        params.tipo = CEMENTERIO;
+        dispatch(setLoader(true));
+        api.get('servicio', params)
+            .then((response) => {
+                dispatch(setData2(response));
+                dispatch(setPage2(page));
             })
             .catch(() => {})
             .finally(() => {
@@ -178,8 +220,25 @@ const eliminar = (id) => (dispatch) => {
 const searchChange =
     (search, tipo = undefined) =>
     (dispatch) => {
-        dispatch(setSearch(search));
-        dispatch(listar(1, tipo));
+        if (tipo === AGUA) {
+            dispatch(setSearch(search));
+            dispatch(listarAgua(1));
+        } else if (tipo === CEMENTERIO) {
+            dispatch(setSearch2(search));
+            dispatch(listarCementerio(1));
+        }
+    };
+
+const filterChange =
+    (filter, tipo = undefined) =>
+    (dispatch) => {
+        if (tipo === AGUA) {
+            dispatch(setFilter(filter));
+            dispatch(listarAgua(1));
+        } else if (tipo === CEMENTERIO) {
+            dispatch(setFilter2(filter));
+            dispatch(listarCementerio(1));
+        }
     };
 
 const onSortChange = (ordering) => (dispatch, getStore) => {
@@ -193,12 +252,14 @@ const onSortChange = (ordering) => (dispatch, getStore) => {
 };
 
 export const actions = {
-    listar,
+    listarAgua,
+    listarCementerio,
     leer,
     crear,
     editar,
     eliminar,
     searchChange,
+    filterChange,
     onSortChange,
     getHistorial,
 };
@@ -238,6 +299,12 @@ const reducers = {
             page,
         };
     },
+    [constants.PAGE2]: (state, { page2 }) => {
+        return {
+            ...state,
+            page2,
+        };
+    },
     [constants.ORDERING]: (state, { ordering }) => {
         return {
             ...state,
@@ -248,6 +315,24 @@ const reducers = {
         return {
             ...state,
             search,
+        };
+    },
+    [constants.SEARCH2]: (state, { search2 }) => {
+        return {
+            ...state,
+            search2,
+        };
+    },
+    [constants.FILTER]: (state, { filter }) => {
+        return {
+            ...state,
+            filter,
+        };
+    },
+    [constants.FILTER2]: (state, { filter2 }) => {
+        return {
+            ...state,
+            filter2,
         };
     },
     [constants.HISTORIAL]: (state, { historial }) => {
@@ -274,8 +359,12 @@ const initialState = {
     },
     item: {},
     page: 1,
+    page2: 1,
     ordering: '',
     search: '',
+    search2: '',
+    filter: '',
+    filter2: '',
 };
 
 export default handleActions(reducers, initialState);
