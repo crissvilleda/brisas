@@ -1,6 +1,8 @@
 
 from api.serializers.servicios import ServicioReadSerializer
 from django_filters.rest_framework import DjangoFilterBackend
+from django.utils import timezone
+from django.db.models import Q
 from rest_framework import viewsets, status, filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -74,6 +76,32 @@ class ServicioViewSet(viewsets.ModelViewSet):
         usuario = request.data.get('usuario')
         request.data['usuario'] = usuario['id']
         return super().update(request, *args, **kwargs)
+
+    def list(self, request, *args, **kwargs):
+        solvente = request.query_params.get('solvente', None)
+
+        queryset = self.get_queryset()
+        queryset = self.filter_queryset(queryset)
+
+        anio = timezone.now().year
+        mes = timezone.now().month
+
+        if solvente is not None and solvente == '1':
+            print('Solventes')
+            queryset = queryset.filter(Q(pagos__mes__gte=mes, pagos__anio__gte=anio) | Q(
+                mes__gte=mes, anio__gte=anio))
+        elif solvente is not None and solvente == '2':
+            print('Insolventes')
+            queryset = queryset.exclude(Q(pagos__mes__gte=mes, pagos__anio__gte=anio) | Q(
+                mes__gte=mes, anio__gte=anio))
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = ServicioReadSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = ServicioReadSerializer(queryset, many=True)
+        return Response(serializer.data)
 
     @action(methods=['get'], detail=True)
     def historial(self, request, *args, **kwargs):
