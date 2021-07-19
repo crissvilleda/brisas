@@ -21,7 +21,8 @@ const ListarUsuariosAgua = (props) => {
     };
 
     const filtrar = (e) => {
-        props.filterChange(e.value, AGUA);
+        const texto = e && e.value ? e.value : '';
+        props.filterChange(texto, AGUA);
     };
 
     return (

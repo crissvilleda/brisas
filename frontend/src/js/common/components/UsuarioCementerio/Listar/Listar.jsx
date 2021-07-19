@@ -21,7 +21,8 @@ const ListarUsuariosCementerio = (props) => {
     };
 
     const filtrar = (e) => {
-        props.filterChange(e.value, CEMENTERIO);
+        const texto = e && e.value ? e.value : '';
+        props.filterChange(texto, CEMENTERIO);
     };
 
     return (
