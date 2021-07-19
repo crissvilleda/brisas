@@ -45,7 +45,7 @@ const ListarUsuariosCementerio = (props) => {
                         onChange={filtrar}
                         className="col-4"
                     />
-                    <Link className="btn btn-primary" to="/servicio/agua">
+                    <Link className="btn btn-primary" to="/servicio/cementerio">
                         REGISTRAR NUEVO USUARIO
                     </Link>
                 </div>

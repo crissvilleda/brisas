@@ -73,7 +73,13 @@ const CrearEditar = (props) => {
                         />
                     </div>
                 </div>
-                <div className="p-0 pt-3 d-flex flex-column flex-md-row col-6 m-auto">
+                <div className="d-flex justify-content-center pt-4">
+                    <p className="m-0">
+                        Seleccione el año y el mes hasta donde el usuario esta
+                        al dia del agua.
+                    </p>
+                </div>
+                <div className="p-0 pt-2 d-flex flex-column flex-md-row col-6 m-auto">
                     <div className="d-flex flex-column flex-1 mx-3">
                         <label htmlFor="anio">Año</label>
                         <Field
