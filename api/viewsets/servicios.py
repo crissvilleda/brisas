@@ -68,8 +68,6 @@ class ServicioViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         usuario = request.data.get('usuario')
         request.data['usuario'] = usuario['id']
-        import pdb
-        pdb.set_trace()
         return super().create(request, *args, **kwargs)
 
     def update(self, request, *args, **kwargs):
