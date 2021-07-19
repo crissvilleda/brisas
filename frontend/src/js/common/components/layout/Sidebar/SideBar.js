@@ -42,7 +42,7 @@ class SideBar extends Component {
                                         <i className="fas fa-home"></i>
                                     </span>
                                 </div>
-                                <span>Inicio</span>
+                                <span>INICIO</span>
                             </NavLink>
                         </li>
                         <li className="nav-item">
