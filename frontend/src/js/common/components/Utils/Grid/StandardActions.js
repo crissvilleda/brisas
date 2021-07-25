@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 // import './acciones.css';
 import Swal from 'sweetalert2';
+import PagoIcono from '../../../../../assets/img/recibo.png';
+import VerIcono from '../../../../../assets/img/ojo.png';
+import EditarIcono from '../../../../../assets/img/lapiz.png';
 
 class Acciones extends Component {
     constructor(props) {
@@ -50,7 +53,7 @@ class Acciones extends Component {
             <div className="d-flex justify-content-center">
                 {ver !== undefined && (
                     <Link to={`${ver}/${id}/ver`} className="px-2">
-                        <i className="material-icons">remove_red_eye</i>
+                        <img src={VerIcono} width="25px" />
                     </Link>
                 )}
                 {editar !== undefined && (
@@ -58,7 +61,7 @@ class Acciones extends Component {
                         className="text-warning"
                         to={`${editar}/${id}/editar`}
                     >
-                        <i className="material-icons">edit</i>
+                        <img src={EditarIcono} width="25px" />
                     </Link>
                 )}
                 {eliminar !== undefined && (
@@ -72,13 +75,17 @@ class Acciones extends Component {
                 )}
                 {proyecto !== undefined && (
                     <Link to={`${ver}/${id}/pagos`} className="px-2">
-                        <i className="material-icons">remove_red_eye</i>
+                        <img src={PagoIcono} width="25px" />
                     </Link>
                 )}
                 {cerrar !== undefined && (
-                    <button className="px-2"
+                    <button
+                        className="px-2"
                         style={{ cursor: 'pointer', color: '#c4183c' }}
-                        onClick={this.cerrar(id)} >CERRAR</button>
+                        onClick={this.cerrar(id)}
+                    >
+                        CERRAR
+                    </button>
                 )}
             </div>
         );

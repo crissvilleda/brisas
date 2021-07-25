@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import InicioIcono from '../../../../../assets/img/casa.png';
+import SectorIcono from '../../../../../assets/img/grafico-de-torta.png';
+import UsuariosIcono from '../../../../../assets/img/lista-de-contactos.png';
+import UsuariosAguaIcono from '../../../../../assets/img/usuario-agua.png';
+import UsuariosCementerioIcono from '../../../../../assets/img/usuario-cementerio.png';
 class SideBar extends Component {
     constructor(props) {
         super(props);
@@ -37,11 +42,12 @@ class SideBar extends Component {
                                 className="nav-link "
                                 activeClassName={'active'}
                             >
-                                <div className="d-inline-block item-icon-wrapper">
-                                    <span style={{ fontSize: '1.25rem' }}>
-                                        <i className="fas fa-home"></i>
-                                    </span>
-                                </div>
+                                <img
+                                    src={InicioIcono}
+                                    width="25px"
+                                    className="mr-2"
+                                />
+
                                 <span>INICIO</span>
                             </NavLink>
                         </li>
@@ -51,11 +57,11 @@ class SideBar extends Component {
                                 className="nav-link"
                                 activeClassName={'active'}
                             >
-                                <div className="d-inline-block item-icon-wrapper">
-                                    <span style={{ fontSize: '1.25rem' }}>
-                                        <i className="fas fa-vector-square"></i>
-                                    </span>
-                                </div>
+                                <img
+                                    src={SectorIcono}
+                                    width="25px"
+                                    className="mr-2"
+                                />
                                 <span>SECTORES</span>
                             </NavLink>
                         </li>
@@ -65,11 +71,11 @@ class SideBar extends Component {
                                 className="nav-link"
                                 activeClassName={'active'}
                             >
-                                <div className="d-inline-block item-icon-wrapper">
-                                    <span style={{ fontSize: '1.25rem' }}>
-                                        <i className="fas fa-user"></i>
-                                    </span>
-                                </div>
+                                <img
+                                    src={UsuariosIcono}
+                                    width="25px"
+                                    className="mr-2"
+                                />
                                 <span>USUARIOS</span>
                             </NavLink>
                         </li>
@@ -79,14 +85,11 @@ class SideBar extends Component {
                                 className="nav-link"
                                 activeClassName={'active'}
                             >
-                                <div className="d-inline-block item-icon-wrapper">
-                                    <span style={{ fontSize: '1.25rem' }}>
-                                        <i className="fas fa-user"></i>
-                                    </span>
-                                    <span style={{ fontSize: '1.25rem' }}>
-                                        <i className="fas fa-tint"></i>
-                                    </span>
-                                </div>
+                                <img
+                                    src={UsuariosAguaIcono}
+                                    width="25px"
+                                    className="mr-2"
+                                />
                                 <span>USUARIOS AGUA</span>
                             </NavLink>
                         </li>
@@ -96,14 +99,11 @@ class SideBar extends Component {
                                 className="nav-link"
                                 activeClassName={'active'}
                             >
-                                <div className="d-inline-block item-icon-wrapper">
-                                    <span style={{ fontSize: '1.25rem' }}>
-                                        <i className="fas fa-user"></i>
-                                    </span>
-                                    <span style={{ fontSize: '1.25rem' }}>
-                                        <i className="fas fa-skull"></i>
-                                    </span>
-                                </div>
+                                <img
+                                    src={UsuariosCementerioIcono}
+                                    width="25px"
+                                    className="mr-2"
+                                />
                                 <span>USUARIOS CEMENTERIO </span>
                             </NavLink>
                         </li>
