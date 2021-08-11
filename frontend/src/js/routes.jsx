@@ -16,6 +16,7 @@ import AgregarUsuarioAgua from './common/components/UsuarioAgua/CrearEditar/';
 import AgregarUsuarioCementerio from './common/components/UsuarioCementerio/CrearEditar/';
 import HistorialServicio from './common/components/Pagos/Listar';
 import AgregarPago from './common/components/Pagos/CrearEditar';
+import GaleriaProyecto from './common/components/Proyecto/Fotos';
 //- configuración
 import Config from './common/components/configuracion/CrearEditar';
 
@@ -27,6 +28,7 @@ import CrearEditarPagoProyecto from './common/components/Proyecto/Pagos/CrearEdi
 
 import '../assets/fonts/fonts.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-responsive-modal/styles.css';
 require('../../node_modules/font-awesome/css/font-awesome.css');
 require('../../node_modules/bootstrap/dist/css/bootstrap.css');
 
@@ -157,6 +159,11 @@ module.exports = (
                     exact
                     path="/servicio/:id/pagar"
                     component={AgregarPago}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/proyecto/:id/fotos"
+                    component={GaleriaProyecto}
                 />
 
                 <ProtectedRoute exact path="/config" component={Config} />

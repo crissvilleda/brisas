@@ -47,7 +47,8 @@ class Acciones extends Component {
     };
 
     render() {
-        const { id, ver, editar, eliminar, cerrar, proyecto } = this.props;
+        const { id, ver, editar, eliminar, cerrar, proyecto, fotos } =
+            this.props;
 
         return (
             <div className="d-flex justify-content-center">
@@ -56,6 +57,12 @@ class Acciones extends Component {
                         <img src={VerIcono} width="25px" />
                     </Link>
                 )}
+                {fotos !== undefined && (
+                    <Link to={`${fotos}/${id}/fotos`} className="px-2">
+                        <img src={VerIcono} width="25px" />
+                    </Link>
+                )}
+
                 {editar !== undefined && (
                     <Link
                         className="text-warning"

@@ -5,7 +5,7 @@ import { standardActions } from '../../Utils/Grid/StandardActions';
 import { Link, Redirect } from 'react-router-dom';
 import { RenderCurrency } from '../../Utils/renderField/renderReadField';
 import { AGUA, CEMENTERIO, OTROS } from '../../../../utility/constants';
-import moment from "moment";
+import moment from 'moment';
 
 const ListarProyectos = (props) => {
     const { textTipo } = props.match.params;
@@ -13,20 +13,37 @@ const ListarProyectos = (props) => {
         return <Redirect to="/" />;
     }
 
-    const TIPO_PROYECTO = textTipo == 'agua' ? AGUA : textTipo == 'cementerio' ? CEMENTERIO : OTROS
-    const URL = `/proyecto/${TIPO_PROYECTO == 10 ? "agua" : TIPO_PROYECTO == 20 ? "cementerio" : "otros"}`
-
+    const TIPO_PROYECTO =
+        textTipo == 'agua'
+            ? AGUA
+            : textTipo == 'cementerio'
+            ? CEMENTERIO
+            : OTROS;
+    const URL = `/proyecto/${
+        TIPO_PROYECTO == 10
+            ? 'agua'
+            : TIPO_PROYECTO == 20
+            ? 'cementerio'
+            : 'otros'
+    }`;
 
     React.useEffect(() => {
         props.listar(1, TIPO_PROYECTO);
     }, [textTipo]);
     const cerrar = (id) => {
-        props.cerrarProyecto(id, TIPO_PROYECTO)
-    }
+        props.cerrarProyecto(id, TIPO_PROYECTO);
+    };
 
     return (
         <React.Fragment>
-            <h3 className="py-4 text-dark">PROYECTOS DE {TIPO_PROYECTO == 10 ? 'AGUA' : TIPO_PROYECTO == 20 ? 'CEMENTERIO' : 'OTROS'} </h3>
+            <h3 className="py-4 text-dark">
+                PROYECTOS DE{' '}
+                {TIPO_PROYECTO == 10
+                    ? 'AGUA'
+                    : TIPO_PROYECTO == 20
+                    ? 'CEMENTERIO'
+                    : 'OTROS'}{' '}
+            </h3>
             <div className="py-4 card card-small px-4">
                 <div className="py-4 d-flex justify-content-end ">
                     <Link className="btn btn-primary" to={URL}>
@@ -46,8 +63,9 @@ const ListarProyectos = (props) => {
                             ver: URL,
                             editar: URL,
                             proyecto: URL,
+                            fotos: '/proyecto',
                         })}
-                        width="110px"
+                        width="150px"
                     >
                         ACCIONES
                     </TableHeaderColumn>
@@ -74,19 +92,27 @@ const ListarProyectos = (props) => {
                     </TableHeaderColumn>
                     <TableHeaderColumn
                         dataField="fecha_inicio"
-                        dataFormat={cell => moment(cell).format("DD-MMM-YYYY")}
+                        dataFormat={(cell) =>
+                            moment(cell).format('DD-MMM-YYYY')
+                        }
                     >
                         FECHA INICIO
                     </TableHeaderColumn>
                     <TableHeaderColumn
                         dataField="fecha_fin"
-                        dataFormat={cell => cell ? moment(cell).format("DD-MMM-YYYY") : "--"}
+                        dataFormat={(cell) =>
+                            cell ? moment(cell).format('DD-MMM-YYYY') : '--'
+                        }
                     >
                         FECHA FINALIZADO
                     </TableHeaderColumn>
                     <TableHeaderColumn
                         dataField="id"
-                        dataFormat={(cell, arrow) => standardActions({ 'cerrar': !arrow.cerrado ? cerrar : undefined })(cell)}
+                        dataFormat={(cell, arrow) =>
+                            standardActions({
+                                cerrar: !arrow.cerrado ? cerrar : undefined,
+                            })(cell)
+                        }
                         width="110px"
                     >
                         ACCIONES

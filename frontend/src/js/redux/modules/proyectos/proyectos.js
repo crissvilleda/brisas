@@ -49,23 +49,26 @@ const setSearch = (search) => ({
 // Actions
 // -----------------------------------
 
-const listar = (page = 1, tipo = undefined) =>
+const listar =
+    (page = 1, tipo = undefined) =>
     (dispatch, getStore) => {
         const resource = getStore().proyectos;
         const params = { page };
         params.search = resource.search;
         if (tipo) params.tipo = tipo;
         dispatch(setLoader(true));
-        dispatch(setData({
-            results: [],
-            count: 0,
-        }));
+        dispatch(
+            setData({
+                results: [],
+                count: 0,
+            })
+        );
         api.get('proyecto', params)
             .then((response) => {
                 dispatch(setData(response));
                 dispatch(setPage(page));
             })
-            .catch(() => { })
+            .catch(() => {})
             .finally(() => {
                 dispatch(setLoader(false));
             });
@@ -79,7 +82,7 @@ const leer = (id) => (dispatch) => {
             dispatch(setItem(response));
             dispatch(initializeForm('proyectoForm', response));
         })
-        .catch(() => { })
+        .catch(() => {})
         .finally(() => {
             dispatch(setLoader(false));
         });
@@ -90,12 +93,10 @@ const crear = (data) => (dispatch) => {
     api.post('proyecto', data)
         .then(() => {
             NotificationManager.success('Registro creado', 'Éxito', 3000);
-            if (data.tipo === AGUA)
-                dispatch(push('/proyectos/agua'));
+            if (data.tipo === AGUA) dispatch(push('/proyectos/agua'));
             if (data.tipo === CEMENTERIO)
                 dispatch(push('/proyectos/cementerio'));
-            if (data.tipo === OTROS)
-                dispatch(push('/proyectos/otros'));
+            if (data.tipo === OTROS) dispatch(push('/proyectos/otros'));
         })
         .catch((error) => {
             let msj = 'Error en la creación';
@@ -112,12 +113,10 @@ const editar = (id, data) => (dispatch) => {
     api.put(`proyecto/${id}`, data)
         .then(() => {
             NotificationManager.success('Registro actualizado', 'Éxito', 3000);
-            if (data.tipo === AGUA)
-                dispatch(push('/proyectos/agua'));
+            if (data.tipo === AGUA) dispatch(push('/proyectos/agua'));
             if (data.tipo === CEMENTERIO)
                 dispatch(push('/proyectos/cementerio'));
-            if (data.tipo === OTROS)
-                dispatch(push('/proyectos/otros'));
+            if (data.tipo === OTROS) dispatch(push('/proyectos/otros'));
         })
         .catch(() => {
             NotificationManager.error('Error en la edición', 'ERROR', 0);
@@ -127,20 +126,43 @@ const editar = (id, data) => (dispatch) => {
         });
 };
 
-const cerrarProyecto = (id, tipo = undefined) => (dispatch) => {
+const guardarImagen = (id, imagen) => (dispatch) => {
     dispatch(setLoader(true));
-    api.put(`proyecto/${id}/cerrar`)
-        .then(() => {
-            NotificationManager.success('Proyecto cerrado', 'Éxito', 3000);
-            dispatch(listar(1, tipo));
+    const array = [];
+    array.push({ name: 'imagen', file: imagen });
+    return api
+        .postAttachments(`proyecto/${id}/guardar_imagen`, {}, array)
+        .then((response) => {
+            NotificationManager.success('Imagen guardada', 'Éxito', 4000);
         })
         .catch(() => {
-            NotificationManager.error('Error al cerrar proyecto', 'ERROR', 3000);
+            NotificationManager.error('Error al guardar imagen', 'ERROR', 4000);
         })
         .finally(() => {
             dispatch(setLoader(false));
         });
 };
+
+const cerrarProyecto =
+    (id, tipo = undefined) =>
+    (dispatch) => {
+        dispatch(setLoader(true));
+        api.put(`proyecto/${id}/cerrar`)
+            .then(() => {
+                NotificationManager.success('Proyecto cerrado', 'Éxito', 3000);
+                dispatch(listar(1, tipo));
+            })
+            .catch(() => {
+                NotificationManager.error(
+                    'Error al cerrar proyecto',
+                    'ERROR',
+                    3000
+                );
+            })
+            .finally(() => {
+                dispatch(setLoader(false));
+            });
+    };
 
 const searchChange = (search) => (dispatch) => {
     dispatch(setSearch(search));
@@ -152,7 +174,6 @@ const destroyForm = () => (dispatch) => {
     dispatch(destroy('proyectoForm'));
 };
 
-
 export const actions = {
     listar,
     leer,
@@ -161,6 +182,7 @@ export const actions = {
     searchChange,
     cerrarProyecto,
     destroyForm,
+    guardarImagen,
 };
 
 // -----------------------------------

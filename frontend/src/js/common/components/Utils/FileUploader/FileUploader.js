@@ -71,7 +71,6 @@ class FileUploader extends Component {
     }
 
     onFileChange(e, file) {
-        this.props.onFileChange(e, file);
         file = file || e.target.files[0];
         const pattern = /-*/;
         const imagePattern = /image-*/;
@@ -79,21 +78,19 @@ class FileUploader extends Component {
         const reader = new FileReader();
         if (file) {
             const isImage = !!file.type.match(imagePattern);
-            if (!file.type.match(pattern)) {
-                alert('Formato inválido');
-                return;
+            if (file.type.match(pattern)) {
+                this.setState({ loaded: false });
+
+                reader.onload = (e) => {
+                    this.setState({
+                        imageSrc: reader.result,
+                        isImage,
+                        loaded: true,
+                    });
+                };
+                reader.readAsDataURL(file);
+                this.props.onFileChange(file);
             }
-
-            this.setState({ loaded: false });
-
-            reader.onload = (e) => {
-                this.setState({
-                    imageSrc: reader.result,
-                    isImage,
-                    loaded: true,
-                });
-            };
-            reader.readAsDataURL(file);
         }
     }
 
@@ -149,7 +146,7 @@ class FileUploader extends Component {
                 <input
                     disabled={this.props.disabled}
                     type="file"
-                    accept="/*"
+                    accept="image/*"
                     onChange={this.onFileChange}
                     ref="input"
                 />
