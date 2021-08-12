@@ -15,6 +15,7 @@ const constants = {
     ITEM: `PROYECTO_ITEM`,
     PAGE: `PROYECTO_PAGE`,
     SEARCH: `PROYECTO_SEARCH`,
+    FOTOS: 'PROYECTO_FOTOS',
 };
 
 // -----------------------------------
@@ -43,6 +44,11 @@ const setPage = (page) => ({
 const setSearch = (search) => ({
     type: constants.SEARCH,
     search,
+});
+
+const setFotos = (fotos) => ({
+    type: constants.FOTOS,
+    fotos,
 });
 
 // -----------------------------------
@@ -92,7 +98,7 @@ const crear = (data) => (dispatch) => {
     dispatch(setLoader(true));
     api.post('proyecto', data)
         .then(() => {
-            NotificationManager.success('Registro creado', 'Éxito', 3000);
+            NotificationManager.success('Registro creado', 'Éxito', 4000);
             if (data.tipo === AGUA) dispatch(push('/proyectos/agua'));
             if (data.tipo === CEMENTERIO)
                 dispatch(push('/proyectos/cementerio'));
@@ -112,7 +118,7 @@ const editar = (id, data) => (dispatch) => {
     dispatch(setLoader(true));
     api.put(`proyecto/${id}`, data)
         .then(() => {
-            NotificationManager.success('Registro actualizado', 'Éxito', 3000);
+            NotificationManager.success('Registro actualizado', 'Éxito', 4000);
             if (data.tipo === AGUA) dispatch(push('/proyectos/agua'));
             if (data.tipo === CEMENTERIO)
                 dispatch(push('/proyectos/cementerio'));
@@ -137,6 +143,25 @@ const guardarImagen = (id, imagen) => (dispatch) => {
         })
         .catch(() => {
             NotificationManager.error('Error al guardar imagen', 'ERROR', 4000);
+        })
+        .finally(() => {
+            dispatch(setLoader(false));
+        });
+};
+
+const obtenerFotos = (id) => (dispatch) => {
+    dispatch(setLoader(true));
+    dispatch(setFotos([]));
+    api.get(`proyecto/${id}/fotos`)
+        .then((response) => {
+            dispatch(setFotos(response));
+        })
+        .catch(() => {
+            NotificationManager.error(
+                'Error al obtener las fotos de este proyecto',
+                'ERROR',
+                4000
+            );
         })
         .finally(() => {
             dispatch(setLoader(false));
@@ -183,6 +208,7 @@ export const actions = {
     cerrarProyecto,
     destroyForm,
     guardarImagen,
+    obtenerFotos,
 };
 
 // -----------------------------------
@@ -220,6 +246,12 @@ const reducers = {
             search,
         };
     },
+    [constants.FOTOS]: (state, { fotos }) => {
+        return {
+            ...state,
+            fotos,
+        };
+    },
 };
 
 const initialState = {
@@ -228,6 +260,7 @@ const initialState = {
         results: [],
         count: 0,
     },
+    fotos: [],
     item: {},
     page: 1,
     search: '',

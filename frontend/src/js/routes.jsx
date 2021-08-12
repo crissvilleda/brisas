@@ -29,6 +29,7 @@ import CrearEditarPagoProyecto from './common/components/Proyecto/Pagos/CrearEdi
 import '../assets/fonts/fonts.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-responsive-modal/styles.css';
+import 'react-image-lightbox/style.css';
 require('../../node_modules/font-awesome/css/font-awesome.css');
 require('../../node_modules/bootstrap/dist/css/bootstrap.css');
 

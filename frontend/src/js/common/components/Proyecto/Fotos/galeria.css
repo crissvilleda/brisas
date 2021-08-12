@@ -1,3 +1,23 @@
 .react-responsive-modal-modal {
     border-radius: 0.5rem;
 }
+.contenedor-galeria {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.foto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20rem;
+    height: 20rem;
+    margin: 1rem;
+    background-color: aquamarine;
+    border-radius: 0.25rem;
+}
+.foto img {
+    width: 17rem;
+    height: 17rem;
+}

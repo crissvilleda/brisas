@@ -1,7 +1,9 @@
 import React from 'react';
 import Uploader from '../../Utils/FileUploader/FileUploader';
 import LoadMask from '../../Utils/LoadMask/LoadMask';
+import Foto from './Foto';
 import { Modal } from 'react-responsive-modal';
+
 import './galeria.css';
 
 export default function Galeria(props) {
@@ -10,15 +12,34 @@ export default function Galeria(props) {
     const { id } = props.match.params;
 
     React.useEffect(() => {
-        if (id) props.leer(id);
+        if (id) {
+            props.leer(id);
+            props.obtenerFotos(id);
+        } else {
+            props.history.push('/404');
+        }
     }, []);
+    const { fotos } = props;
 
     return (
         <React.Fragment>
             <LoadMask loading={props.loader} blur>
                 <br />
                 <br />
-                <button onClick={() => setOpen(true)}>Nueva Imagen</button>
+                <div>
+                    <button
+                        className="btn btn-primary ml-3"
+                        onClick={() => setOpen(true)}
+                    >
+                        Nueva Imagen
+                    </button>
+                </div>
+                <div className="contenedor-galeria">
+                    {fotos.map((foto) => (
+                        <Foto key={foto.id} foto={foto} />
+                    ))}
+                </div>
+
                 <Modal
                     open={open}
                     onClose={() => setOpen(false)}
@@ -51,6 +72,7 @@ export default function Galeria(props) {
                                     props.guardarImagen(id, imagen).then(() => {
                                         setImagen(undefined);
                                         setOpen(false);
+                                        props.obtenerFotos(id);
                                     });
                                 }}
                             >

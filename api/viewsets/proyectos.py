@@ -46,12 +46,7 @@ class ProyectoViewSet(viewsets.ModelViewSet):
     def fotos(self, request, *args, **kwargs):
         proyecto = self.get_object()
 
-        queryset = Fotos.objects.filter(proyecto=proyecto)
-
-        page = self.paginate_queryset(queryset)
-        if page is not None:
-            serializer = FotosSerializer(page, many=True)
-            return self.get_paginated_response(serializer.data)
+        queryset = Fotos.objects.filter(proyecto=proyecto).order_by('-id')
 
         serializer = FotosSerializer(queryset, many=True)
         return Response(serializer.data)
