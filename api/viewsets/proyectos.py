@@ -4,7 +4,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from django.db import transaction
 from django.core.files import File
 from api.models import Proyecto, Fotos
-from api.serializers import ProyectoSerializer, ProyectoReadSerializer
+from api.serializers import ProyectoSerializer, ProyectoReadSerializer, FotosSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
@@ -41,6 +41,20 @@ class ProyectoViewSet(viewsets.ModelViewSet):
             return Response(status=status.HTTP_200_OK)
 
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    @action(methods=['get'], detail=True)
+    def fotos(self, request, *args, **kwargs):
+        proyecto = self.get_object()
+
+        queryset = Fotos.objects.filter(proyecto=proyecto)
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = FotosSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = FotosSerializer(queryset, many=True)
+        return Response(serializer.data)
 
     @action(methods=['put'], detail=True)
     def cerrar(self, request, *args, **kwargs):
