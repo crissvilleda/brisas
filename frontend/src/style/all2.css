@@ -6286,6 +6286,7 @@ a.text-accent:hover {
 
 .main-content > .main-content-container.container-fluid {
     min-height: calc(100vh - 7.5rem);
+    height: fit-content;
 }
 
 .main-footer {
