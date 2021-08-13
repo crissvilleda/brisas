@@ -14,8 +14,11 @@
     width: 20rem;
     height: 20rem;
     margin: 1rem;
-    background-color: aquamarine;
+    background-color: #fff;
     border-radius: 0.25rem;
+    box-shadow: 10px 10px 22px -11px rgba(0, 0, 0, 0.87);
+    -webkit-box-shadow: 10px 10px 22px -11px rgba(0, 0, 0, 0.87);
+    -moz-box-shadow: 10px 10px 22px -11px rgba(0, 0, 0, 0.87);
 }
 .foto img {
     width: 17rem;
