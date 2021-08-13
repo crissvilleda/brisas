@@ -68,7 +68,7 @@ class PrivateRouteBase extends Component {
                                             />
                                         </div>
                                     </div>
-                                    <div className="main-content-container px-4 container-fluid blue-gradient-bg">
+                                    <div className="main-content-container px-4 container-fluid blue-light-bg">
                                         <Component {...props} />
                                     </div>
                                     <Footer />

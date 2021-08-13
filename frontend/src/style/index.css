@@ -3,9 +3,23 @@
 @import '../../node_modules/react-day-picker/lib/style.css';
 @import 'bootstrap_reset.css';
 @import './texts.css';
+@font-face {
+    font-family: 'Roboto';
+    src: url('../assets/fonts/Roboto-BoldItalic.eot');
+    src: url('../assets/fonts/Roboto-BoldItalic.eot?#iefix')
+            format('embedded-opentype'),
+        url('../assets/fonts/Roboto-BoldItalic.woff2') format('woff2'),
+        url('../assets/fonts/Roboto-BoldItalic.woff') format('woff'),
+        url('../assets/fonts/Roboto-BoldItalic.ttf') format('truetype'),
+        url('../assets/fonts/Roboto-BoldItalic.svg#Roboto-BoldItalic')
+            format('svg');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
 
 .container {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Roboto', Helvetica, Arial, sans-serif;
     font-size: 16px;
     margin-left: 60px;
     margin-right: 60px;

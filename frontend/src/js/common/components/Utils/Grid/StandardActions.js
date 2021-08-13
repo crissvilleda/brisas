@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import PagoIcono from '../../../../../assets/img/recibo.png';
 import VerIcono from '../../../../../assets/img/ojo.png';
 import EditarIcono from '../../../../../assets/img/lapiz.png';
-
+import FotosIcono from '../../../../../assets/img/fotos.png';
 class Acciones extends Component {
     constructor(props) {
         super(props);
@@ -59,7 +59,7 @@ class Acciones extends Component {
                 )}
                 {fotos !== undefined && (
                     <Link to={`${fotos}/${id}/fotos`} className="px-2">
-                        <img src={VerIcono} width="25px" />
+                        <img src={FotosIcono} width="25px" />
                     </Link>
                 )}
 

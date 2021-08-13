@@ -5,6 +5,10 @@ import SectorIcono from '../../../../../assets/img/grafico-de-torta.png';
 import UsuariosIcono from '../../../../../assets/img/lista-de-contactos.png';
 import UsuariosAguaIcono from '../../../../../assets/img/usuario-agua.png';
 import UsuariosCementerioIcono from '../../../../../assets/img/usuario-cementerio.png';
+import ProyectoAguaIcono from '../../../../../assets/img/proyecto-agua.png';
+import ProyectoCementerioIcono from '../../../../../assets/img/proyecto-cementerio.png';
+import ConfiguracionIcono from '../../../../../assets/img/configuracion.png';
+import SalirIcono from '../../../../../assets/img/salida.png';
 class SideBar extends Component {
     constructor(props) {
         super(props);
@@ -113,14 +117,11 @@ class SideBar extends Component {
                                 className="nav-link"
                                 activeClassName={'active'}
                             >
-                                <div className="d-inline-block item-icon-wrapper">
-                                    <span style={{ fontSize: '1.25rem' }}>
-                                        <i className="fas fa-briefcase"></i>
-                                    </span>
-                                    <span style={{ fontSize: '1.25rem' }}>
-                                        <i className="fas fa-tint"></i>
-                                    </span>
-                                </div>
+                                <img
+                                    src={ProyectoAguaIcono}
+                                    width="25px"
+                                    className="mr-2"
+                                />
                                 <span>PROYECTOS AGUA</span>
                             </NavLink>
                         </li>
@@ -130,14 +131,11 @@ class SideBar extends Component {
                                 className="nav-link"
                                 activeClassName={'active'}
                             >
-                                <div className="d-inline-block item-icon-wrapper">
-                                    <span style={{ fontSize: '1.25rem' }}>
-                                        <i className="fas fa-briefcase"></i>
-                                    </span>
-                                    <span style={{ fontSize: '1.25rem' }}>
-                                        <i className="fas fa-skull"></i>
-                                    </span>
-                                </div>
+                                <img
+                                    src={ProyectoCementerioIcono}
+                                    width="25px"
+                                    className="mr-2"
+                                />
                                 <span>PROYECTOS CEMENTERIO</span>
                             </NavLink>
                         </li>
@@ -147,11 +145,11 @@ class SideBar extends Component {
                                 className="nav-link"
                                 activeClassName={'active'}
                             >
-                                <div className="d-inline-block item-icon-wrapper">
-                                    <span style={{ fontSize: '1.25rem' }}>
-                                        <i className="fas fa-tools"></i>
-                                    </span>
-                                </div>
+                                <img
+                                    src={ConfiguracionIcono}
+                                    width="25px"
+                                    className="mr-2"
+                                />
                                 <span>CONFIGURACIÓN</span>
                             </NavLink>
                         </li>
@@ -161,9 +159,11 @@ class SideBar extends Component {
                                 onClick={logOut}
                                 className="nav-link"
                             >
-                                <div className="d-inline-block item-icon-wrapper">
-                                    <i className="material-icons">lock</i>
-                                </div>
+                                <img
+                                    src={SalirIcono}
+                                    width="25px"
+                                    className="mr-2"
+                                />
                                 <span>Salir</span>
                             </Link>
                         </li>
