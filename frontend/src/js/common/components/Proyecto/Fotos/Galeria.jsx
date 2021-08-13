@@ -31,7 +31,7 @@ export default function Galeria(props) {
                         className="btn btn-primary ml-3"
                         onClick={() => setOpen(true)}
                     >
-                        Nueva Imagen
+                        <h6 className="m-0">Nueva Imagen</h6>
                     </button>
                 </div>
                 <div className="contenedor-galeria">
