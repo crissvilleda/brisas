@@ -13,22 +13,34 @@ export default function Galeria(props) {
 
     React.useEffect(() => {
         if (id) {
-            props.leer(id);
-            props.obtenerFotos(id);
+            async function loadFotos() {
+                await props.leer(id);
+                await props.obtenerFotos(id);
+            }
+            loadFotos().then();
         } else {
             props.history.push('/404');
         }
     }, []);
-    const { fotos } = props;
+    const { fotos, item } = props;
 
+    console.log(item);
     return (
         <React.Fragment>
             <LoadMask loading={props.loader} blur>
-                <br />
+                <div className="m-0 pt-4 ">
+                    <h2 className="m-0" style={{ fontSize: '1.5rem' }}>
+                        <span>Nombre Proyecto:</span> {item.nombre}
+                    </h2>
+                </div>
+                <hr
+                    className="bg-white m-0"
+                    style={{ height: '0.3rem', borderRadius: '0.25rem' }}
+                />
                 <br />
                 <div>
                     <button
-                        className="btn btn-primary ml-3"
+                        className="btn btn-primary "
                         onClick={() => setOpen(true)}
                     >
                         <h6 className="m-0">Nueva Imagen</h6>

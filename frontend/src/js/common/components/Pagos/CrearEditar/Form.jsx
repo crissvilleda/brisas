@@ -51,7 +51,7 @@ const CrearEditar = (props) => {
         <form action="" onSubmit={handleSubmit}>
             <div className="d-flex flex-1 flex-column flex-md-row">
                 <div className="d-flex flex-1 flex-column">
-                    <div className="p-0 pt-3 d-flex flex-column flex-md-row col-6 m-auto">
+                    <div className="p-0 pt-3 d-flex flex-column flex-md-row flex-1">
                         <div className="d-flex flex-column flex-1 mx-3">
                             <label htmlFor="nombre">Año</label>
                             <Field
@@ -66,8 +66,8 @@ const CrearEditar = (props) => {
                             />
                         </div>
                     </div>
-                    <div className="p-0 pt-3 d-flex flex-column flex-md-row col-6 m-auto">
-                        <div className="d-flex flex-column flex-1 mx-3">
+                    <div className="p-0 pt-3 d-flex flex-row flex-1">
+                        <div className="d-flex flex-column flex-1 mx-3  align-items-center">
                             <label htmlFor="nombre">Enero</label>
                             <Field
                                 name="enero"
@@ -78,7 +78,7 @@ const CrearEditar = (props) => {
                                 className="form-control"
                             />
                         </div>
-                        <div className="d-flex flex-column flex-1 mx-3">
+                        <div className="d-flex flex-column flex-1 mx-3  align-items-center">
                             <label htmlFor="nombre">Febrero</label>
                             <Field
                                 name="febrero"
@@ -90,8 +90,8 @@ const CrearEditar = (props) => {
                             />
                         </div>
                     </div>
-                    <div className="p-0 pt-3 d-flex flex-column flex-md-row col-6 m-auto">
-                        <div className="d-flex flex-column flex-1 mx-3">
+                    <div className="p-0 pt-3 d-flex flex-row flex-1">
+                        <div className="d-flex flex-column flex-1 mx-3  align-items-center">
                             <label htmlFor="nombre">Marzo</label>
                             <Field
                                 name="marzo"
@@ -102,7 +102,7 @@ const CrearEditar = (props) => {
                                 className="form-control"
                             />
                         </div>
-                        <div className="d-flex flex-column flex-1 mx-3">
+                        <div className="d-flex flex-column flex-1 mx-3  align-items-center">
                             <label htmlFor="nombre">Abril</label>
                             <Field
                                 name="abril"
@@ -114,8 +114,8 @@ const CrearEditar = (props) => {
                             />
                         </div>
                     </div>
-                    <div className="p-0 pt-3 d-flex flex-column flex-md-row col-6 m-auto">
-                        <div className="d-flex flex-column flex-1 mx-3">
+                    <div className="p-0 pt-3 d-flex flex-row flex-1">
+                        <div className="d-flex flex-column flex-1 mx-3  align-items-center">
                             <label htmlFor="nombre">Mayo</label>
                             <Field
                                 name="mayo"
@@ -126,7 +126,7 @@ const CrearEditar = (props) => {
                                 className="form-control"
                             />
                         </div>
-                        <div className="d-flex flex-column flex-1 mx-3">
+                        <div className="d-flex flex-column flex-1 mx-3  align-items-center">
                             <label htmlFor="nombre">Junio</label>
                             <Field
                                 name="junio"
@@ -138,8 +138,8 @@ const CrearEditar = (props) => {
                             />
                         </div>
                     </div>
-                    <div className="p-0 pt-3 d-flex flex-column flex-md-row col-6 m-auto">
-                        <div className="d-flex flex-column flex-1 mx-3">
+                    <div className="p-0 pt-3 d-flex flex-row flex-1">
+                        <div className="d-flex flex-column flex-1 mx-3  align-items-center">
                             <label htmlFor="nombre">Julio</label>
                             <Field
                                 name="julio"
@@ -150,7 +150,7 @@ const CrearEditar = (props) => {
                                 className="form-control"
                             />
                         </div>
-                        <div className="d-flex flex-column flex-1 mx-3">
+                        <div className="d-flex flex-column flex-1 mx-3  align-items-center">
                             <label htmlFor="nombre">Agosto</label>
                             <Field
                                 name="agosto"
@@ -162,8 +162,8 @@ const CrearEditar = (props) => {
                             />
                         </div>
                     </div>
-                    <div className="p-0 pt-3 d-flex flex-column flex-md-row col-6 m-auto">
-                        <div className="d-flex flex-column flex-1 mx-3">
+                    <div className="p-0 pt-3 d-flex flex-row flex-1">
+                        <div className="d-flex flex-column flex-1 mx-3  align-items-center">
                             <label htmlFor="nombre">Septiembre</label>
                             <Field
                                 name="septiembre"
@@ -174,7 +174,7 @@ const CrearEditar = (props) => {
                                 className="form-control"
                             />
                         </div>
-                        <div className="d-flex flex-column flex-1 mx-3">
+                        <div className="d-flex flex-column flex-1 mx-3  align-items-center">
                             <label htmlFor="nombre">Octubre</label>
                             <Field
                                 name="octubre"
@@ -186,8 +186,8 @@ const CrearEditar = (props) => {
                             />
                         </div>
                     </div>
-                    <div className="p-0 pt-3 d-flex flex-column flex-md-row col-6 m-auto">
-                        <div className="d-flex flex-column flex-1 mx-3">
+                    <div className="p-0 pt-3 d-flex flex-row flex-1">
+                        <div className="d-flex flex-column flex-1 mx-3  align-items-center">
                             <label htmlFor="nombre">Noviembre</label>
                             <Field
                                 name="noviembre"
@@ -198,7 +198,7 @@ const CrearEditar = (props) => {
                                 className="form-control"
                             />
                         </div>
-                        <div className="d-flex flex-column flex-1 mx-3">
+                        <div className="d-flex flex-column flex-1 mx-3  align-items-center">
                             <label htmlFor="nombre">Diciembre</label>
                             <Field
                                 name="diciembre"

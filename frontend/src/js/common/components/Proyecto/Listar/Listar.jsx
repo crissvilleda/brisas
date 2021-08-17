@@ -36,7 +36,7 @@ const ListarProyectos = (props) => {
 
     return (
         <React.Fragment>
-            <h3 className="py-4 text-dark">
+            <h3 className="m-0 pt-4 text-dark" style={{ fontSize: '1.5rem' }}>
                 PROYECTOS DE{' '}
                 {TIPO_PROYECTO == 10
                     ? 'AGUA'
@@ -44,6 +44,11 @@ const ListarProyectos = (props) => {
                     ? 'CEMENTERIO'
                     : 'OTROS'}{' '}
             </h3>
+            <hr
+                className="bg-white m-0"
+                style={{ height: '0.3rem', borderRadius: '0.25rem' }}
+            />
+            <br />
             <div className="py-4 card card-small px-4">
                 <div className="py-4 d-flex justify-content-end ">
                     <Link className="btn btn-primary" to={URL}>
