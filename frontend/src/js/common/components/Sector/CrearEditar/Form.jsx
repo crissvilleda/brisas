@@ -13,7 +13,14 @@ const CrearEditar = (props) => {
     const { handleSubmit, ver } = props;
     return (
         <form action="" onSubmit={handleSubmit} className="py-4">
-            <h3 className="text-dark">SECTOR</h3>
+            <h3 className=" m-0 text-dark" style={{ fontSize: '1.5rem' }}>
+                SECTOR
+            </h3>
+            <hr
+                className="bg-white m-0"
+                style={{ height: '0.3rem', borderRadius: '0.25rem' }}
+            />
+            <br />
             <div className="mb-4 card card-small">
                 <div className="p-0 pt-3 d-flex flex-column flex-md-row col-6 m-auto">
                     <div className="d-flex flex-column flex-1 mx-3">
