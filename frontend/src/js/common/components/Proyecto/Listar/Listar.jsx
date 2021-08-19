@@ -52,7 +52,7 @@ const ListarProyectos = (props) => {
             <div className="py-4 card card-small px-4">
                 <div className="py-4 d-flex justify-content-end ">
                     <Link className="btn btn-primary" to={URL}>
-                        NUEVO
+                        NUEVO PROYECTO
                     </Link>
                 </div>
                 <Tabla
@@ -78,6 +78,12 @@ const ListarProyectos = (props) => {
                         PROYECTO
                     </TableHeaderColumn>
                     <TableHeaderColumn
+                        dataField="monto_ingreso"
+                        dataFormat={(value) => <RenderCurrency value={value} />}
+                    >
+                        MONTO INGRESO
+                    </TableHeaderColumn>
+                    <TableHeaderColumn
                         dataField="monto_neutro"
                         dataFormat={(value) => <RenderCurrency value={value} />}
                     >
@@ -90,8 +96,13 @@ const ListarProyectos = (props) => {
                         MONTO EGRESO
                     </TableHeaderColumn>
                     <TableHeaderColumn
-                        dataField="total_costo"
-                        dataFormat={(value) => <RenderCurrency value={value} />}
+                        dataField="id"
+                        dataFormat={(value, row) => {
+                            console.log(row);
+                            const total = row.monto_neutro + row.monto_egreso;
+                            console.log(total);
+                            return <RenderCurrency value={total} />;
+                        }}
                     >
                         TOTAL COSTO
                     </TableHeaderColumn>
@@ -110,17 +121,6 @@ const ListarProyectos = (props) => {
                         }
                     >
                         FECHA FINALIZADO
-                    </TableHeaderColumn>
-                    <TableHeaderColumn
-                        dataField="id"
-                        dataFormat={(cell, arrow) =>
-                            standardActions({
-                                cerrar: !arrow.cerrado ? cerrar : undefined,
-                            })(cell)
-                        }
-                        width="110px"
-                    >
-                        ACCIONES
                     </TableHeaderColumn>
                 </Tabla>
             </div>

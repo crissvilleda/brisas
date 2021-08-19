@@ -4,13 +4,6 @@ from api.models import ModeloBase
 
 
 class Detalle(ModeloBase):
-    AGUA = 10
-    CEMENTERIO = 20
-
-    TIPOS_SERVICIOS = (
-        (AGUA, 'Servicio Agua'),
-        (CEMENTERIO, 'Servicio Cementerio')
-    )
 
     INGRESO = 10
     EGRESO = 20
@@ -22,8 +15,7 @@ class Detalle(ModeloBase):
         (NEUTRO, 'Neutro')
     )
 
-    tipo = models.IntegerField(choices=TIPOS_SERVICIOS)
-    tipo_detalle = models.IntegerField(choices=TIPOS_DETALLE)
+    tipo = models.IntegerField(choices=TIPOS_DETALLE)
 
     descripcion = models.TextField()
     monto = models.FloatField()

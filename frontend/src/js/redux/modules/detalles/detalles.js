@@ -51,27 +51,29 @@ const setSearch = (search) => ({
 
 const listar =
     (page = 1, idProyecto = undefined) =>
-        (dispatch, getStore) => {
-            const resource = getStore().detalles;
-            const params = { page };
-            params.ordering = resource.ordering;
-            params.search = resource.search;
-            if (idProyecto) params.idProyecto = idProyecto;
-            dispatch(setLoader(true));
-            dispatch(setData({
+    (dispatch, getStore) => {
+        const resource = getStore().detalles;
+        const params = { page };
+        params.ordering = resource.ordering;
+        params.search = resource.search;
+        if (idProyecto) params.idProyecto = idProyecto;
+        dispatch(setLoader(true));
+        dispatch(
+            setData({
                 results: [],
                 count: 0,
-            }));
-            api.get('detalle', params)
-                .then((response) => {
-                    dispatch(setData(response));
-                    dispatch(setPage(page));
-                })
-                .catch(() => { })
-                .finally(() => {
-                    dispatch(setLoader(false));
-                });
-        };
+            })
+        );
+        api.get('detalle', params)
+            .then((response) => {
+                dispatch(setData(response));
+                dispatch(setPage(page));
+            })
+            .catch(() => {})
+            .finally(() => {
+                dispatch(setLoader(false));
+            });
+    };
 
 const leer = (id) => (dispatch) => {
     dispatch(setLoader(true));
@@ -81,7 +83,7 @@ const leer = (id) => (dispatch) => {
             dispatch(setItem(response));
             dispatch(initializeForm('DetalleProyectoForm', response));
         })
-        .catch(() => { })
+        .catch(() => {})
         .finally(() => {
             dispatch(setLoader(false));
         });
@@ -90,11 +92,11 @@ const leer = (id) => (dispatch) => {
 const crear = (data) => (dispatch) => {
     dispatch(setLoader(true));
     api.post('detalle', data)
-        .then(() => {
+        .then((res) => {
             NotificationManager.success('Registro creado', 'Éxito', 3000);
-            if (data.tipo === AGUA)
+            if (res.tipo_proyecto === AGUA)
                 dispatch(push(`/proyecto/agua/${data.proyecto}/pagos`));
-            if (data.tipo === CEMENTERIO)
+            if (res.tipo_proyecto === CEMENTERIO)
                 dispatch(push(`/proyecto/cementerio/${data.proyecto}/pagos`));
         })
         .catch((error) => {
@@ -109,14 +111,14 @@ const crear = (data) => (dispatch) => {
 
 const editar = (id, data) => (dispatch) => {
     dispatch(setLoader(true));
-    const id_proyecto = data.proyecto.id
-    delete data.proyecto
+    const id_proyecto = data.proyecto.id;
+    delete data.proyecto;
     api.put(`detalle/${id}`, data)
-        .then(() => {
+        .then((res) => {
             NotificationManager.success('Registro actualizado', 'Éxito', 3000);
-            if (data.tipo === AGUA)
+            if (res.tipo_proyecto === AGUA)
                 dispatch(push(`/proyecto/agua/${id_proyecto}/pagos`));
-            if (data.tipo === CEMENTERIO)
+            if (res.tipo_proyecto === CEMENTERIO)
                 dispatch(push(`/proyecto/cementerio/${id_proyecto}/pagos`));
         })
         .catch(() => {
@@ -127,12 +129,10 @@ const editar = (id, data) => (dispatch) => {
         });
 };
 
-
 const searchChange = (search) => (dispatch) => {
     dispatch(setSearch(search));
     dispatch(listar());
 };
-
 
 export const actions = {
     listar,

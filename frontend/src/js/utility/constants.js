@@ -16,3 +16,7 @@ export const MESES = [
     { value: 11, label: 'Noviembre' },
     { value: 12, label: 'Diciembre' },
 ];
+
+export const INGRESO = 10;
+export const EGRESO = 20;
+export const NEUTRO = 30;

@@ -10,10 +10,11 @@ class DetalleViewSet(viewsets.ModelViewSet):
     queryset = Detalle.objects.filter(activo=True).order_by('-id')
     serializer_class = DetalleSerializer
 
-    filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
-    filter_fields = ("id", "tipo", "tipo_detalle", "descripcion")
-    search_fields = ("id", "tipo", "tipo_detalle", "descripcion")
-    ordering_fields = ("id", "tipo", "tipo_detalle", "descripcion")
+    filter_backends = (DjangoFilterBackend,
+                       filters.SearchFilter, filters.OrderingFilter)
+    filter_fields = ("id", "tipo", "descripcion")
+    search_fields = ("id", "tipo", "descripcion")
+    ordering_fields = ("id", "tipo", "descripcion")
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -24,8 +25,6 @@ class DetalleViewSet(viewsets.ModelViewSet):
             return queryset.none()
 
         return queryset
-
-
 
     def get_serializer_class(self):
         """Define serializer for API"""

@@ -10,12 +10,12 @@ class Footer extends Component {
                         <ul className="nav">
                             <li className="nav-item">
                                 <Link className="nav-link" to="/">
-                                    Home
+                                    Inicio
                                 </Link>
                             </li>
                         </ul>
                         <span className="copyright ml-auto my-auto mr-2">
-                            Ciancoders
+                            Creado con 💙 by Villeda
                         </span>
                     </div>
                 </div>

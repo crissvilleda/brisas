@@ -13,16 +13,11 @@ const CrearEditar = (props) => {
     const onSubmit = (data) => {
         const { id, idProyecto } = props.match.params;
         const body = { ...data };
-
-        body.tipo = AGUA;
-        body.fecha_fin = moment(data.fecha_fin).format('YYYY-MM-DD');
-        body.fecha_inicio = moment(data.fecha_inicio).format('YYYY-MM-DD');
-
+        console.log(body);
         if (id) {
-            props.editar(id, body)
-        }
-        else {
-            body.proyecto = idProyecto
+            props.editar(id, body);
+        } else {
+            body.proyecto = idProyecto;
             props.crear(body);
         }
     };
