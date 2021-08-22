@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { NotificationContainer } from 'react-notifications';
 
 import { Login, Profile, Registro } from './common/components/LoginRegister';
-import Demo from './common/components/Demo/Demo';
+import Inicio from './common/components/Inicio';
 import ProtectedRoute from './ProtectedRoute';
 import NotFound from './common/components/layout/NotFound/NotFound';
 import CrearEditarSector from './common/components/Sector/CrearEditar';
@@ -41,7 +41,7 @@ module.exports = (
             <Switch>
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/registro" component={Registro} />
-                <ProtectedRoute exact path="/" component={Demo} />
+                <ProtectedRoute exact path="/" component={Inicio} />
                 {/* Sectores */}
                 <ProtectedRoute
                     exact

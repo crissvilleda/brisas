@@ -95,7 +95,13 @@ const ListarUsuariosCementerio = (props) => {
                     </TableHeaderColumn>
                     <TableHeaderColumn
                         dataField="solvente"
-                        dataFormat={(value) => (value ? 'SI' : 'NO')}
+                        dataFormat={(value) =>
+                            value ? (
+                                'SI'
+                            ) : (
+                                <span className="text-danger">NO</span>
+                            )
+                        }
                     >
                         SOLVENTE
                     </TableHeaderColumn>

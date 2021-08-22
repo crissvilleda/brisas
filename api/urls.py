@@ -13,6 +13,7 @@ router.register(r'proyecto', viewsets.ProyectoViewSet)
 router.register(r'servicio', viewsets.ServicioViewSet)
 router.register(r'detalle', viewsets.DetalleViewSet)
 router.register(r'config', viewsets.ConfigViewSet, basename='configuracion')
+router.register(r'dashboard', viewsets.DashboardViewSet, basename='dashboard')
 
 urlpatterns = [
     path('api/', include(router.urls)),

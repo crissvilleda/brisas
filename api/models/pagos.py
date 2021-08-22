@@ -6,6 +6,7 @@ from api.models import ModeloBase
 
 
 class Pago(ModeloBase):
+    """Aquí se guardaran los pagos que realizara cada usuario al mes """
 
     usuario = models.ForeignKey(
         'api.Usuario', on_delete=models.CASCADE, related_name='pagos')
