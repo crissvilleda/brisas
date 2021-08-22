@@ -21,8 +21,6 @@ export default function Dashboard() {
         });
     }, []);
 
-    console.log(proyectos);
-
     return (
         <React.Fragment>
             <div className="d-flex justify-content-center py-4">
@@ -41,7 +39,10 @@ export default function Dashboard() {
                 <br />
                 <div className="d-flex">
                     {servicios.map((servicio) => (
-                        <div className="d-flex flex-column flex-1  m-3">
+                        <div
+                            key={servicio.tipo}
+                            className="d-flex flex-column flex-1  m-3"
+                        >
                             <h4 className="pl-3 mb-2">{servicio.tipo}</h4>
                             <div className="card card-small p-3">
                                 <h3 style={{ fontSize: '1rem' }}>
@@ -86,7 +87,10 @@ export default function Dashboard() {
                 <br />
                 <div className="d-flex">
                     {proyectos.map((proyecto) => (
-                        <div className="d-flex flex-column flex-1 m-3">
+                        <div
+                            key={proyecto.tipo}
+                            className="d-flex flex-column flex-1 m-3"
+                        >
                             <h4 className="pl-3 mb-2">{proyecto.tipo}</h4>
                             <div className="card card-small p-3">
                                 <h3 style={{ fontSize: '1rem' }}>
