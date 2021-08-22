@@ -24,7 +24,6 @@ const ListarUsuariosAgua = (props) => {
         const texto = e && e.value ? e.value : '';
         props.filterChange(texto, AGUA);
     };
-
     return (
         <React.Fragment>
             <h3 className=" m-0 pt-4 text-dark" style={{ fontSize: '1.5rem' }}>
@@ -45,6 +44,9 @@ const ListarUsuariosAgua = (props) => {
                     />
                     <Select
                         options={options}
+                        value={options.filter(
+                            (item) => item.value === props.filter
+                        )}
                         isClearable={true}
                         placeholder="Filtrar por ....."
                         onChange={filtrar}

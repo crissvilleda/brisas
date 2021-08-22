@@ -45,6 +45,9 @@ const ListarUsuariosCementerio = (props) => {
                     />
                     <Select
                         options={options}
+                        value={options.filter(
+                            (item) => item.value === props.filter2
+                        )}
                         isClearable={true}
                         placeholder="Filtrar por ....."
                         onChange={filtrar}
