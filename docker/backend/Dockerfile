@@ -1,11 +1,15 @@
 # docker/backend/Dockerfile
 
-FROM python:3.9.5-slim
+FROM python:3.9.6-alpine
 
 
-RUN apt-get update \
-  && apt-get -y install libpq-dev gcc \
-  && pip install psycopg2
+# install psycopg2 dependencies
+RUN apk update \
+  && apk add --virtual build-deps gcc python3-dev musl-dev \
+  && apk add postgresql-dev \
+  && apk add jpeg-dev zlib-dev libjpeg \
+  && pip install Pillow \
+  && apk del build-deps
 
 WORKDIR /app
 ADD ./requirements.txt /app/backend/
