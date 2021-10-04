@@ -19,6 +19,7 @@ function getToken() {
  * */
 export function makeUrl(path, params = {}) {
     let url = 'https://crisss.pythonanywhere.com/api';
+    // let url = '/api';
     if (path[0] === '/') {
         url += `${path}/`;
     } else {

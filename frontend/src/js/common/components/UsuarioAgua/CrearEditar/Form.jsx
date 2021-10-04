@@ -38,6 +38,14 @@ const optionsAnio = [
 const validate = (values) => {
     const errors = {};
     if (!values.usuario) errors.usuario = 'Campo requerido';
+    if (!values.anio) errors.anio = 'Campo requerido';
+    if (!values.mes) errors.mes = 'Campo requerido';
+    if (!values.descripcion) errors.descripcion = 'Campo requerido';
+    if (values.descripcion) {
+        const texto = values.descripcion.split('');
+        if (texto.length < 25)
+            errors.descripcion = 'Motivo del registro del usuario requerido';
+    }
     return errors;
 };
 

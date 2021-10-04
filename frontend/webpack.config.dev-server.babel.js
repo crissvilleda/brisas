@@ -41,19 +41,19 @@ webpackConfig.devServer = {
     proxy: [
         {
             path: '/api',
-            target: 'https://crisss.pythonanywhere.com/',
+            target: 'http://localhost:8000/',
             secure: false,
             changeOrigin: true,
         },
         {
             path: '/static',
-            target: 'https://crisss.pythonanywhere.com/',
+            target: 'http://localhost:8000/',
             secure: false,
             changeOrigin: true,
         },
         {
             path: '/media',
-            target: 'https://crisss.pythonanywhere.com/',
+            target: 'http://localhost:8000/',
             secure: false,
             changeOrigin: true,
         },

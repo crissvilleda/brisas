@@ -4,6 +4,7 @@ import {
     AsyncSelectField,
     SelectField,
     renderTextArea,
+    renderNumber,
 } from '../../Utils/renderField/renderField';
 import { Link } from 'react-router-dom';
 import { api } from 'api';
@@ -40,6 +41,15 @@ const validate = (values) => {
     if (!values.usuario) errors.usuario = 'Campo requerido';
     if (!values.anio) errors.anio = 'Campo requerido';
     if (!values.mes) errors.mes = 'Campo requerido';
+    if (!values.descripcion) errors.descripcion = 'Campo requerido';
+    if (values.descripcion) {
+        const texto = values.descripcion.split('');
+        if (texto.length < 25)
+            errors.descripcion = 'Motivo del registro del usuario requerido';
+    }
+    if (!values.no_predio) errors.no_predio = 'Campo requerido';
+    if (values.no_predio && values.no_predio <= 0)
+        errors.no_predio = 'Ingrese un numero mayor a 0';
     return errors;
 };
 
@@ -69,6 +79,18 @@ const CrearEditar = (props) => {
                             labelKey2="apellidos"
                             valueKey="id"
                             type="text"
+                            className="form-control"
+                            disabled={ver}
+                        />
+                    </div>
+                </div>
+                <div className="p-0 pt-3 d-flex flex-column flex-md-row col-6 m-auto">
+                    <div className="d-flex flex-column flex-1 mx-3">
+                        <label htmlFor="anio">No. Predio</label>
+                        <Field
+                            name="no_predio"
+                            placeholder="Ingrese No. Predio"
+                            component={renderNumber}
                             className="form-control"
                             disabled={ver}
                         />
