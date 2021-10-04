@@ -45,7 +45,7 @@ export const onSubmit =
                 NotificationManager.error(
                     'Credenciales incorrectas, vuelva a intentar',
                     'ERROR',
-                    0
+                    5000
                 );
             })
             .finally(() => {

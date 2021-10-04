@@ -172,3 +172,10 @@ CORS_ALLOWED_ORIGINS = [
     "https://brisas.vercel.app/",
     "https://brisas.vercel.app",
 ]
+
+# Local settigns import
+try:
+    from .local_settings import *
+except ImportError:
+    pass
+
