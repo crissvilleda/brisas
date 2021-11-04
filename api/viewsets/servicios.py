@@ -202,7 +202,17 @@ class ServicioViewSet(viewsets.ModelViewSet):
                     serializer.save()
                     anio += 1
                     mes = 0
-
+                elif mes > 12:
+                    mes -= 12
+                    anio += 1
+                    data['usuario'] = servicio.usuario.id
+                    data['servicio'] = servicio.id
+                    data['mes'] = mes
+                    data['anio'] = anio
+                    data['pago'] = cuota
+                    serializer = PagoSerializer(data=data)
+                    serializer.is_valid(raise_exception=True)
+                    serializer.save()
                 mes += 1
                 meses -= 1
             return Response(status=status.HTTP_200_OK)
@@ -232,7 +242,17 @@ class ServicioViewSet(viewsets.ModelViewSet):
                     serializer.save()
                     anio += 1
                     mes = 0
-
+                elif mes > 12:
+                    mes -= 12
+                    anio += 1
+                    data['usuario'] = servicio.usuario.id
+                    data['servicio'] = servicio.id
+                    data['mes'] = mes
+                    data['anio'] = anio
+                    data['pago'] = cuota
+                    serializer = PagoSerializer(data=data)
+                    serializer.is_valid(raise_exception=True)
+                    serializer.save()
                 mes += 1
                 meses -= 1
             return Response(status=status.HTTP_200_OK)
