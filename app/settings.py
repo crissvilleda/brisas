@@ -27,7 +27,7 @@ SECRET_KEY = 'h70dp)&5zyb%u0l+9v+811!2!8)k7=d7-s^gnr5ke#1t9bm^3e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0']
+ALLOWED_HOSTS = ['0.0.0.0','crisss.pythonanywhere.com','brisas.vercel.app','https://brisas.vercel.app']
 
 
 # Application definition
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     # 'djcelery',
     'debug_toolbar',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -59,6 +60,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'app.urls'
@@ -165,8 +168,14 @@ DATABASES = {
     }
 }
 
+CORS_ALLOWED_ORIGINS = [
+    "https://brisas.vercel.app/",
+    "https://brisas.vercel.app",
+]
+
 # Local settigns import
 try:
     from .local_settings import *
 except ImportError:
     pass
+
