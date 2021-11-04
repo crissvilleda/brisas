@@ -169,7 +169,6 @@ DATABASES = {
 }
 
 CORS_ALLOWED_ORIGINS = [
-    "https://brisas.vercel.app/",
     "https://brisas.vercel.app",
 ]
 
