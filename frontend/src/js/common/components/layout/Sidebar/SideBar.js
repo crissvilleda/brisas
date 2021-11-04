@@ -29,12 +29,7 @@ class SideBar extends Component {
                                 <span>Sistema Las brisas</span>
                             </div>
                         </a>
-                        <a
-                            className="toggle-sidebar d-sm-inline d-md-none d-lg-none"
-                            onClick={navToggle}
-                        >
-                            <i className="material-icons"></i>
-                        </a>
+
                     </nav>
                 </div>
                 <div className="nav-wrapper">

@@ -27,7 +27,7 @@ SECRET_KEY = 'h70dp)&5zyb%u0l+9v+811!2!8)k7=d7-s^gnr5ke#1t9bm^3e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0','crisss.pythonanywhere.com','brisas.vercel.app','https://brisas.vercel.app']
+ALLOWED_HOSTS = ['0.0.0.0','crisss.pythonanywhere.com','brisas.vercel.app','https://brisas.vercel.app','localhost']
 
 
 # Application definition
@@ -170,6 +170,7 @@ DATABASES = {
 
 CORS_ALLOWED_ORIGINS = [
     "https://brisas.vercel.app",
+    "https://localhost"
 ]
 
 # Local settigns import

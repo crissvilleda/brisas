@@ -23,7 +23,7 @@
     "html": [
         {
             "name": "homepage",
-            "title": "Everything is Awesome",
+            "title": "Sistema Brisas",
             "template": "_default.html",
             "filename": "index.html"
         }
