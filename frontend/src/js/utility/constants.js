@@ -20,3 +20,5 @@ export const MESES = [
 export const INGRESO = 10;
 export const EGRESO = 20;
 export const NEUTRO = 30;
+
+export const URL_MEDIA_FILES = 'http://localhost:3000/media';
