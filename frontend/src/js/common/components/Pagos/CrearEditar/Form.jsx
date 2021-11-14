@@ -218,7 +218,9 @@ const CrearEditar = (props) => {
                         <span className="font-weight-bolder text-md">
                             Servicio a pagar:{' '}
                         </span>{' '}
-                        <span className="text-md">Agua</span>
+                        <span className="text-md">
+                            {props.item.tipo_servicio}
+                        </span>
                     </div>
                     <div className="pt-4 pl-4">
                         <span className="font-weight-bolder text-md">
