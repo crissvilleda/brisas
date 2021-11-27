@@ -8,3 +8,4 @@ from .pagos import Pago
 from .detalle import Detalle
 from .configuracion import Configuracion
 from .fotos import Fotos
+from .fallecidos import Fallecidos

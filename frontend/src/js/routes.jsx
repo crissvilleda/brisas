@@ -26,6 +26,10 @@ import ListarProyectos from './common/components/Proyecto/Listar';
 import ListarPagosProyectos from './common/components/Proyecto/Pagos/Listar';
 import CrearEditarPagoProyecto from './common/components/Proyecto/Pagos/CrearEditar';
 
+//----------fallecidos
+import CrearEditarFallecido from './common/components/Fallecidos/CrearEditar';
+import ListarFallecidos from './common/components/Fallecidos/Listar';
+
 import '../assets/fonts/fonts.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-responsive-modal/styles.css';
@@ -165,6 +169,27 @@ module.exports = (
                     exact
                     path="/proyecto/:id/fotos"
                     component={GaleriaProyecto}
+                />
+                {/* Lista fallecidos */}
+                <ProtectedRoute
+                    exact
+                    path="/fallecido"
+                    component={CrearEditarFallecido}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/fallecido/:id/ver"
+                    component={CrearEditarFallecido}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/fallecido/:id/editar"
+                    component={CrearEditarFallecido}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/fallecidos"
+                    component={ListarFallecidos}
                 />
 
                 <ProtectedRoute exact path="/config" component={Config} />

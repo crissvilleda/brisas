@@ -7,6 +7,7 @@ import DayPicker from '../DayPicker';
 import FileUploader from '../FileUploader/FileUploader';
 import DatePicker from 'react-date-picker';
 import _ from 'lodash';
+import dayjs from 'dayjs';
 
 export const renderField = ({
     input,
@@ -424,6 +425,10 @@ export const renderDatePicker = ({
     meta: { touched, error },
 }) => {
     const invalid = touched && error;
+    let value = null;
+    if (dayjs(input.value).isValid()) {
+        value = dayjs(input.value).toDate();
+    }
     return (
         <div className={classNames(`${className}`, { 'is-invalid': invalid })}>
             <DatePicker
@@ -432,7 +437,7 @@ export const renderDatePicker = ({
                 disabled={disabled}
                 maxDate={maxDate}
                 minDate={minDate}
-                value={input.value}
+                value={value}
             />
             {invalid && <div className="invalid-feedback">{error}</div>}
         </div>

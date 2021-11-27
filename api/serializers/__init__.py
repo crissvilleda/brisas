@@ -7,3 +7,4 @@ from .pagos import PagoSerializer, PagoReadSerializer
 from .detalle import DetalleSerializer, DetalleReadSerializer
 from .configuracion import ConfigSerializer
 from .fotos import FotosSerializer
+from .fallecidos import FallecidosSerializer

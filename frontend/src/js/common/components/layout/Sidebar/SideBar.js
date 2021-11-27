@@ -9,6 +9,7 @@ import ProyectoAguaIcono from '../../../../../assets/img/proyecto-agua.png';
 import ProyectoCementerioIcono from '../../../../../assets/img/proyecto-cementerio.png';
 import ConfiguracionIcono from '../../../../../assets/img/configuracion.png';
 import SalirIcono from '../../../../../assets/img/salida.png';
+import FallecidosIcono from '../../../../../assets/img/fallecido.png';
 class SideBar extends Component {
     constructor(props) {
         super(props);
@@ -29,7 +30,6 @@ class SideBar extends Component {
                                 <span>Sistema Las brisas</span>
                             </div>
                         </a>
-
                     </nav>
                 </div>
                 <div className="nav-wrapper">
@@ -104,6 +104,20 @@ class SideBar extends Component {
                                     className="mr-2"
                                 />
                                 <span>USUARIOS CEMENTERIO </span>
+                            </NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink
+                                to="/fallecidos"
+                                className="nav-link"
+                                activeClassName={'active'}
+                            >
+                                <img
+                                    src={FallecidosIcono}
+                                    width="25px"
+                                    className="mr-2"
+                                />
+                                <span>FALLECIDOS</span>
                             </NavLink>
                         </li>
                         <li className="nav-item">

@@ -6,3 +6,4 @@ from .servicios import ServicioViewSet
 from .detalle import DetalleViewSet
 from .configuracion import ConfigViewSet
 from .dashboard import DashboardViewSet
+from .fallecidos import FallecidosViewSet

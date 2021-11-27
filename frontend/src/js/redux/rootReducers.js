@@ -12,6 +12,7 @@ import servicios from './modules/servicios/servicios';
 import pagos from './modules/pagos/pagos';
 import detalles from './modules/detalles/detalles';
 import config from './modules/configuracion/configuracion';
+import fallecidos from './modules/fallecidos/fallecidos';
 
 export default combineReducers({
     form: formReducer,
@@ -27,4 +28,5 @@ export default combineReducers({
     pagos,
     detalles,
     config,
+    fallecidos,
 });
