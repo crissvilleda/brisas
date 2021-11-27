@@ -67,7 +67,7 @@ const ListarUsuariosAgua = (props) => {
                         isKey
                         dataField="id"
                         dataFormat={standardActions({
-                            ver: '/servicio',
+                            pagos: '/servicio',
                         })}
                     >
                         ACCIONES

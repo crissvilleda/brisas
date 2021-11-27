@@ -47,19 +47,19 @@ class Acciones extends Component {
     };
 
     render() {
-        const { id, ver, editar, eliminar, cerrar, proyecto, fotos } =
+        const { id, ver, editar, eliminar, cerrar, proyecto, fotos, pagos } =
             this.props;
 
         return (
             <div className="d-flex justify-content-center">
                 {ver !== undefined && (
                     <Link to={`${ver}/${id}/ver`} className="px-2">
-                        <img src={VerIcono} width="25px" />
+                        <img src={VerIcono} width="25px" title="Ver" />
                     </Link>
                 )}
                 {fotos !== undefined && (
                     <Link to={`${fotos}/${id}/fotos`} className="px-2">
-                        <img src={FotosIcono} width="25px" />
+                        <img src={FotosIcono} width="25px" title="Galeria" />
                     </Link>
                 )}
 
@@ -68,7 +68,7 @@ class Acciones extends Component {
                         className="text-warning"
                         to={`${editar}/${id}/editar`}
                     >
-                        <img src={EditarIcono} width="25px" />
+                        <img src={EditarIcono} width="25px" title="Editar" />
                     </Link>
                 )}
                 {eliminar !== undefined && (
@@ -82,7 +82,16 @@ class Acciones extends Component {
                 )}
                 {proyecto !== undefined && (
                     <Link to={`${ver}/${id}/pagos`} className="px-2">
-                        <img src={PagoIcono} width="25px" />
+                        <img
+                            src={PagoIcono}
+                            width="25px"
+                            title="Ingresos/Egresos"
+                        />
+                    </Link>
+                )}
+                {pagos !== undefined && (
+                    <Link to={`${pagos}/${id}/ver`} className="px-2">
+                        <img src={PagoIcono} width="25px" title="Pagos" />
                     </Link>
                 )}
                 {cerrar !== undefined && (
